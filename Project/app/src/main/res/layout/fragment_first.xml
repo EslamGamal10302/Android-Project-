@@ -31,6 +31,7 @@
         android:layout_marginBottom="50dp"
         android:backgroundTint="#FFBF00"
         android:text="Next"
+        android:textStyle="bold"
         android:textAllCaps="false"
         app:cornerRadius="50dp" />
 

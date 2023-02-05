@@ -6,6 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".home.SearchActivity">
 
+    <TextView
+        android:id="@+id/tv_search"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="18dp"
+        android:fontFamily="casual"
+        android:maxHeight="48dp"
+        android:text="@string/tv_search"
+        android:textAlignment="center"
+        android:textColor="#FFBF00"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btn_allmeals"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.416"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <Button
         android:id="@+id/btn_allmeals"
@@ -13,6 +32,7 @@
         android:layout_height="142dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         android:backgroundTint="#FFBF00"
         android:drawableLeft="@drawable/allmeals"
         android:fontFamily="casual"
@@ -23,17 +43,17 @@
         android:textSize="25dp"
         android:textStyle="bold"
         app:cornerRadius="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_area"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btn_area"
         android:layout_width="376dp"
         android:layout_height="142dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         android:backgroundTint="#FFBF00"
         android:drawableLeft="@drawable/world"
         android:fontFamily="casual"
@@ -44,18 +64,18 @@
         android:textSize="25dp"
         android:textStyle="bold"
         app:cornerRadius="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_ingradiant"
         app:layout_constraintEnd_toEndOf="@+id/btn_allmeals"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/btn_allmeals"
-        app:layout_constraintTop_toBottomOf="@+id/btn_allmeals" />
+        app:layout_constraintStart_toStartOf="@+id/btn_allmeals" />
 
 
     <Button
         android:id="@+id/btn_gategory"
         android:layout_width="376dp"
         android:layout_height="142dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         android:backgroundTint="#FFBF00"
         android:drawableLeft="@drawable/cat"
         android:fontFamily="casual"
@@ -66,18 +86,17 @@
         android:textSize="25dp"
         android:textStyle="bold"
         app:cornerRadius="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="@+id/btn_ingradiant"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/btn_ingradiant"
-        app:layout_constraintTop_toBottomOf="@+id/btn_ingradiant" />
+        app:layout_constraintStart_toStartOf="@+id/btn_ingradiant" />
 
     <Button
         android:id="@+id/btn_ingradiant"
         android:layout_width="376dp"
         android:layout_height="142dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="8dp"
         android:backgroundTint="#FFBF00"
         android:drawableLeft="@drawable/ing"
         android:fontFamily="casual"
@@ -91,8 +110,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_gategory"
         app:layout_constraintEnd_toEndOf="@+id/btn_area"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/btn_area"
-        app:layout_constraintTop_toBottomOf="@+id/btn_area" />
+        app:layout_constraintStart_toStartOf="@+id/btn_area" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"

@@ -32,7 +32,8 @@
         android:backgroundTint="#FFBF00"
         android:text="Next"
         android:textAllCaps="false"
-        app:cornerRadius="50dp" />
+        app:cornerRadius="50dp"
+        android:textStyle="bold"/>
 
 
 
