@@ -1,4 +1,4 @@
-package com.example.project.home;
+package com.example.project.favourite;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.project.R;
+import com.example.project.calender.CalendarActivity;
+import com.example.project.home.view.HomeActivity;
+import com.example.project.search.SearchActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class FavActivity extends AppCompatActivity {
@@ -24,17 +27,17 @@ public class FavActivity extends AppCompatActivity {
                 switch(item.getItemId())
                 {
                     case R.id.searchScreen:
-                        startActivity(new Intent(getApplicationContext(),SearchActivity.class));
+                        startActivity(new Intent(getApplicationContext(), SearchActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.homeScreen:
-                        startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+                        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.favScreen:
                         return true;
                     case R.id.calScreen:
-                        startActivity(new Intent(getApplicationContext(),CalendarActivity.class));
+                        startActivity(new Intent(getApplicationContext(), CalendarActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                 }

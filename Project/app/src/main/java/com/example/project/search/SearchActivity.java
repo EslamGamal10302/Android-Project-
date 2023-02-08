@@ -11,6 +11,9 @@ import android.widget.Button;
 
 import com.example.project.Ingredient.IngredientActivity;
 import com.example.project.R;
+import com.example.project.calender.CalendarActivity;
+import com.example.project.favourite.FavActivity;
+import com.example.project.home.view.HomeActivity;
 import com.example.project.area.AreasActivity;
 import com.example.project.category.CategoryActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

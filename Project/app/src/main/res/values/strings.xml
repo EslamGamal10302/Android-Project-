@@ -43,4 +43,18 @@
     <string name="bt_signup">signup</string>
     <string name="btn_sign_up">Signup</string>
     <string name="tv_login">Login Page</string>
+    <string name="spinner_content_description">"list of days "</string>
+    <string name="btn_addToFavourite">Add To Favourite</string>
+
+    <string-array name="days">
+        <item>"Select the day you want"</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+
+    </string-array>
 </resources>

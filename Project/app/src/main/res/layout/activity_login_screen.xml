@@ -135,7 +135,7 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="32dp"
         app:cardCornerRadius="60dp"
-        app:cardElevation="10dp"
+        app:cardElevation="50dp"
         app:cardPreventCornerOverlap="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4">
@@ -188,14 +188,18 @@
         android:layout_marginTop="16dp"
         android:fontFamily="casual"
         android:text="@string/tv_login"
-        android:textColor="#FFBF00"
+        android:textColor="#ECA869"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tb_email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.681"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:shadowColor="#000000"
+        android:shadowDx="1.5"
+        android:shadowDy="1.3"
+        android:shadowRadius="1.6"/>
 
 
 
