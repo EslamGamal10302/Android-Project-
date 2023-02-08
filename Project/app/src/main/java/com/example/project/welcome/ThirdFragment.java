@@ -18,6 +18,8 @@ import android.widget.TextView;
 import com.example.project.R;
 import com.example.project.home.FavActivity;
 import com.example.project.home.HomeActivity;
+import com.example.project.login.LoginScreen;
+import com.example.project.login.SplashScreen;
 
 
 public class ThirdFragment extends Fragment {
@@ -35,7 +37,7 @@ public class ThirdFragment extends Fragment {
             @Override
             public void onClick(View v) {
               //  Navigation.findNavController(v).navigate(R.id.action_thirdFragment_to_firstFragment);
-                Intent intent = new Intent(context.getApplicationContext(),HomeActivity.class);
+                Intent intent = new Intent(context.getApplicationContext(), SplashScreen.class);
                 startActivity(intent);
             }
         });
