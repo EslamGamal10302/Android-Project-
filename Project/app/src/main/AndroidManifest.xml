@@ -21,19 +21,19 @@
             android:name=".login.LoginScreen"
             android:exported="false" />
         <activity
-            android:name=".home.CalendarActivity"
+            android:name=".calender.CalendarActivity"
             android:exported="false"
             android:theme="@style/Theme.Project.NoActionBar" />
         <activity
-            android:name=".home.FavActivity"
+            android:name=".favourite.FavActivity"
             android:exported="false"
             android:theme="@style/Theme.Project.NoActionBar" />
         <activity
-            android:name=".home.SearchActivity"
+            android:name=".search.SearchActivity"
             android:exported="false"
             android:theme="@style/Theme.Project.NoActionBar" />
         <activity
-            android:name=".home.HomeActivity"
+            android:name=".home.view.HomeActivity"
             android:exported="false"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.Project.NoActionBar" />

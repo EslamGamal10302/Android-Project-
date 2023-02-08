@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.project.R;
-import com.example.project.home.HomeActivity;
+import com.example.project.home.view.HomeActivity;
 import com.example.project.signup.SignUp;
 
 public class LoginScreen extends AppCompatActivity {
