@@ -43,4 +43,11 @@
     <string name="bt_signup">signup</string>
     <string name="btn_sign_up">Signup</string>
     <string name="tv_login">Login Page</string>
+    <string name="Saturday">Saturday</string>
+    <string name="Sunday">Sunday</string>
+    <string name="Monday">Monday</string>
+    <string name="Tuesday">Tuesday</string>
+    <string name="Wednesday">Wednesday</string>
+    <string name="Thursday">Thursday</string>
+    <string name="Friday">Friday</string>
 </resources>
