@@ -9,12 +9,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import com.example.project.R;
 import com.example.project.calender.CalendarActivity;
 import com.example.project.favourite.FavActivity;
+import com.example.project.home.SearchActivity;
 import com.example.project.model.Meal;
-import com.example.project.search.SearchActivity;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {
@@ -77,4 +80,6 @@ public class HomeActivity extends AppCompatActivity {
 
 
     }
+
+
 }

@@ -12,9 +12,10 @@ import android.view.MenuItem;
 import com.example.project.R;
 import com.example.project.area.Area;
 import com.example.project.area.AreaAdapter;
-import com.example.project.home.CalendarActivity;
-import com.example.project.home.FavActivity;
-import com.example.project.home.HomeActivity;
+
+import com.example.project.calender.CalendarActivity;
+import com.example.project.favourite.FavActivity;
+import com.example.project.home.view.HomeActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class AreasActivity extends AppCompatActivity {

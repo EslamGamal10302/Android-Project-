@@ -2,17 +2,20 @@ package com.example.project.home.view;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -66,6 +69,20 @@ public HomeAdapter (Context context , Meal [] meals){
 
             }
         });
+        holder.addToFavourite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    holder.addToFavourite.setChecked(true);
+                    holder.addToFavourite.setBackgroundResource(R.drawable.baseline_favorite_24);
+                    Toast.makeText(context, "on Click", Toast.LENGTH_SHORT).show();
+
+                }else{
+                   holder.addToFavourite.setBackgroundResource(R.drawable.baseline_favorite_border_24);
+                    Toast.makeText(context, "Removed", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override
@@ -78,7 +95,7 @@ public HomeAdapter (Context context , Meal [] meals){
     class HomeViewHolder extends RecyclerView.ViewHolder {
       private TextView mealName ;
         private ImageView mealImage;
-        private ImageButton addToFavourite ;
+        private ToggleButton addToFavourite ;
         private Spinner daysSpinner ;
         public HomeViewHolder(@NonNull View itemView) {
             super(itemView);

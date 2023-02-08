@@ -9,8 +9,9 @@ import android.view.MenuItem;
 
 import com.example.project.R;
 import com.example.project.favourite.FavActivity;
+import com.example.project.home.SearchActivity;
 import com.example.project.home.view.HomeActivity;
-import com.example.project.search.SearchActivity;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class CalendarActivity extends AppCompatActivity {

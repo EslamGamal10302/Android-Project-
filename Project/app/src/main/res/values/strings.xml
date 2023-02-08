@@ -45,6 +45,10 @@
     <string name="tv_login">Login Page</string>
     <string name="spinner_content_description">"list of days "</string>
     <string name="btn_addToFavourite">Add To Favourite</string>
+    <string name="tv_favouritePage">Favourite Page</string>
+    <string name="tv_favourite_meal_name" />
+    <string name="tv_FavMealName">meal</string>
+    <string name="btn_remove_from_fav">Removing meal from favourite</string>
 
     <string-array name="days">
         <item>"Select the day you want"</item>

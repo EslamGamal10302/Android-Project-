@@ -2,6 +2,9 @@ package com.example.project.favourite;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,11 +12,17 @@ import android.view.MenuItem;
 
 import com.example.project.R;
 import com.example.project.calender.CalendarActivity;
+import com.example.project.home.SearchActivity;
 import com.example.project.home.view.HomeActivity;
-import com.example.project.search.SearchActivity;
+
+import com.example.project.home.view.HomeAdapter;
+import com.example.project.model.Meal;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class FavActivity extends AppCompatActivity {
+    RecyclerView recyclerView;
+    LinearLayoutManager layoutManager;
+    FavAdabter favAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,5 +53,18 @@ public class FavActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+
+
+        Meal[] meals ={new Meal("Pasta", R.drawable.allmeals) , new Meal("Eshta",R.drawable.cat)};
+
+        recyclerView =findViewById(R.id.fav_recyclerView);
+        layoutManager = new LinearLayoutManager(this);
+
+        layoutManager.setOrientation(RecyclerView.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
+
+        favAdapter = new FavAdabter(this,meals);
+        recyclerView.setAdapter(favAdapter);
     }
 }
