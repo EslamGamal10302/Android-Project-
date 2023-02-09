@@ -49,6 +49,13 @@
     <string name="tv_favourite_meal_name" />
     <string name="tv_FavMealName">meal</string>
     <string name="btn_remove_from_fav">Removing meal from favourite</string>
+    <string name="Saturday">Saturday</string>
+    <string name="Sunday">Sunday</string>
+    <string name="Monday">Monday</string>
+    <string name="Tuesday">Tuesday</string>
+    <string name="Wednesday">Wednesday</string>
+    <string name="Thursday">Thursday</string>
+    <string name="Friday">Friday</string>
 
     <string-array name="days">
         <item>"Select the day you want"</item>
