@@ -78,7 +78,7 @@ public class CalendarActivity extends AppCompatActivity {
         myManger = new LinearLayoutManager(this);
         myManger.setOrientation(RecyclerView.HORIZONTAL);
         saturdayRecycle.setLayoutManager(myManger);
-        saturdayAdapter = new CalendarAdapter(saturday,this );
+        saturdayAdapter = new CalendarAdapter(saturday,this ,findViewById(R.id.txt_saturday) );
         saturdayRecycle.setAdapter(saturdayAdapter);
 
 
@@ -87,7 +87,7 @@ public class CalendarActivity extends AppCompatActivity {
         sundayManger.setOrientation(RecyclerView.HORIZONTAL);
         sundayRecycle=findViewById(R.id.sunday);
         sundayRecycle.setLayoutManager(sundayManger);
-        sundayAdapter= new CalendarAdapter(sunday,this);
+        sundayAdapter= new CalendarAdapter(sunday,this,findViewById(R.id.txt_sunday));
         sundayRecycle.setAdapter(sundayAdapter);
 
 
@@ -96,16 +96,16 @@ public class CalendarActivity extends AppCompatActivity {
         mondayManger.setOrientation(RecyclerView.HORIZONTAL);
         mondayRecycle=findViewById(R.id.monday);
         mondayRecycle.setLayoutManager(mondayManger);
-        monddayAdapter= new CalendarAdapter(monday,this);
+        monddayAdapter= new CalendarAdapter(monday,this,findViewById(R.id.txt_monday));
         mondayRecycle.setAdapter(monddayAdapter);
 
 
 
-        tuesdaydayManger = new LinearLayoutManager(this);
+         tuesdaydayManger = new LinearLayoutManager(this);
         tuesdaydayManger.setOrientation(RecyclerView.HORIZONTAL);
         tuesdaydayRecycle=findViewById(R.id.tuesday);
         tuesdaydayRecycle.setLayoutManager(tuesdaydayManger);
-        tuesdaydayAdapter= new CalendarAdapter(tuesday,this);
+        tuesdaydayAdapter= new CalendarAdapter(tuesday,this,findViewById(R.id.txt_tuesday));
         tuesdaydayRecycle.setAdapter(tuesdaydayAdapter);
 
 
@@ -114,7 +114,7 @@ public class CalendarActivity extends AppCompatActivity {
         wednesdayManger.setOrientation(RecyclerView.HORIZONTAL);
         wednesdayRecycle=findViewById(R.id.wednesday);
         wednesdayRecycle.setLayoutManager(wednesdayManger);
-         wednesdayAdapter= new CalendarAdapter(wednesday,this);
+         wednesdayAdapter= new CalendarAdapter(wednesday,this,findViewById(R.id.txt_wednesday));
         wednesdayRecycle.setAdapter(wednesdayAdapter);
 
 
@@ -124,7 +124,7 @@ public class CalendarActivity extends AppCompatActivity {
         thursdaydayManger.setOrientation(RecyclerView.HORIZONTAL);
         thursdaydayRecycle=findViewById(R.id.thuresday);
         thursdaydayRecycle.setLayoutManager(thursdaydayManger);
-        thursdaydayAdapter= new CalendarAdapter(thuresday,this);
+        thursdaydayAdapter= new CalendarAdapter(thuresday,this,findViewById(R.id.txt_thuresday));
         thursdaydayRecycle.setAdapter(thursdaydayAdapter);
 
 
@@ -134,7 +134,7 @@ public class CalendarActivity extends AppCompatActivity {
         fridayManger.setOrientation(RecyclerView.HORIZONTAL);
         fridayRecycle=findViewById(R.id.friday);
         fridayRecycle.setLayoutManager(fridayManger);
-        fridayAdapter= new CalendarAdapter(friday,this);
+        fridayAdapter= new CalendarAdapter(friday,this,findViewById(R.id.txt_friday));
         fridayRecycle.setAdapter(fridayAdapter);
 
 
