@@ -39,8 +39,6 @@
             android:exported="false"
             android:theme="@style/Theme.Project.NoActionBar" />
 
-            android:name=".signup.SignUp"
-            android:exported="false" />
         <activity
             android:name=".login.SplashScreen"
             android:exported="false" />
@@ -48,18 +46,8 @@
             android:name=".login.LoginScreen"
             android:exported="false" />
 
-        <activity
-            android:name=".home.CalendarActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Project.NoActionBar" />
-        <activity
-            android:name=".home.FavActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Project.NoActionBar" />
-        <activity
-            android:name=".home.SearchActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Project.NoActionBar" />
+
+
         <activity
             android:name=".home.HomeActivity"
             android:exported="false"

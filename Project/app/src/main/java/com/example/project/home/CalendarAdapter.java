@@ -14,13 +14,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project.R;
 
+import org.w3c.dom.Text;
+
 public class CalendarAdapter extends RecyclerView.Adapter <CalendarAdapter.MyViewHolder>{
     Calendar[] myItems ;
     Context context;
 
-    public CalendarAdapter(Calendar[] myItems, Context context) {
+
+    TextView day;
+
+    public CalendarAdapter(Calendar[] myItems, Context context , TextView day) {
         this.myItems = myItems;
         this.context = context;
+        this.day=day;
+
     }
 
     @NonNull
@@ -37,6 +44,9 @@ public class CalendarAdapter extends RecyclerView.Adapter <CalendarAdapter.MyVie
         Calendar current = myItems[position];
         holder.name.setText(current.getName());
         holder.thumbnails.setImageResource(current.getThumbnail());
+        if(myItems.length>0){
+            day.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
