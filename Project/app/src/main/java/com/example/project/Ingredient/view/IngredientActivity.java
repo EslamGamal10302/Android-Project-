@@ -1,4 +1,4 @@
-package com.example.project.area;
+package com.example.project.Ingredient.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,33 +9,53 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.project.GeneralRepositoryModel.GeneralRepository;
+import com.example.project.Ingredient.meals;
+import com.example.project.Ingredient.presenter.IngredientInterface;
+import com.example.project.Ingredient.presenter.IngredientPresenter;
+import com.example.project.Network.MealClient;
 import com.example.project.R;
-import com.example.project.area.Area;
-import com.example.project.area.AreaAdapter;
 
-import com.example.project.area.selectedArea.view.SelectedAreaActivity;
+import com.example.project.area.selectedArea.model.SelectedAreaMeals;
 import com.example.project.calender.CalendarActivity;
 import com.example.project.favourite.FavActivity;
 import com.example.project.home.view.HomeActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class AreasActivity extends AppCompatActivity implements AreaOnClickListner{
+import java.util.ArrayList;
+
+public class IngredientActivity extends AppCompatActivity implements IngredientViewInterface{
     RecyclerView myRecycleView;
     LinearLayoutManager myManger;
-    AreaAdapter myAdapter;
+    IngredientAdapter myAdapter;
 
-    Area[] areas = {new Area(R.drawable.america,"American"),new Area(R.drawable.england,"British"),new Area(R.drawable.canada,"Canadian"),new Area(R.drawable.chinese,"Chinese"),new Area(R.drawable.croatia,"Croatian"),new Area(R.drawable.netherland,"Dutch"),new Area(R.drawable.egypt,"Egyptian"),new Area(R.drawable.france,"French"),new Area(R.drawable.greece,"Greek"),new Area(R.drawable.indian,"Indian"),new Area(R.drawable.ierland,"Irish"),new Area(R.drawable.italia,"Italian"),new Area(R.drawable.jamaika,"Jamaican"),new Area(R.drawable.japan,"Japanese"),new Area(R.drawable.kenia,"Kenyan"),new Area(R.drawable.malysia,"Malaysian"),new Area(R.drawable.mexico,"Mexican"),new Area(R.drawable.moroco,"Moroccan"),new Area(R.drawable.poland,"Polish"),new Area(R.drawable.porogal,"Portuguese"),new Area(R.drawable.russia,"Russian"),new Area(R.drawable.spain,"Spanish"),new Area(R.drawable.tailand,"Thali"),new Area(R.drawable.tunisa,"Tunisian"),new Area(R.drawable.turkey,"Turkish"),new Area(R.drawable.vitnam,"Vietnamese")};
+    IngredientInterface presnter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_areas);
+        setContentView(R.layout.activity_ingredient);
         myRecycleView = (RecyclerView) findViewById(R.id.recyclerView);
         myManger = new LinearLayoutManager(this);
         myManger.setOrientation(RecyclerView.VERTICAL);
         myRecycleView.setLayoutManager(myManger);
-        myAdapter = new AreaAdapter(this , areas,this);
+        myAdapter = new IngredientAdapter(this );
         myRecycleView.setAdapter(myAdapter);
+        presnter = new IngredientPresenter(this, GeneralRepository.getInstance(MealClient.getInstance(),this));
+        presnter.getAllIngredient();
+
+
+
+
+
+
+
+
+
+
+
+
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.searchScreen);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -64,9 +84,8 @@ public class AreasActivity extends AppCompatActivity implements AreaOnClickListn
     }
 
     @Override
-    public void onClick(String nationName) {
-        Intent intent = new Intent(this, SelectedAreaActivity.class);
-        intent.putExtra("area",nationName);
-        startActivity(intent);
+    public void showData(ArrayList<SelectedAreaMeals> meals) {
+       myAdapter.setList(meals);
+       myAdapter.notifyDataSetChanged();
     }
 }

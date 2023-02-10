@@ -1,4 +1,4 @@
-package com.example.project.category;
+package com.example.project.category.view;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,13 +12,19 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.project.Ingredient.IngredientAdapter;
-import com.example.project.Ingredient.meals;
 import com.example.project.R;
+import com.example.project.area.selectedArea.model.SelectedAreaMeals;
+import com.example.project.category.Category;
+
+import java.util.ArrayList;
 
 public class CategoryAdapter extends RecyclerView.Adapter <CategoryAdapter.MyViewHolder>{
     Context context ;
-    Category[] myCategory;
+    ArrayList<SelectedAreaMeals> myMeals;
+
+    private String url_part1="https://www.themealdb.com/images/category/";
+
+    private  String url_part2=".png";
 
     @NonNull
     @Override
@@ -29,21 +35,25 @@ public class CategoryAdapter extends RecyclerView.Adapter <CategoryAdapter.MyVie
         return vh;
     }
 
-    public CategoryAdapter(Context context, Category[] myCategory) {
+    public CategoryAdapter(Context context) {
         this.context = context;
-        this.myCategory = myCategory;
+        myMeals=new ArrayList<>();
     }
+
+
+    public void setList(ArrayList<SelectedAreaMeals> updateMales )
+    {this.myMeals = updateMales;}
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Category category = myCategory[position];
-        holder.category.setText(category.getStrCategory());
-        Glide.with(context).load(category.getImage()).into(holder.thumbnails);
+        SelectedAreaMeals meal = myMeals.get(position);
+        holder.category.setText(meal.getStrCategory());
+        Glide.with(context).load(url_part1+meal.getStrCategory()+url_part2).into(holder.thumbnails);
     }
 
     @Override
     public int getItemCount() {
-        return myCategory.length;
+        return myMeals.size();
     }
 
 

@@ -1,4 +1,4 @@
-package com.example.project.Ingredient;
+package com.example.project.category.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,30 +9,57 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.project.GeneralRepositoryModel.GeneralRepository;
+import com.example.project.Network.MealClient;
 import com.example.project.R;
-import com.example.project.area.AreaAdapter;
 
+import com.example.project.area.selectedArea.model.SelectedAreaMeals;
 import com.example.project.calender.CalendarActivity;
+import com.example.project.category.Category;
+import com.example.project.category.presenter.CategoryInterface;
+import com.example.project.category.presenter.CategoryPresenter;
 import com.example.project.favourite.FavActivity;
 import com.example.project.home.view.HomeActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class IngredientActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class CategoryActivity extends AppCompatActivity implements CategoryViewInterface {
     RecyclerView myRecycleView;
     LinearLayoutManager myManger;
-    IngredientAdapter myAdapter;
+    CategoryAdapter myAdapter;
 
-    meals[] myMeals = {new meals("Chicken","https://www.themealdb.com/images/ingredients/Chicken.png"),new meals("Salmon","https://www.themealdb.com/images/ingredients/Salmon.png"),new meals("Beef","https://www.themealdb.com/images/ingredients/Beef.png"),new meals("Pork","https://www.themealdb.com/images/ingredients/Pork.png"),new meals("Avocado","https://www.themealdb.com/images/ingredients/Avocado.png"),new meals("Aubergine","https://www.themealdb.com/images/ingredients/Aubergine.png")};
+    CategoryInterface presenter;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ingredient);
+        setContentView(R.layout.activity_category);
         myRecycleView = (RecyclerView) findViewById(R.id.recyclerView);
         myManger = new LinearLayoutManager(this);
         myManger.setOrientation(RecyclerView.VERTICAL);
         myRecycleView.setLayoutManager(myManger);
-        myAdapter = new IngredientAdapter(this , myMeals);
+        myAdapter = new CategoryAdapter(this );
         myRecycleView.setAdapter(myAdapter);
+        presenter = new CategoryPresenter(this, GeneralRepository.getInstance(MealClient.getInstance(),this));
+        presenter.getAllCategory();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.searchScreen);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -58,5 +85,11 @@ public class IngredientActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    @Override
+    public void showData(ArrayList<SelectedAreaMeals> meals) {
+        myAdapter.setList(meals);
+        myAdapter.notifyDataSetChanged();
     }
 }

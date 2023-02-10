@@ -18,8 +18,12 @@
             android:exported="false" />
         <activity
             android:name=".category.CategoryActivity"
+            android:name=".area.selectedArea.view.SelectedAreaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".category.view.CategoryActivity"
             android:exported="false"
-            android:theme="@style/Theme.Project.NoActionBar" />
+            android:theme="@style/Theme.Project.NoActionBar"/>
         <activity
             android:name=".Ingredient.IngredientActivity"
             android:exported="false"
@@ -40,15 +44,18 @@
             android:name=".home.SearchActivity"
             android:exported="false"
             android:theme="@style/Theme.Project.NoActionBar" />
-        <activity
-            android:name=".signup.SignUp"
-            android:exported="false" />
+
+      <activity
+        android:name=".signup.SignUp"
+        android:exported="false" />
+
         <activity
             android:name=".login.SplashScreen"
             android:exported="false" />
         <activity
             android:name=".login.LoginScreen"
             android:exported="false" />
+
         <activity
             android:name=".home.view.HomeActivity"
             android:exported="false"

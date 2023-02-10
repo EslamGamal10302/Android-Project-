@@ -1,4 +1,4 @@
-package com.example.project.category;
+package com.example.project.area.selectedArea.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,33 +7,72 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
-import com.example.project.Ingredient.IngredientAdapter;
-import com.example.project.Ingredient.meals;
+import com.example.project.GeneralRepositoryModel.GeneralRepository;
+import com.example.project.Network.MealClient;
 import com.example.project.R;
-
+import com.example.project.area.selectedArea.model.SelectedAreaMeals;
+import com.example.project.area.selectedArea.presenter.SelectedAreaInrerface;
+import com.example.project.area.selectedArea.presenter.SelectedAreaPresenter;
 import com.example.project.calender.CalendarActivity;
 import com.example.project.favourite.FavActivity;
 import com.example.project.home.view.HomeActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class CategoryActivity extends AppCompatActivity {
-    RecyclerView myRecycleView;
-    LinearLayoutManager myManger;
-    CategoryAdapter myAdapter;
+import java.util.ArrayList;
 
-    Category[] myCategory = {new Category("Pasta","https://www.themealdb.com/images/category/pasta.png"),new Category("Seafood","https://www.themealdb.com/images/category/seafood.png"),new Category("Starter","https://www.themealdb.com/images/category/starter.png"),new Category("Goat","https://www.themealdb.com/images/category/goat.png"),new Category("Breakfast","https://www.themealdb.com/images/category/breakfast.png"),new Category( "Dessert","https://www.themealdb.com/images/category/dessert.png")};
+public class SelectedAreaActivity extends AppCompatActivity implements SelectedAreaViewInterface{
+    private String nationality;
+
+
+    RecyclerView rv;
+    SelectedAreaAdapter ad;
+
+    SelectedAreaInrerface presenter;
+    RecyclerView.LayoutManager manger;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_category);
-        myRecycleView = (RecyclerView) findViewById(R.id.recyclerView);
-        myManger = new LinearLayoutManager(this);
-        myManger.setOrientation(RecyclerView.VERTICAL);
-        myRecycleView.setLayoutManager(myManger);
-        myAdapter = new CategoryAdapter(this , myCategory);
-        myRecycleView.setAdapter(myAdapter);
+        setContentView(R.layout.activity_selected_area);
+        Intent recived = getIntent();
+        nationality=recived.getStringExtra("area");
+        Log.i("eslam",nationality);
+        rv = findViewById(R.id.recyclerView);
+        manger = new LinearLayoutManager(this);
+        ad= new SelectedAreaAdapter( this );
+        presenter = new SelectedAreaPresenter(this, GeneralRepository.getInstance(MealClient.getInstance(),this));
+        rv.setLayoutManager(manger);
+        rv.setAdapter(ad);
+        presenter.getSelectedAreaMeals(nationality);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.searchScreen);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -59,5 +98,11 @@ public class CategoryActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    @Override
+    public void showData(ArrayList<SelectedAreaMeals> meals) {
+       ad.setList(meals);
+       ad.notifyDataSetChanged();
     }
 }
