@@ -56,6 +56,7 @@
     <string name="Wednesday">Wednesday</string>
     <string name="Thursday">Thursday</string>
     <string name="Friday">Friday</string>
+    <string name="instarctions">Instractions</string>
 
     <string-array name="days">
         <item>"Select the day you want"</item>
