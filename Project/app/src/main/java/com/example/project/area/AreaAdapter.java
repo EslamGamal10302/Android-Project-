@@ -17,9 +17,13 @@ public class AreaAdapter extends RecyclerView.Adapter <AreaAdapter.MyViewHolder>
     Context context ;
     Area[] areas;
 
-    public AreaAdapter(Context context, Area[] areas) {
+
+    AreaOnClickListner listner;
+
+    public AreaAdapter(Context context, Area[] areas ,AreaOnClickListner listner) {
         this.context = context;
         this.areas = areas;
+        this.listner=listner;
     }
 
     @NonNull
@@ -36,6 +40,12 @@ public class AreaAdapter extends RecyclerView.Adapter <AreaAdapter.MyViewHolder>
         Area area = areas[position];
         holder.nationality.setText(area.getNationality());
         holder.thumbnails.setImageResource(area.getImage_thumbnails());
+        holder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listner.onClick(area.getNationality());
+            }
+        });
     }
 
     @Override
