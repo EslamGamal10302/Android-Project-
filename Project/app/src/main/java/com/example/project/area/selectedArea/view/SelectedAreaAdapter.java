@@ -24,9 +24,9 @@ public class SelectedAreaAdapter extends RecyclerView.Adapter <SelectedAreaAdapt
     ArrayList<SelectedAreaMeals> myMeals;
     Context context ;
 
-    public SelectedAreaAdapter(ArrayList<SelectedAreaMeals> myMeals, Context context) {
-        this.myMeals = myMeals;
+    public SelectedAreaAdapter( Context context) {
         this.context = context;
+        myMeals= new ArrayList<>();
     }
 
 

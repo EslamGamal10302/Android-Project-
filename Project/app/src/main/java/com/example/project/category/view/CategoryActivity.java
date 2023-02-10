@@ -1,4 +1,4 @@
-package com.example.project.category;
+package com.example.project.category.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,21 +9,29 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.project.Ingredient.IngredientAdapter;
-import com.example.project.Ingredient.meals;
+import com.example.project.GeneralRepositoryModel.GeneralRepository;
+import com.example.project.Network.MealClient;
 import com.example.project.R;
 
+import com.example.project.area.selectedArea.model.SelectedAreaMeals;
 import com.example.project.calender.CalendarActivity;
+import com.example.project.category.Category;
+import com.example.project.category.presenter.CategoryInterface;
+import com.example.project.category.presenter.CategoryPresenter;
 import com.example.project.favourite.FavActivity;
 import com.example.project.home.view.HomeActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class CategoryActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class CategoryActivity extends AppCompatActivity implements CategoryViewInterface {
     RecyclerView myRecycleView;
     LinearLayoutManager myManger;
     CategoryAdapter myAdapter;
 
-    Category[] myCategory = {new Category("Pasta","https://www.themealdb.com/images/category/pasta.png"),new Category("Seafood","https://www.themealdb.com/images/category/seafood.png"),new Category("Starter","https://www.themealdb.com/images/category/starter.png"),new Category("Goat","https://www.themealdb.com/images/category/goat.png"),new Category("Breakfast","https://www.themealdb.com/images/category/breakfast.png"),new Category( "Dessert","https://www.themealdb.com/images/category/dessert.png")};
+    CategoryInterface presenter;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,8 +40,26 @@ public class CategoryActivity extends AppCompatActivity {
         myManger = new LinearLayoutManager(this);
         myManger.setOrientation(RecyclerView.VERTICAL);
         myRecycleView.setLayoutManager(myManger);
-        myAdapter = new CategoryAdapter(this , myCategory);
+        myAdapter = new CategoryAdapter(this );
         myRecycleView.setAdapter(myAdapter);
+        presenter = new CategoryPresenter(this, GeneralRepository.getInstance(MealClient.getInstance(),this));
+        presenter.getAllCategory();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.searchScreen);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -59,5 +85,11 @@ public class CategoryActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    @Override
+    public void showData(ArrayList<SelectedAreaMeals> meals) {
+        myAdapter.setList(meals);
+        myAdapter.notifyDataSetChanged();
     }
 }

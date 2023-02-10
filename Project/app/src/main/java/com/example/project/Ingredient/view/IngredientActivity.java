@@ -1,4 +1,4 @@
-package com.example.project.Ingredient;
+package com.example.project.Ingredient.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,20 +9,29 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.project.GeneralRepositoryModel.GeneralRepository;
+import com.example.project.Ingredient.meals;
+import com.example.project.Ingredient.presenter.IngredientInterface;
+import com.example.project.Ingredient.presenter.IngredientPresenter;
+import com.example.project.Network.MealClient;
 import com.example.project.R;
-import com.example.project.area.AreaAdapter;
 
+import com.example.project.area.selectedArea.model.SelectedAreaMeals;
 import com.example.project.calender.CalendarActivity;
 import com.example.project.favourite.FavActivity;
 import com.example.project.home.view.HomeActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class IngredientActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class IngredientActivity extends AppCompatActivity implements IngredientViewInterface{
     RecyclerView myRecycleView;
     LinearLayoutManager myManger;
     IngredientAdapter myAdapter;
 
-    meals[] myMeals = {new meals("Chicken","https://www.themealdb.com/images/ingredients/Chicken.png"),new meals("Salmon","https://www.themealdb.com/images/ingredients/Salmon.png"),new meals("Beef","https://www.themealdb.com/images/ingredients/Beef.png"),new meals("Pork","https://www.themealdb.com/images/ingredients/Pork.png"),new meals("Avocado","https://www.themealdb.com/images/ingredients/Avocado.png"),new meals("Aubergine","https://www.themealdb.com/images/ingredients/Aubergine.png")};
+    IngredientInterface presnter;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,8 +40,22 @@ public class IngredientActivity extends AppCompatActivity {
         myManger = new LinearLayoutManager(this);
         myManger.setOrientation(RecyclerView.VERTICAL);
         myRecycleView.setLayoutManager(myManger);
-        myAdapter = new IngredientAdapter(this , myMeals);
+        myAdapter = new IngredientAdapter(this );
         myRecycleView.setAdapter(myAdapter);
+        presnter = new IngredientPresenter(this, GeneralRepository.getInstance(MealClient.getInstance(),this));
+        presnter.getAllIngredient();
+
+
+
+
+
+
+
+
+
+
+
+
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.searchScreen);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -58,5 +81,11 @@ public class IngredientActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    @Override
+    public void showData(ArrayList<SelectedAreaMeals> meals) {
+       myAdapter.setList(meals);
+       myAdapter.notifyDataSetChanged();
     }
 }

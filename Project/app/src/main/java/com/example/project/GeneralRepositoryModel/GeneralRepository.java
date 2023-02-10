@@ -29,4 +29,14 @@ public class GeneralRepository implements GeneralRepositoryInterface{
         RS.resultMealsSelectedArea(networkDelegate,nationality);
 
     }
+
+    @Override
+    public void resultIngredientCategory(AreaNetworkDelegate networkDelegate) {
+        RS.resultIngredientCategory(networkDelegate);
+    }
+
+    @Override
+    public void resultCategory(AreaNetworkDelegate networkDelegate) {
+        RS.resultCategory(networkDelegate);
+    }
 }

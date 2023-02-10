@@ -26,6 +26,7 @@ import java.util.ArrayList;
 public class SelectedAreaActivity extends AppCompatActivity implements SelectedAreaViewInterface{
     private String nationality;
 
+
     RecyclerView rv;
     SelectedAreaAdapter ad;
 
@@ -41,7 +42,7 @@ public class SelectedAreaActivity extends AppCompatActivity implements SelectedA
         Log.i("eslam",nationality);
         rv = findViewById(R.id.recyclerView);
         manger = new LinearLayoutManager(this);
-        ad= new SelectedAreaAdapter( new ArrayList<>(),this );
+        ad= new SelectedAreaAdapter( this );
         presenter = new SelectedAreaPresenter(this, GeneralRepository.getInstance(MealClient.getInstance(),this));
         rv.setLayoutManager(manger);
         rv.setAdapter(ad);

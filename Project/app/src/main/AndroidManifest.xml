@@ -17,11 +17,11 @@
             android:name=".area.selectedArea.view.SelectedAreaActivity"
             android:exported="false" />
         <activity
-            android:name=".category.CategoryActivity"
+            android:name=".category.view.CategoryActivity"
             android:exported="false"
             android:theme="@style/Theme.Project.NoActionBar" />
         <activity
-            android:name=".Ingredient.IngredientActivity"
+            android:name=".Ingredient.view.IngredientActivity"
             android:exported="false"
             android:theme="@style/Theme.Project.NoActionBar" />
         <activity

@@ -9,4 +9,11 @@ import retrofit2.http.Query;
 public interface MealService {
     @GET("filter.php")
     Observable<SelectedArea> getMealsOfSelectedArea(@Query("a") String areaSelected);
+
+    @GET("list.php?i=list")
+    Observable<SelectedArea> getIngredientsList();
+
+
+    @GET("list.php?c=list")
+    Observable<SelectedArea> getCategoriesList();
 }

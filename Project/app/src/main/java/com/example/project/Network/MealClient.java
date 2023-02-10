@@ -1,8 +1,11 @@
 package com.example.project.Network;
 
 import com.example.project.area.selectedArea.model.SelectedArea;
+import com.example.project.area.selectedArea.model.SelectedAreaMeals;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.util.ArrayList;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -14,7 +17,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MealClient implements RemoteSource{
     private static MealClient client = null ;
 
+
+
     public MealClient() {
+
     }
 
     public static MealClient getInstance(){
@@ -42,7 +48,28 @@ public class MealClient implements RemoteSource{
         Observable<SelectedArea> observable = myApi.getMealsOfSelectedArea(nationality)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
-        observable.subscribe(o->networkDelegate.onSuccessResponse(o.getAreaMeals()));
+        observable.subscribe(o->networkDelegate.onSuccessResponse(o.getAreaMeals())
+        );
 
+    }
+
+    @Override
+    public void resultIngredientCategory(AreaNetworkDelegate networkDelegate) {
+        MealService myApi=RetrofitCall();
+        Observable<SelectedArea> observable = myApi.getIngredientsList()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+        observable.subscribe(o->networkDelegate.onSuccessResponse(o.getAreaMeals())
+        );
+    }
+
+    @Override
+    public void resultCategory(AreaNetworkDelegate networkDelegate) {
+        MealService myApi=RetrofitCall();
+        Observable<SelectedArea> observable = myApi.getCategoriesList()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+        observable.subscribe(o->networkDelegate.onSuccessResponse(o.getAreaMeals())
+        );
     }
 }

@@ -1,4 +1,4 @@
-package com.example.project.Ingredient;
+package com.example.project.Ingredient.view;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,23 +12,27 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.project.Ingredient.meals;
 import com.example.project.R;
-import com.example.project.area.Area;
-import com.example.project.area.AreaAdapter;
+import com.example.project.area.selectedArea.model.SelectedAreaMeals;
+
+import java.util.ArrayList;
 
 public class IngredientAdapter  extends RecyclerView.Adapter <IngredientAdapter.MyViewHolder> {
     Context context ;
-    meals [] myMeals;
+    ArrayList<SelectedAreaMeals> myMeals;
 
-    public IngredientAdapter(Context context, meals[] myMeals) {
+    private String url_part1="https://www.themealdb.com/images/ingredients/";
+
+    private  String url_part2=".png";
+
+    public IngredientAdapter(Context context) {
         this.context = context;
-        this.myMeals = myMeals;
+        myMeals=new ArrayList<>();
     }
 
-
-
-
-
+    public void setList(ArrayList<SelectedAreaMeals> updateMales )
+    {this.myMeals = updateMales;}
 
     @NonNull
     @Override
@@ -41,14 +45,14 @@ public class IngredientAdapter  extends RecyclerView.Adapter <IngredientAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull IngredientAdapter.MyViewHolder holder, int position) {
-        meals meal = myMeals[position];
+        SelectedAreaMeals meal = myMeals.get(position);
         holder.ingredient.setText(meal.getStrIngredient());
-        Glide.with(context).load(meal.getImage()).into(holder.thumbnails);
+        Glide.with(context).load(url_part1+meal.getStrIngredient()+url_part2).into(holder.thumbnails);
     }
 
     @Override
     public int getItemCount() {
-        return  myMeals.length;
+        return  myMeals.size();
     }
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ConstraintLayout layout;
