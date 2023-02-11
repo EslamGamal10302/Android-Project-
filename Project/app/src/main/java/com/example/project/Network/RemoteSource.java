@@ -6,4 +6,10 @@ public interface RemoteSource {
     public  void resultIngredientCategory (AreaNetworkDelegate networkDelegate );
 
     public  void resultCategory (AreaNetworkDelegate networkDelegate );
+
+    //create method get random meals
+    public void resultRandomMeals(AreaNetworkDelegate networkDelegate);
+
+    public void resultAllMeals(AreaNetworkDelegate networkDelegate);
+
 }

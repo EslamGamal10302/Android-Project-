@@ -12,18 +12,31 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.project.GeneralRepositoryModel.GeneralRepository;
+import com.example.project.Network.MealClient;
 import com.example.project.R;
+import com.example.project.area.selectedArea.model.SelectedAreaMeals;
 import com.example.project.calender.CalendarActivity;
 import com.example.project.favourite.FavActivity;
 import com.example.project.home.SearchActivity;
+import com.example.project.home.pressenter.HomePressenter;
+import com.example.project.home.pressenter.HomePressenterInterface;
 import com.example.project.model.Meal;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class HomeActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class HomeActivity extends AppCompatActivity implements  HomeViewInterface {
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
     HomeAdapter homeAdapter;
+
+    HomePressenterInterface pressenter ;
+
+
+
+
 
 
 
@@ -35,6 +48,17 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.homeScreen);
+
+      pressenter = new HomePressenter(GeneralRepository.getInstance(MealClient.getInstance(),this),this);
+        recyclerView =findViewById(R.id.home_recyclerView);
+        layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        recyclerView.setLayoutManager(layoutManager);
+        homeAdapter = new HomeAdapter(this);
+        recyclerView.setAdapter(homeAdapter);
+        pressenter.getDailyRandomMeals();
+
+
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -60,26 +84,12 @@ public class HomeActivity extends AppCompatActivity {
         });
 
 
-        Meal [] meals ={new Meal("Pasta", R.drawable.allmeals) , new Meal("Eshta",R.drawable.cat)};
-
-        recyclerView =findViewById(R.id.home_recyclerView);
-        layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(RecyclerView.HORIZONTAL);
-        recyclerView.setLayoutManager(layoutManager);
-
-        homeAdapter = new HomeAdapter(this,meals);
-        recyclerView.setAdapter(homeAdapter);
-
-
-
-
-
-
-
-
-
-
     }
 
 
+    @Override
+    public void showRandomMeals(ArrayList<SelectedAreaMeals> randomMeals) {
+         homeAdapter.setList(randomMeals);
+         homeAdapter.notifyDataSetChanged();
+    }
 }

@@ -43,11 +43,12 @@ public class MealDetails extends AppCompatActivity {
         ingradiant6=findViewById(R.id.ingradiant6);
         ingradiant7=findViewById(R.id.ingradiant7);
         steps=findViewById(R.id.steps);
+        youTubePlayerView =findViewById(R.id.ybv);
 
 
 
-    /*    youTubePlayerView =findViewById(R.id.ybv);
-        youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+
+    /*    youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
             @Override
             public void onReady(@NonNull YouTubePlayer youTubePlayer) {
                 super.onReady(youTubePlayer);

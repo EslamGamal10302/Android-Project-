@@ -20,20 +20,28 @@ import android.widget.ToggleButton;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.project.R;
+import com.example.project.area.selectedArea.model.SelectedAreaMeals;
 import com.example.project.model.Meal;
+
+import java.util.ArrayList;
 
 public class HomeAdapter extends  RecyclerView.Adapter<HomeAdapter.HomeViewHolder>  {
     Activity spinnerContext;
 
     Context context;
-    Meal [] meals;
+    ArrayList<SelectedAreaMeals> rnadomMels;
 
 
-public HomeAdapter (Context context , Meal [] meals){
+public HomeAdapter (Context context){
     this.context = context;
-    this.meals = meals;
+    rnadomMels = new ArrayList<>();
 
+}
+
+public void setList(ArrayList<SelectedAreaMeals> randomMeals){
+    this.rnadomMels = randomMeals;
 }
 
 
@@ -51,9 +59,10 @@ public HomeAdapter (Context context , Meal [] meals){
     @Override
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
        String [] days ={"satrday","sunday","monday","tusday"};
-       Meal meal = meals[position];
+
+       SelectedAreaMeals meal = rnadomMels.get(position);
        holder.mealName.setText(meal.getStrMeal());
-       holder.mealImage.setImageResource(meal.getImage_thumbnail());
+        Glide.with(context).load(meal.getStrMealThumb()).into(holder.mealImage);
        ArrayAdapter <CharSequence> adapter = ArrayAdapter.createFromResource(context,R.array.days, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
         holder.daysSpinner.setAdapter(adapter);
@@ -87,7 +96,7 @@ public HomeAdapter (Context context , Meal [] meals){
 
     @Override
     public int getItemCount() {
-        return meals.length;
+        return rnadomMels.size();
     }
 
 

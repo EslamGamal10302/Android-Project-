@@ -11,6 +11,7 @@ import android.widget.Button;
 
 import com.example.project.Ingredient.view.IngredientActivity;
 import com.example.project.R;
+import com.example.project.allMeals.view.AllMealsActivity;
 import com.example.project.calender.CalendarActivity;
 import com.example.project.favourite.FavActivity;
 import com.example.project.home.view.HomeActivity;
@@ -24,6 +25,8 @@ public class SearchActivity extends AppCompatActivity {
 
     Button category;
 
+    Button allmeals ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,7 @@ public class SearchActivity extends AppCompatActivity {
         area=findViewById(R.id.btn_area);
         ingredient=findViewById(R.id.btn_ingradiant);
         category= findViewById(R.id.btn_gategory);
+        allmeals = findViewById(R.id.btn_allmeals);
         category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,6 +54,16 @@ public class SearchActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), IngredientActivity.class));
             }
         });
+
+
+        allmeals.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), AllMealsActivity.class));
+            }
+        });
+
+
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.searchScreen);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

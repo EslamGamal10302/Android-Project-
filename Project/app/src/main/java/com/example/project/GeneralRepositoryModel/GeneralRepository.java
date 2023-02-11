@@ -39,4 +39,16 @@ public class GeneralRepository implements GeneralRepositoryInterface{
     public void resultCategory(AreaNetworkDelegate networkDelegate) {
         RS.resultCategory(networkDelegate);
     }
+
+    @Override
+    public void resultRandomMeals(AreaNetworkDelegate networkDelegate) {
+        RS.resultRandomMeals(networkDelegate);
+    }
+
+    @Override
+    public void resultAllMeals(AreaNetworkDelegate networkDelegate) {
+        RS.resultAllMeals(networkDelegate);
+    }
+
+
 }

@@ -14,6 +14,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+
 public class MealClient implements RemoteSource{
     private static MealClient client = null ;
 
@@ -72,4 +73,30 @@ public class MealClient implements RemoteSource{
         observable.subscribe(o->networkDelegate.onSuccessResponse(o.getAreaMeals())
         );
     }
+
+
+    @Override
+    public void resultRandomMeals(AreaNetworkDelegate networkDelegate){
+        MealService myApi=RetrofitCall();
+        Observable<SelectedArea> observable = myApi.getRandomMeals()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+        observable.subscribe(o->networkDelegate.onSuccessResponse(o.getAreaMeals())
+        );
+    }
+
+
+    @Override
+    public void resultAllMeals(AreaNetworkDelegate networkDelegate){
+        MealService myApi=RetrofitCall();
+        Observable<SelectedArea> observable = myApi.getAllMeals()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+        observable.subscribe(o->networkDelegate.onSuccessResponse(o.getAreaMeals())
+        );
+    }
+
+
+
+
 }

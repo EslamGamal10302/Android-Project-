@@ -16,4 +16,11 @@ public interface MealService {
 
     @GET("list.php?c=list")
     Observable<SelectedArea> getCategoriesList();
+
+    @GET("search.php?f=a")
+    Observable<SelectedArea> getRandomMeals();
+
+    @GET("search.php?s")
+    Observable<SelectedArea> getAllMeals();
+
 }
