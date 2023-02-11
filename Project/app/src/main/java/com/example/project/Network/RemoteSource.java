@@ -3,7 +3,15 @@ package com.example.project.Network;
 public interface RemoteSource {
     public  void resultMealsSelectedArea (AreaNetworkDelegate networkDelegate , String nationality);
 
+    public  void resultMealsSelectedCategory (AreaNetworkDelegate networkDelegate , String category);
+
+    public  void resultMealsSelectedIngredient (AreaNetworkDelegate networkDelegate , String ingredient);
+
     public  void resultIngredientCategory (AreaNetworkDelegate networkDelegate );
 
     public  void resultCategory (AreaNetworkDelegate networkDelegate );
+
+
+
+
 }

@@ -16,6 +16,7 @@ import com.example.project.R;
 import com.example.project.area.selectedArea.model.SelectedAreaMeals;
 import com.example.project.calender.CalendarActivity;
 import com.example.project.category.Category;
+import com.example.project.category.SelectedCategory.view.SelectedCategoryActivity;
 import com.example.project.category.presenter.CategoryInterface;
 import com.example.project.category.presenter.CategoryPresenter;
 import com.example.project.favourite.FavActivity;
@@ -24,7 +25,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
-public class CategoryActivity extends AppCompatActivity implements CategoryViewInterface {
+public class CategoryActivity extends AppCompatActivity implements CategoryViewInterface ,CategoryOnClickListner {
     RecyclerView myRecycleView;
     LinearLayoutManager myManger;
     CategoryAdapter myAdapter;
@@ -40,7 +41,7 @@ public class CategoryActivity extends AppCompatActivity implements CategoryViewI
         myManger = new LinearLayoutManager(this);
         myManger.setOrientation(RecyclerView.VERTICAL);
         myRecycleView.setLayoutManager(myManger);
-        myAdapter = new CategoryAdapter(this );
+        myAdapter = new CategoryAdapter(this ,this);
         myRecycleView.setAdapter(myAdapter);
         presenter = new CategoryPresenter(this, GeneralRepository.getInstance(MealClient.getInstance(),this));
         presenter.getAllCategory();
@@ -91,5 +92,13 @@ public class CategoryActivity extends AppCompatActivity implements CategoryViewI
     public void showData(ArrayList<SelectedAreaMeals> meals) {
         myAdapter.setList(meals);
         myAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onClick(String category) {
+        Intent intent = new Intent(this, SelectedCategoryActivity.class);
+        intent.putExtra("category",category);
+        startActivity(intent);
+
     }
 }

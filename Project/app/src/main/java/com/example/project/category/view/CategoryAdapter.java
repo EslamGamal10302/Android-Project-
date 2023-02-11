@@ -26,6 +26,9 @@ public class CategoryAdapter extends RecyclerView.Adapter <CategoryAdapter.MyVie
 
     private  String url_part2=".png";
 
+
+    CategoryOnClickListner listner;
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -35,8 +38,9 @@ public class CategoryAdapter extends RecyclerView.Adapter <CategoryAdapter.MyVie
         return vh;
     }
 
-    public CategoryAdapter(Context context) {
+    public CategoryAdapter(Context context , CategoryOnClickListner listner) {
         this.context = context;
+        this.listner=listner;
         myMeals=new ArrayList<>();
     }
 
@@ -49,6 +53,12 @@ public class CategoryAdapter extends RecyclerView.Adapter <CategoryAdapter.MyVie
         SelectedAreaMeals meal = myMeals.get(position);
         holder.category.setText(meal.getStrCategory());
         Glide.with(context).load(url_part1+meal.getStrCategory()+url_part2).into(holder.thumbnails);
+        holder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listner.onClick(meal.getStrCategory());
+            }
+        });
     }
 
     @Override

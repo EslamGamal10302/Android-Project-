@@ -54,6 +54,26 @@ public class MealClient implements RemoteSource{
     }
 
     @Override
+    public void resultMealsSelectedCategory(AreaNetworkDelegate networkDelegate, String category) {
+        MealService myApi=RetrofitCall();
+        Observable<SelectedArea> observable = myApi.getMealsOfSelectedCategory(category)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+        observable.subscribe(o->networkDelegate.onSuccessResponse(o.getAreaMeals())
+        );
+    }
+
+    @Override
+    public void resultMealsSelectedIngredient(AreaNetworkDelegate networkDelegate, String ingredient) {
+        MealService myApi=RetrofitCall();
+        Observable<SelectedArea> observable = myApi.getMealsOfSelectedIngredient(ingredient)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+        observable.subscribe(o->networkDelegate.onSuccessResponse(o.getAreaMeals())
+        );
+    }
+
+    @Override
     public void resultIngredientCategory(AreaNetworkDelegate networkDelegate) {
         MealService myApi=RetrofitCall();
         Observable<SelectedArea> observable = myApi.getIngredientsList()

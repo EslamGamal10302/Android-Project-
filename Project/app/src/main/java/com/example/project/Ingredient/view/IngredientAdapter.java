@@ -26,8 +26,11 @@ public class IngredientAdapter  extends RecyclerView.Adapter <IngredientAdapter.
 
     private  String url_part2=".png";
 
-    public IngredientAdapter(Context context) {
+    private IngredientOnClickListner listner ;
+
+    public IngredientAdapter(Context context, IngredientOnClickListner listner) {
         this.context = context;
+        this.listner = listner;
         myMeals=new ArrayList<>();
     }
 
@@ -48,6 +51,12 @@ public class IngredientAdapter  extends RecyclerView.Adapter <IngredientAdapter.
         SelectedAreaMeals meal = myMeals.get(position);
         holder.ingredient.setText(meal.getStrIngredient());
         Glide.with(context).load(url_part1+meal.getStrIngredient()+url_part2).into(holder.thumbnails);
+        holder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listner.onClick(meal.getStrIngredient());
+            }
+        });
     }
 
     @Override

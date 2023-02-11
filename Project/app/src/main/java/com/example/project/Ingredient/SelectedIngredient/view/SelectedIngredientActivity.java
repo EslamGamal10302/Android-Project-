@@ -1,4 +1,4 @@
-package com.example.project.Ingredient.view;
+package com.example.project.Ingredient.SelectedIngredient.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,44 +7,60 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.project.GeneralRepositoryModel.GeneralRepository;
-import com.example.project.Ingredient.SelectedIngredient.view.SelectedIngredientActivity;
-import com.example.project.Ingredient.meals;
-import com.example.project.Ingredient.presenter.IngredientInterface;
-import com.example.project.Ingredient.presenter.IngredientPresenter;
+import com.example.project.Ingredient.SelectedIngredient.presenter.SelectedIngredientInterface;
+import com.example.project.Ingredient.SelectedIngredient.presenter.SelectedIngredientPresenter;
 import com.example.project.Network.MealClient;
 import com.example.project.R;
-
 import com.example.project.area.selectedArea.model.SelectedAreaMeals;
 import com.example.project.calender.CalendarActivity;
+import com.example.project.category.SelectedCategory.presenter.SelectedCategoryInterface;
+import com.example.project.category.SelectedCategory.presenter.SelectedCategoryPresenter;
+import com.example.project.category.SelectedCategory.view.SelectedCategoryAdapter;
 import com.example.project.favourite.FavActivity;
 import com.example.project.home.view.HomeActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
-public class IngredientActivity extends AppCompatActivity implements IngredientViewInterface , IngredientOnClickListner{
-    RecyclerView myRecycleView;
-    LinearLayoutManager myManger;
-    IngredientAdapter myAdapter;
+public class SelectedIngredientActivity extends AppCompatActivity implements SelectedIngredientViewInterface {
+    private String ingredient ;
 
-    IngredientInterface presnter;
+    RecyclerView rv;
+    SelectedIngredientAdapter ad;
 
+    SelectedIngredientInterface presenter;
+    RecyclerView.LayoutManager manger;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ingredient);
-        myRecycleView = (RecyclerView) findViewById(R.id.recyclerView);
-        myManger = new LinearLayoutManager(this);
-        myManger.setOrientation(RecyclerView.VERTICAL);
-        myRecycleView.setLayoutManager(myManger);
-        myAdapter = new IngredientAdapter(this , this );
-        myRecycleView.setAdapter(myAdapter);
-        presnter = new IngredientPresenter(this, GeneralRepository.getInstance(MealClient.getInstance(),this));
-        presnter.getAllIngredient();
+        setContentView(R.layout.activity_selected_ingredient);
+        Intent recived = getIntent();
+        ingredient = recived.getStringExtra("ingredient");
+        Log.i("eslam",ingredient);
+        rv = findViewById(R.id.recyclerView);
+        manger = new LinearLayoutManager(this);
+        ad= new SelectedIngredientAdapter(this);
+        presenter = new SelectedIngredientPresenter(this, GeneralRepository.getInstance(MealClient.getInstance(),this));
+        rv.setLayoutManager(manger);
+        rv.setAdapter(ad);
+        presenter.getSelectedIngredientMeals(ingredient);
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -86,14 +102,7 @@ public class IngredientActivity extends AppCompatActivity implements IngredientV
 
     @Override
     public void showData(ArrayList<SelectedAreaMeals> meals) {
-       myAdapter.setList(meals);
-       myAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onClick(String ingredient) {
-        Intent intent = new Intent(this , SelectedIngredientActivity.class);
-        intent.putExtra("ingredient",ingredient);
-        startActivity(intent);
+        ad.setList(meals);
+        ad.notifyDataSetChanged();
     }
 }
