@@ -2,7 +2,6 @@ package com.example.project.favourite;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,8 +14,7 @@ import com.example.project.calender.CalendarActivity;
 import com.example.project.home.SearchActivity;
 import com.example.project.home.view.HomeActivity;
 
-import com.example.project.home.view.HomeAdapter;
-import com.example.project.model.Meal;
+import com.example.project.model.MealMeals;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class FavActivity extends AppCompatActivity {
@@ -56,7 +54,7 @@ public class FavActivity extends AppCompatActivity {
 
 
 
-        Meal[] meals ={new Meal("Pasta", R.drawable.allmeals) , new Meal("Eshta",R.drawable.cat)};
+        MealMeals[] meals ={new MealMeals("Pasta", R.drawable.allmeals) , new MealMeals("Eshta",R.drawable.cat)};
 
         recyclerView =findViewById(R.id.fav_recyclerView);
         layoutManager = new LinearLayoutManager(this);

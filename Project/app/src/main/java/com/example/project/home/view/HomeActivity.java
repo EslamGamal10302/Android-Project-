@@ -5,18 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 import com.example.project.R;
 import com.example.project.calender.CalendarActivity;
 import com.example.project.favourite.FavActivity;
 import com.example.project.home.SearchActivity;
-import com.example.project.model.Meal;
+import com.example.project.model.MealMeals;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -60,7 +57,7 @@ public class HomeActivity extends AppCompatActivity {
         });
 
 
-        Meal [] meals ={new Meal("Pasta", R.drawable.allmeals) , new Meal("Eshta",R.drawable.cat)};
+        MealMeals[] meals ={new MealMeals("Pasta", R.drawable.allmeals) , new MealMeals("Eshta",R.drawable.cat)};
 
         recyclerView =findViewById(R.id.home_recyclerView);
         layoutManager = new LinearLayoutManager(this);

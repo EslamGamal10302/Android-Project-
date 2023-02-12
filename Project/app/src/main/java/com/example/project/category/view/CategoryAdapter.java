@@ -13,14 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.project.R;
-import com.example.project.area.selectedArea.model.SelectedAreaMeals;
-import com.example.project.category.Category;
+import com.example.project.area.selectedArea.model.Meal;
 
 import java.util.ArrayList;
 
 public class CategoryAdapter extends RecyclerView.Adapter <CategoryAdapter.MyViewHolder>{
     Context context ;
-    ArrayList<SelectedAreaMeals> myMeals;
+    ArrayList<Meal> myMeals;
 
     private String url_part1="https://www.themealdb.com/images/category/";
 
@@ -45,12 +44,12 @@ public class CategoryAdapter extends RecyclerView.Adapter <CategoryAdapter.MyVie
     }
 
 
-    public void setList(ArrayList<SelectedAreaMeals> updateMales )
+    public void setList(ArrayList<Meal> updateMales )
     {this.myMeals = updateMales;}
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        SelectedAreaMeals meal = myMeals.get(position);
+        Meal meal = myMeals.get(position);
         holder.category.setText(meal.getStrCategory());
         Glide.with(context).load(url_part1+meal.getStrCategory()+url_part2).into(holder.thumbnails);
         holder.layout.setOnClickListener(new View.OnClickListener() {

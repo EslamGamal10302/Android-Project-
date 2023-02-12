@@ -2,7 +2,7 @@ package com.example.project.area.selectedArea.presenter;
 
 import com.example.project.GeneralRepositoryModel.GeneralRepositoryInterface;
 import com.example.project.Network.AreaNetworkDelegate;
-import com.example.project.area.selectedArea.model.SelectedAreaMeals;
+import com.example.project.area.selectedArea.model.Meal;
 import com.example.project.area.selectedArea.view.SelectedAreaViewInterface;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class SelectedAreaPresenter implements SelectedAreaInrerface , AreaNetwor
     }
 
     @Override
-    public void onSuccessResponse(ArrayList<SelectedAreaMeals> response) {
+    public void onSuccessResponse(ArrayList<Meal> response) {
            view.showData(response);
     }
 

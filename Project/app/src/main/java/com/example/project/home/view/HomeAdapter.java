@@ -2,15 +2,12 @@ package com.example.project.home.view;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -21,16 +18,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project.R;
-import com.example.project.model.Meal;
+import com.example.project.model.MealMeals;
 
 public class HomeAdapter extends  RecyclerView.Adapter<HomeAdapter.HomeViewHolder>  {
     Activity spinnerContext;
 
     Context context;
-    Meal [] meals;
+    MealMeals[] meals;
 
 
-public HomeAdapter (Context context , Meal [] meals){
+public HomeAdapter (Context context , MealMeals[] meals){
     this.context = context;
     this.meals = meals;
 
@@ -51,7 +48,7 @@ public HomeAdapter (Context context , Meal [] meals){
     @Override
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
        String [] days ={"satrday","sunday","monday","tusday"};
-       Meal meal = meals[position];
+       MealMeals meal = meals[position];
        holder.mealName.setText(meal.getStrMeal());
        holder.mealImage.setImageResource(meal.getImage_thumbnail());
        ArrayAdapter <CharSequence> adapter = ArrayAdapter.createFromResource(context,R.array.days, android.R.layout.simple_spinner_item);

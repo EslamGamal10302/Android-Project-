@@ -15,11 +15,8 @@ import com.example.project.Ingredient.SelectedIngredient.presenter.SelectedIngre
 import com.example.project.Ingredient.SelectedIngredient.presenter.SelectedIngredientPresenter;
 import com.example.project.Network.MealClient;
 import com.example.project.R;
-import com.example.project.area.selectedArea.model.SelectedAreaMeals;
+import com.example.project.area.selectedArea.model.Meal;
 import com.example.project.calender.CalendarActivity;
-import com.example.project.category.SelectedCategory.presenter.SelectedCategoryInterface;
-import com.example.project.category.SelectedCategory.presenter.SelectedCategoryPresenter;
-import com.example.project.category.SelectedCategory.view.SelectedCategoryAdapter;
 import com.example.project.favourite.FavActivity;
 import com.example.project.home.view.HomeActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -101,7 +98,7 @@ public class SelectedIngredientActivity extends AppCompatActivity implements Sel
     }
 
     @Override
-    public void showData(ArrayList<SelectedAreaMeals> meals) {
+    public void showData(ArrayList<Meal> meals) {
         ad.setList(meals);
         ad.notifyDataSetChanged();
     }

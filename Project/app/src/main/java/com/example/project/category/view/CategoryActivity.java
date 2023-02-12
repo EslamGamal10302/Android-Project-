@@ -13,9 +13,8 @@ import com.example.project.GeneralRepositoryModel.GeneralRepository;
 import com.example.project.Network.MealClient;
 import com.example.project.R;
 
-import com.example.project.area.selectedArea.model.SelectedAreaMeals;
+import com.example.project.area.selectedArea.model.Meal;
 import com.example.project.calender.CalendarActivity;
-import com.example.project.category.Category;
 import com.example.project.category.SelectedCategory.view.SelectedCategoryActivity;
 import com.example.project.category.presenter.CategoryInterface;
 import com.example.project.category.presenter.CategoryPresenter;
@@ -89,7 +88,7 @@ public class CategoryActivity extends AppCompatActivity implements CategoryViewI
     }
 
     @Override
-    public void showData(ArrayList<SelectedAreaMeals> meals) {
+    public void showData(ArrayList<Meal> meals) {
         myAdapter.setList(meals);
         myAdapter.notifyDataSetChanged();
     }

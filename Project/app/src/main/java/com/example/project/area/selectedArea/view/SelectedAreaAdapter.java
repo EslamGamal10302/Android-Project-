@@ -4,9 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,13 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.project.R;
-import com.example.project.area.selectedArea.model.SelectedAreaMeals;
+import com.example.project.area.selectedArea.model.Meal;
 
 import java.util.ArrayList;
 
 public class SelectedAreaAdapter extends RecyclerView.Adapter <SelectedAreaAdapter.MyViewHolder>{
 
-    ArrayList<SelectedAreaMeals> myMeals;
+    ArrayList<Meal> myMeals;
     Context context ;
 
     public SelectedAreaAdapter( Context context) {
@@ -30,7 +28,7 @@ public class SelectedAreaAdapter extends RecyclerView.Adapter <SelectedAreaAdapt
     }
 
 
-    public void setList(ArrayList<SelectedAreaMeals> updateMales )
+    public void setList(ArrayList<Meal> updateMales )
     {this.myMeals = updateMales;}
     @NonNull
     @Override
@@ -43,7 +41,7 @@ public class SelectedAreaAdapter extends RecyclerView.Adapter <SelectedAreaAdapt
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        SelectedAreaMeals meal = myMeals.get(position);
+        Meal meal = myMeals.get(position);
         holder.title.setText(meal.getStrMeal());
         Glide.with(context).load(meal.getStrMealThumb()).into(holder.thumbnails);
 

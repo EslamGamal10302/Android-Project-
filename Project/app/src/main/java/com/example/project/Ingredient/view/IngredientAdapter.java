@@ -12,15 +12,14 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.project.Ingredient.meals;
 import com.example.project.R;
-import com.example.project.area.selectedArea.model.SelectedAreaMeals;
+import com.example.project.area.selectedArea.model.Meal;
 
 import java.util.ArrayList;
 
 public class IngredientAdapter  extends RecyclerView.Adapter <IngredientAdapter.MyViewHolder> {
     Context context ;
-    ArrayList<SelectedAreaMeals> myMeals;
+    ArrayList<Meal> myMeals;
 
     private String url_part1="https://www.themealdb.com/images/ingredients/";
 
@@ -34,7 +33,7 @@ public class IngredientAdapter  extends RecyclerView.Adapter <IngredientAdapter.
         myMeals=new ArrayList<>();
     }
 
-    public void setList(ArrayList<SelectedAreaMeals> updateMales )
+    public void setList(ArrayList<Meal> updateMales )
     {this.myMeals = updateMales;}
 
     @NonNull
@@ -48,7 +47,7 @@ public class IngredientAdapter  extends RecyclerView.Adapter <IngredientAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull IngredientAdapter.MyViewHolder holder, int position) {
-        SelectedAreaMeals meal = myMeals.get(position);
+        Meal meal = myMeals.get(position);
         holder.ingredient.setText(meal.getStrIngredient());
         Glide.with(context).load(url_part1+meal.getStrIngredient()+url_part2).into(holder.thumbnails);
         holder.layout.setOnClickListener(new View.OnClickListener() {

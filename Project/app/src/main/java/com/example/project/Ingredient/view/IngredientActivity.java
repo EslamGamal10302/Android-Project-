@@ -11,13 +11,12 @@ import android.view.MenuItem;
 
 import com.example.project.GeneralRepositoryModel.GeneralRepository;
 import com.example.project.Ingredient.SelectedIngredient.view.SelectedIngredientActivity;
-import com.example.project.Ingredient.meals;
 import com.example.project.Ingredient.presenter.IngredientInterface;
 import com.example.project.Ingredient.presenter.IngredientPresenter;
 import com.example.project.Network.MealClient;
 import com.example.project.R;
 
-import com.example.project.area.selectedArea.model.SelectedAreaMeals;
+import com.example.project.area.selectedArea.model.Meal;
 import com.example.project.calender.CalendarActivity;
 import com.example.project.favourite.FavActivity;
 import com.example.project.home.view.HomeActivity;
@@ -85,7 +84,7 @@ public class IngredientActivity extends AppCompatActivity implements IngredientV
     }
 
     @Override
-    public void showData(ArrayList<SelectedAreaMeals> meals) {
+    public void showData(ArrayList<Meal> meals) {
        myAdapter.setList(meals);
        myAdapter.notifyDataSetChanged();
     }
