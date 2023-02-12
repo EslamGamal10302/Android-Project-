@@ -1,9 +1,8 @@
 package com.example.project.category.presenter;
 
 import com.example.project.GeneralRepositoryModel.GeneralRepositoryInterface;
-import com.example.project.Ingredient.view.IngredientViewInterface;
 import com.example.project.Network.AreaNetworkDelegate;
-import com.example.project.area.selectedArea.model.SelectedAreaMeals;
+import com.example.project.area.selectedArea.model.Meal;
 import com.example.project.category.view.CategoryViewInterface;
 
 import java.util.ArrayList;
@@ -18,7 +17,7 @@ public class CategoryPresenter implements CategoryInterface, AreaNetworkDelegate
 
     GeneralRepositoryInterface GR;
     @Override
-    public void onSuccessResponse(ArrayList<SelectedAreaMeals> response) {
+    public void onSuccessResponse(ArrayList<Meal> response) {
         view.showData(response);
     }
 

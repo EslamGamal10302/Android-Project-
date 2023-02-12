@@ -10,13 +10,13 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.project.GeneralRepositoryModel.GeneralRepository;
-import com.example.project.Ingredient.meals;
+import com.example.project.Ingredient.SelectedIngredient.view.SelectedIngredientActivity;
 import com.example.project.Ingredient.presenter.IngredientInterface;
 import com.example.project.Ingredient.presenter.IngredientPresenter;
 import com.example.project.Network.MealClient;
 import com.example.project.R;
 
-import com.example.project.area.selectedArea.model.SelectedAreaMeals;
+import com.example.project.area.selectedArea.model.Meal;
 import com.example.project.calender.CalendarActivity;
 import com.example.project.favourite.FavActivity;
 import com.example.project.home.view.HomeActivity;
@@ -24,7 +24,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
-public class IngredientActivity extends AppCompatActivity implements IngredientViewInterface{
+public class IngredientActivity extends AppCompatActivity implements IngredientViewInterface , IngredientOnClickListner{
     RecyclerView myRecycleView;
     LinearLayoutManager myManger;
     IngredientAdapter myAdapter;
@@ -40,7 +40,7 @@ public class IngredientActivity extends AppCompatActivity implements IngredientV
         myManger = new LinearLayoutManager(this);
         myManger.setOrientation(RecyclerView.VERTICAL);
         myRecycleView.setLayoutManager(myManger);
-        myAdapter = new IngredientAdapter(this );
+        myAdapter = new IngredientAdapter(this , this );
         myRecycleView.setAdapter(myAdapter);
         presnter = new IngredientPresenter(this, GeneralRepository.getInstance(MealClient.getInstance(),this));
         presnter.getAllIngredient();
@@ -84,8 +84,15 @@ public class IngredientActivity extends AppCompatActivity implements IngredientV
     }
 
     @Override
-    public void showData(ArrayList<SelectedAreaMeals> meals) {
+    public void showData(ArrayList<Meal> meals) {
        myAdapter.setList(meals);
        myAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onClick(String ingredient) {
+        Intent intent = new Intent(this , SelectedIngredientActivity.class);
+        intent.putExtra("ingredient",ingredient);
+        startActivity(intent);
     }
 }

@@ -1,4 +1,4 @@
-package com.example.project.area.selectedArea.view;
+package com.example.project.Ingredient.SelectedIngredient.view;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -17,34 +17,32 @@ import com.example.project.area.selectedArea.model.Meal;
 
 import java.util.ArrayList;
 
-public class SelectedAreaAdapter extends RecyclerView.Adapter <SelectedAreaAdapter.MyViewHolder>{
-
+public class SelectedIngredientAdapter extends RecyclerView.Adapter<SelectedIngredientAdapter.MyViewHolder> {
     ArrayList<Meal> myMeals;
     Context context ;
 
-    public SelectedAreaAdapter( Context context) {
+    public SelectedIngredientAdapter(Context context) {
         this.context = context;
-        myMeals= new ArrayList<>();
+        myMeals = new ArrayList<>();
     }
-
 
     public void setList(ArrayList<Meal> updateMales )
     {this.myMeals = updateMales;}
+
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public SelectedIngredientAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater  = (LayoutInflater) context .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.selected_area_view , parent , false);
-        MyViewHolder vh = new MyViewHolder(view);
+        View view = inflater.inflate(R.layout.selected_ingredient_view, parent , false);
+        SelectedIngredientAdapter.MyViewHolder vh = new SelectedIngredientAdapter.MyViewHolder(view);
         return vh;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SelectedIngredientAdapter.MyViewHolder holder, int position) {
         Meal meal = myMeals.get(position);
         holder.title.setText(meal.getStrMeal());
         Glide.with(context).load(meal.getStrMealThumb()).into(holder.thumbnails);
-
     }
 
     @Override
@@ -61,9 +59,9 @@ public class SelectedAreaAdapter extends RecyclerView.Adapter <SelectedAreaAdapt
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            layout = itemView.findViewById(R.id.cons_lay_Selected_area);
-            title = itemView.findViewById(R.id.text_selected_area);
-            thumbnails = itemView.findViewById(R.id.imageView_selected_area);
+            layout = itemView.findViewById(R.id.cons_lay_Selected_ingredient);
+            title = itemView.findViewById(R.id.text_selected_ingredient);
+            thumbnails = itemView.findViewById(R.id.imageView_selected_ingredient);
 
         }
 

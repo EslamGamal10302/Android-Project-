@@ -13,7 +13,7 @@ import android.view.MenuItem;
 import com.example.project.GeneralRepositoryModel.GeneralRepository;
 import com.example.project.Network.MealClient;
 import com.example.project.R;
-import com.example.project.area.selectedArea.model.SelectedAreaMeals;
+import com.example.project.area.selectedArea.model.Meal;
 import com.example.project.area.selectedArea.presenter.SelectedAreaInrerface;
 import com.example.project.area.selectedArea.presenter.SelectedAreaPresenter;
 import com.example.project.calender.CalendarActivity;
@@ -101,7 +101,7 @@ public class SelectedAreaActivity extends AppCompatActivity implements SelectedA
     }
 
     @Override
-    public void showData(ArrayList<SelectedAreaMeals> meals) {
+    public void showData(ArrayList<Meal> meals) {
        ad.setList(meals);
        ad.notifyDataSetChanged();
     }

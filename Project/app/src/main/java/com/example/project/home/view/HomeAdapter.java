@@ -24,6 +24,7 @@ import com.bumptech.glide.Glide;
 import com.example.project.R;
 import com.example.project.area.selectedArea.model.SelectedAreaMeals;
 import com.example.project.model.Meal;
+import com.example.project.model.MealMeals;
 
 import java.util.ArrayList;
 

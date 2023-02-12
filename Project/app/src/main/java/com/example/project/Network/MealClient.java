@@ -43,7 +43,7 @@ public class MealClient implements RemoteSource{
 
     @Override
     public void resultMealsSelectedArea(AreaNetworkDelegate networkDelegate , String nationality) {
-        MealService myApi= RetrofitCall();
+        MealService myApi=RetrofitCall();
         Observable<SelectedArea> observable = myApi.getMealsOfSelectedArea(nationality)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());

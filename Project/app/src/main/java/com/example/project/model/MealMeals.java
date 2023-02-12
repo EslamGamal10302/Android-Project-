@@ -1,6 +1,6 @@
 package com.example.project.model;
 
-public class Meal {
+public class MealMeals {
 
     private  int image_thumbnail;
 
@@ -12,7 +12,7 @@ public class Meal {
     private String strYoutube;
 
 
-    public Meal (String strMeal , int image_thumbnail){
+    public MealMeals(String strMeal , int image_thumbnail){
         this.strMeal = strMeal;
         this.image_thumbnail=image_thumbnail;
     }

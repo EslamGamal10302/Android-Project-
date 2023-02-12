@@ -3,8 +3,7 @@ package com.example.project.Ingredient.presenter;
 import com.example.project.GeneralRepositoryModel.GeneralRepositoryInterface;
 import com.example.project.Ingredient.view.IngredientViewInterface;
 import com.example.project.Network.AreaNetworkDelegate;
-import com.example.project.area.selectedArea.model.SelectedAreaMeals;
-import com.example.project.area.selectedArea.view.SelectedAreaViewInterface;
+import com.example.project.area.selectedArea.model.Meal;
 
 import java.util.ArrayList;
 
@@ -23,7 +22,7 @@ public class IngredientPresenter implements IngredientInterface , AreaNetworkDel
     }
 
     @Override
-    public void onSuccessResponse(ArrayList<SelectedAreaMeals> response) {
+    public void onSuccessResponse(ArrayList<Meal> response) {
         view.showData(response);
     }
 

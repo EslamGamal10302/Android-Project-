@@ -1,9 +1,9 @@
-package com.example.project.area.selectedArea.view;
+package com.example.project.Ingredient.SelectedIngredient.view;
 
 import com.example.project.area.selectedArea.model.Meal;
 
 import java.util.ArrayList;
 
-public interface SelectedAreaViewInterface {
+public interface SelectedIngredientViewInterface {
     public void showData(ArrayList<Meal> meals);
 }

@@ -31,6 +31,16 @@ public class GeneralRepository implements GeneralRepositoryInterface{
     }
 
     @Override
+    public void resultMealsSelectedCategory(AreaNetworkDelegate networkDelegate, String category) {
+        RS.resultMealsSelectedCategory(networkDelegate,category);
+    }
+
+    @Override
+    public void resultMealsSelectedIngredient(AreaNetworkDelegate networkDelegate, String ingredient) {
+        RS.resultMealsSelectedIngredient(networkDelegate,ingredient);
+    }
+
+    @Override
     public void resultIngredientCategory(AreaNetworkDelegate networkDelegate) {
         RS.resultIngredientCategory(networkDelegate);
     }

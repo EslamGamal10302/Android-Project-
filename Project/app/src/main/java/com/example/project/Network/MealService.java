@@ -8,19 +8,28 @@ import retrofit2.http.Query;
 
 public interface MealService {
     @GET("filter.php")
-    Observable<SelectedArea> getMealsOfSelectedArea(@Query("a") String areaSelected);
+    Observable<SelectedResponse> getMealsOfSelectedArea(@Query("a") String areaSelected);
+
+    @GET("filter.php")
+    Observable<SelectedResponse> getMealsOfSelectedCategory(@Query("c") String categorySelected);
+
+
+
+    @GET("filter.php")
+    Observable<SelectedResponse> getMealsOfSelectedIngredient(@Query("i") String ingredientSelected);
+
 
     @GET("list.php?i=list")
-    Observable<SelectedArea> getIngredientsList();
+    Observable<SelectedResponse> getIngredientsList();
 
 
     @GET("list.php?c=list")
-    Observable<SelectedArea> getCategoriesList();
+    Observable<SelectedResponse> getCategoriesList();
 
     @GET("search.php?f=a")
-    Observable<SelectedArea> getRandomMeals();
+    Observable<SelectedResponse> getRandomMeals();
 
     @GET("search.php?s")
-    Observable<SelectedArea> getAllMeals();
+    Observable<SelectedResponse> getAllMeals();
 
 }

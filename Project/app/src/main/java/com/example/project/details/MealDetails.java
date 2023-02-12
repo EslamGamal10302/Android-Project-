@@ -47,8 +47,8 @@ public class MealDetails extends AppCompatActivity {
 
 
 
-
-    /*    youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+    /*    youTubePlayerView =findViewById(R.id.ybv);
+        youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
             @Override
             public void onReady(@NonNull YouTubePlayer youTubePlayer) {
                 super.onReady(youTubePlayer);

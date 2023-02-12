@@ -1,33 +1,27 @@
 package com.example.project.favourite;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project.R;
-import com.example.project.home.view.HomeAdapter;
-import com.example.project.model.Meal;
+import com.example.project.model.MealMeals;
 
 public class FavAdabter  extends  RecyclerView.Adapter<FavAdabter.FavViewHolder>  {
 
     Context context;
-    Meal [] meals;
+    MealMeals[] meals;
 
 
-    public FavAdabter (Context context , Meal [] meals){
+    public FavAdabter (Context context , MealMeals[] meals){
         this.context = context;
         this.meals = meals;
 
@@ -47,7 +41,7 @@ public class FavAdabter  extends  RecyclerView.Adapter<FavAdabter.FavViewHolder>
     @Override
     public void onBindViewHolder(@NonNull FavViewHolder holder, int position) {
         String [] days ={"satrday","sunday","monday","tusday"};
-        Meal meal = meals[position];
+        MealMeals meal = meals[position];
         holder.mealName.setText(meal.getStrMeal());
         holder.mealImage.setImageResource(meal.getImage_thumbnail());
        /* ArrayAdapter <CharSequence> adapter = ArrayAdapter.createFromResource(context,R.array.days, android.R.layout.simple_spinner_item);

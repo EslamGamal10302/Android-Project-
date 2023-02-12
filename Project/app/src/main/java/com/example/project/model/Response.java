@@ -4,17 +4,17 @@ import java.util.ArrayList;
 
 public class Response {
 
-    private ArrayList<Meal> meals ;
+    private ArrayList<MealMeals> meals ;
 
-    public Response(ArrayList<Meal> meals) {
+    public Response(ArrayList<MealMeals> meals) {
         this.meals = meals;
     }
 
-    public ArrayList<Meal> getMeals() {
+    public ArrayList<MealMeals> getMeals() {
         return meals;
     }
 
-    public void setMeals(ArrayList<Meal> meals) {
+    public void setMeals(ArrayList<MealMeals> meals) {
         this.meals = meals;
     }
 }

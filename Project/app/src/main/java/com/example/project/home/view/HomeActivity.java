@@ -19,6 +19,7 @@ import com.example.project.area.selectedArea.model.SelectedAreaMeals;
 import com.example.project.calender.CalendarActivity;
 import com.example.project.favourite.FavActivity;
 import com.example.project.home.SearchActivity;
+
 import com.example.project.home.pressenter.HomePressenter;
 import com.example.project.home.pressenter.HomePressenterInterface;
 import com.example.project.model.Meal;
@@ -32,17 +33,17 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
     LinearLayoutManager layoutManager;
     HomeAdapter homeAdapter;
 
-    HomePressenterInterface pressenter ;
+    HomePressenterInterface pressenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.homeScreen);
 
-      pressenter = new HomePressenter(GeneralRepository.getInstance(MealClient.getInstance(),this),this);
-        recyclerView =findViewById(R.id.home_recyclerView);
+        pressenter = new HomePressenter(GeneralRepository.getInstance(MealClient.getInstance(), this), this);
+        recyclerView = findViewById(R.id.home_recyclerView);
         layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);
@@ -53,21 +54,20 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch(item.getItemId())
-                {
+                switch (item.getItemId()) {
                     case R.id.searchScreen:
                         startActivity(new Intent(getApplicationContext(), SearchActivity.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
                         return true;
                     case R.id.homeScreen:
                         return true;
                     case R.id.favScreen:
                         startActivity(new Intent(getApplicationContext(), FavActivity.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
                         return true;
                     case R.id.calScreen:
                         startActivity(new Intent(getApplicationContext(), CalendarActivity.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
                         return true;
                 }
                 return false;
@@ -77,9 +77,12 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
 
     }
 
+
     @Override
     public void showRandomMeals(ArrayList<SelectedAreaMeals> randomMeals) {
-         homeAdapter.setList(randomMeals);
-         homeAdapter.notifyDataSetChanged();
+        homeAdapter.setList(randomMeals);
+        homeAdapter.notifyDataSetChanged();
     }
 }
+
+
