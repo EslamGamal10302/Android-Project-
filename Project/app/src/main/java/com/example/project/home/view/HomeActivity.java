@@ -15,14 +15,15 @@ import android.widget.Toast;
 import com.example.project.GeneralRepositoryModel.GeneralRepository;
 import com.example.project.Network.MealClient;
 import com.example.project.R;
-import com.example.project.area.selectedArea.model.SelectedAreaMeals;
+import com.example.project.area.selectedArea.model.Meal;
+
 import com.example.project.calender.CalendarActivity;
 import com.example.project.favourite.FavActivity;
 import com.example.project.home.SearchActivity;
 
 import com.example.project.home.pressenter.HomePressenter;
 import com.example.project.home.pressenter.HomePressenterInterface;
-import com.example.project.model.Meal;
+
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -79,7 +80,7 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
 
 
     @Override
-    public void showRandomMeals(ArrayList<SelectedAreaMeals> randomMeals) {
+    public void showRandomMeals(ArrayList<Meal> randomMeals) {
         homeAdapter.setList(randomMeals);
         homeAdapter.notifyDataSetChanged();
     }

@@ -1,6 +1,7 @@
 package com.example.project.Network;
 
-import com.example.project.area.selectedArea.model.SelectedArea;
+
+import com.example.project.area.selectedArea.model.SelectedResponse;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

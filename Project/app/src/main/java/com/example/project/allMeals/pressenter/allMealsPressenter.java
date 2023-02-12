@@ -3,7 +3,8 @@ package com.example.project.allMeals.pressenter;
 import com.example.project.GeneralRepositoryModel.GeneralRepositoryInterface;
 import com.example.project.Network.AreaNetworkDelegate;
 import com.example.project.allMeals.view.AllMealsViewInterface;
-import com.example.project.area.selectedArea.model.SelectedAreaMeals;
+import com.example.project.area.selectedArea.model.Meal;
+
 
 import java.util.ArrayList;
 
@@ -25,7 +26,7 @@ public class allMealsPressenter implements allMealPressenterInterface , AreaNetw
     }
 
     @Override
-    public void onSuccessResponse(ArrayList<SelectedAreaMeals> response) {
+    public void onSuccessResponse(ArrayList<Meal> response) {
         view.showAllMeals(response);
     }
 

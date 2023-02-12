@@ -11,7 +11,8 @@ import com.example.project.Network.MealClient;
 import com.example.project.R;
 import com.example.project.allMeals.pressenter.allMealPressenterInterface;
 import com.example.project.allMeals.pressenter.allMealsPressenter;
-import com.example.project.area.selectedArea.model.SelectedAreaMeals;
+import com.example.project.area.selectedArea.model.Meal;
+
 import com.example.project.home.pressenter.HomePressenter;
 import com.example.project.home.pressenter.HomePressenterInterface;
 import com.example.project.home.view.HomeAdapter;
@@ -44,7 +45,7 @@ public class AllMealsActivity extends AppCompatActivity implements AllMealsViewI
     }
 
     @Override
-    public void showAllMeals(ArrayList<SelectedAreaMeals> allMeals) {
+    public void showAllMeals(ArrayList<Meal> allMeals) {
         allMealAdapter.setList(allMeals);
         allMealAdapter.notifyDataSetChanged();
     }

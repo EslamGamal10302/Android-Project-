@@ -22,8 +22,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.project.R;
-import com.example.project.area.selectedArea.model.SelectedAreaMeals;
-import com.example.project.model.Meal;
+import com.example.project.area.selectedArea.model.Meal;
+
+
 import com.example.project.model.MealMeals;
 
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class HomeAdapter extends  RecyclerView.Adapter<HomeAdapter.HomeViewHolde
     Activity spinnerContext;
 
     Context context;
-    ArrayList<SelectedAreaMeals> rnadomMels;
+    ArrayList<Meal> rnadomMels;
 
 
 public HomeAdapter (Context context){
@@ -41,7 +42,7 @@ public HomeAdapter (Context context){
 
 }
 
-public void setList(ArrayList<SelectedAreaMeals> randomMeals){
+public void setList(ArrayList<Meal> randomMeals){
     this.rnadomMels = randomMeals;
 }
 
@@ -61,7 +62,7 @@ public void setList(ArrayList<SelectedAreaMeals> randomMeals){
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
        String [] days ={"satrday","sunday","monday","tusday"};
 
-       SelectedAreaMeals meal = rnadomMels.get(position);
+       Meal meal = rnadomMels.get(position);
        holder.mealName.setText(meal.getStrMeal());
         Glide.with(context).load(meal.getStrMealThumb()).into(holder.mealImage);
        ArrayAdapter <CharSequence> adapter = ArrayAdapter.createFromResource(context,R.array.days, android.R.layout.simple_spinner_item);

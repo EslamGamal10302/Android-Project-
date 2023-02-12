@@ -12,14 +12,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.project.R;
-import com.example.project.area.selectedArea.model.SelectedAreaMeals;
+import com.example.project.area.selectedArea.model.Meal;
+
 import com.example.project.home.view.HomeAdapter;
 
 import java.util.ArrayList;
 
 public class AllMealAdapter extends  RecyclerView.Adapter<AllMealAdapter.AllMealsViewHolder>{
 
-   ArrayList<SelectedAreaMeals>allmeals ;
+   ArrayList<Meal>allmeals ;
    Context context ;
 
     public AllMealAdapter(Context context) {
@@ -27,7 +28,7 @@ public class AllMealAdapter extends  RecyclerView.Adapter<AllMealAdapter.AllMeal
         allmeals = new ArrayList<>();
     }
 
-    public void setList(ArrayList<SelectedAreaMeals> allmeals){
+    public void setList(ArrayList<Meal> allmeals){
         this.allmeals = allmeals;
     }
 
@@ -44,7 +45,7 @@ public class AllMealAdapter extends  RecyclerView.Adapter<AllMealAdapter.AllMeal
 
     @Override
     public void onBindViewHolder(@NonNull AllMealsViewHolder holder, int position) {
-        SelectedAreaMeals meal = allmeals.get(position);
+        Meal meal = allmeals.get(position);
         holder.mealName.setText(meal.getStrMeal());
         Glide.with(context).load(meal.getStrMealThumb()).into(holder.mealImage);
 

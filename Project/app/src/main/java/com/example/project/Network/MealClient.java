@@ -1,7 +1,7 @@
 package com.example.project.Network;
 
-import com.example.project.area.selectedArea.model.SelectedArea;
-import com.example.project.area.selectedArea.model.SelectedAreaMeals;
+
+import com.example.project.area.selectedArea.model.SelectedResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -44,7 +44,7 @@ public class MealClient implements RemoteSource{
     @Override
     public void resultMealsSelectedArea(AreaNetworkDelegate networkDelegate , String nationality) {
         MealService myApi=RetrofitCall();
-        Observable<SelectedArea> observable = myApi.getMealsOfSelectedArea(nationality)
+        Observable<SelectedResponse> observable = myApi.getMealsOfSelectedArea(nationality)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
         observable.subscribe(o->networkDelegate.onSuccessResponse(o.getAreaMeals())
@@ -53,9 +53,29 @@ public class MealClient implements RemoteSource{
     }
 
     @Override
+    public void resultMealsSelectedCategory(AreaNetworkDelegate networkDelegate, String category) {
+        MealService myApi=RetrofitCall();
+        Observable<SelectedResponse> observable = myApi.getMealsOfSelectedCategory(category)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+        observable.subscribe(o->networkDelegate.onSuccessResponse(o.getAreaMeals())
+        );
+    }
+
+    @Override
+    public void resultMealsSelectedIngredient(AreaNetworkDelegate networkDelegate, String ingredient) {
+        MealService myApi=RetrofitCall();
+        Observable<SelectedResponse> observable = myApi.getMealsOfSelectedIngredient(ingredient)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+        observable.subscribe(o->networkDelegate.onSuccessResponse(o.getAreaMeals())
+        );
+    }
+
+    @Override
     public void resultIngredientCategory(AreaNetworkDelegate networkDelegate) {
         MealService myApi=RetrofitCall();
-        Observable<SelectedArea> observable = myApi.getIngredientsList()
+        Observable<SelectedResponse> observable = myApi.getIngredientsList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
         observable.subscribe(o->networkDelegate.onSuccessResponse(o.getAreaMeals())
@@ -65,7 +85,7 @@ public class MealClient implements RemoteSource{
     @Override
     public void resultCategory(AreaNetworkDelegate networkDelegate) {
         MealService myApi=RetrofitCall();
-        Observable<SelectedArea> observable = myApi.getCategoriesList()
+        Observable<SelectedResponse> observable = myApi.getCategoriesList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
         observable.subscribe(o->networkDelegate.onSuccessResponse(o.getAreaMeals())
@@ -76,7 +96,7 @@ public class MealClient implements RemoteSource{
     @Override
     public void resultRandomMeals(AreaNetworkDelegate networkDelegate){
         MealService myApi=RetrofitCall();
-        Observable<SelectedArea> observable = myApi.getRandomMeals()
+        Observable<SelectedResponse> observable = myApi.getRandomMeals()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
         observable.subscribe(o->networkDelegate.onSuccessResponse(o.getAreaMeals())
@@ -87,7 +107,7 @@ public class MealClient implements RemoteSource{
     @Override
     public void resultAllMeals(AreaNetworkDelegate networkDelegate){
         MealService myApi=RetrofitCall();
-        Observable<SelectedArea> observable = myApi.getAllMeals()
+        Observable<SelectedResponse> observable = myApi.getAllMeals()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
         observable.subscribe(o->networkDelegate.onSuccessResponse(o.getAreaMeals())

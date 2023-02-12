@@ -1,6 +1,15 @@
 package com.example.project.area.selectedArea.model;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity (tableName = "meals")
+
 public class Meal {
+
+    @PrimaryKey
+    @NonNull
     private String strMeal;
     private String strMealThumb;
 

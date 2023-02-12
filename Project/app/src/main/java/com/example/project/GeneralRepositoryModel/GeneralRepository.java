@@ -4,6 +4,11 @@ import android.content.Context;
 
 import com.example.project.Network.AreaNetworkDelegate;
 import com.example.project.Network.RemoteSource;
+import com.example.project.area.selectedArea.model.Meal;
+
+import java.util.List;
+
+import io.reactivex.Observable;
 
 public class GeneralRepository implements GeneralRepositoryInterface{
     Context context;
@@ -61,4 +66,18 @@ public class GeneralRepository implements GeneralRepositoryInterface{
     }
 
 
+    @Override
+    public Observable<List<Meal>> getStoredmeals() {
+        return null;
+    }
+
+    @Override
+    public void delete(Meal meal) {
+
+    }
+
+    @Override
+    public void insert(Meal meal) {
+
+    }
 }
