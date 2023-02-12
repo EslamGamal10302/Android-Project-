@@ -34,14 +34,6 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
 
     HomePressenterInterface pressenter ;
 
-
-
-
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +49,6 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
         homeAdapter = new HomeAdapter(this);
         recyclerView.setAdapter(homeAdapter);
         pressenter.getDailyRandomMeals();
-
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -85,7 +76,6 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
 
 
     }
-
 
     @Override
     public void showRandomMeals(ArrayList<SelectedAreaMeals> randomMeals) {
