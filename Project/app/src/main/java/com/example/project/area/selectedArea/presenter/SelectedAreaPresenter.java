@@ -31,4 +31,9 @@ public class SelectedAreaPresenter implements SelectedAreaInrerface , AreaNetwor
         GR.resultMealsSelectedArea(this ,nationality);
 
     }
+
+    @Override
+    public void addToFavorite(Meal meal) {
+        GR.insert(meal);
+    }
 }
