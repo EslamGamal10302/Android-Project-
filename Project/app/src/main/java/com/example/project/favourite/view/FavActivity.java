@@ -14,13 +14,12 @@ import com.example.project.GeneralRepositoryModel.GeneralRepository;
 import com.example.project.Network.MealClient;
 import com.example.project.R;
 import com.example.project.area.selectedArea.model.Meal;
-import com.example.project.calender.CalendarActivity;
+import com.example.project.calender.view.CalendarActivity;
 import com.example.project.favourite.presenter.FavouritePresenterInterface;
 import com.example.project.favourite.presenter.favouritePresenter;
 import com.example.project.home.SearchActivity;
 import com.example.project.home.view.HomeActivity;
 
-import com.example.project.model.MealMeals;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;

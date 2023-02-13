@@ -89,4 +89,39 @@ public class GeneralRepository implements GeneralRepositoryInterface{
         LS.insert(meal);
 
     }
+
+    @Override
+    public Observable<List<Meal>> getSutrdaydmeals() {
+        return  LS.getSutrdaydmeals();
+    }
+
+    @Override
+    public Observable<List<Meal>> getSundaydmeals() {
+       return LS.getSundaydmeals();
+    }
+
+    @Override
+    public Observable<List<Meal>> getMondaymeals() {
+        return LS.getMondaymeals();
+    }
+
+    @Override
+    public Observable<List<Meal>> getTusdaymeals() {
+        return LS.getTusdaymeals();
+    }
+
+    @Override
+    public Observable<List<Meal>> getWednsdaymeals() {
+        return LS.getWednsdaymeals();
+    }
+
+    @Override
+    public Observable<List<Meal>> getThursdaymeals() {
+        return LS.getThursdaymeals();
+    }
+
+    @Override
+    public Observable<List<Meal>> getFridaymeals() {
+        return LS.getFridaymeals();
+    }
 }

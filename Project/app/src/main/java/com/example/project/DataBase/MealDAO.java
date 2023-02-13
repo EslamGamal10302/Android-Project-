@@ -21,5 +21,22 @@ public interface MealDAO {
     Completable insertMeal (Meal meal);
     @Delete
     Completable deleteMeal (Meal meal);
+    @Query("SELECT * FROM meals WHERE DAY LIKE '1'")
+    Observable<List<Meal>> getSaturdaymeals();
+    @Query("SELECT * FROM meals WHERE DAY LIKE '2'")
+    Observable<List<Meal>> getSundaymeals();
+    @Query("SELECT * FROM meals WHERE DAY LIKE '3'")
+    Observable<List<Meal>> getMondaymeals();
+    @Query("SELECT * FROM meals WHERE DAY LIKE '4'")
+    Observable<List<Meal>> getTusdaymeals();
+    @Query("SELECT * FROM meals WHERE DAY LIKE '5'")
+    Observable<List<Meal>> getWednsdaymeals();
+    @Query("SELECT * FROM meals WHERE DAY LIKE '6'")
+    Observable<List<Meal>> getThursdaymeals();
+    @Query("SELECT * FROM meals WHERE DAY LIKE '7'")
+    Observable<List<Meal>> getFridaymeals();
+
+
+
 
 }

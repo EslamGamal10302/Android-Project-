@@ -77,4 +77,39 @@ public class DataBaseRepository implements LocalSource {
             }
         });
     }
+
+    @Override
+    public Observable<List<Meal>> getSutrdaydmeals() {
+        return mealDAO.getSaturdaymeals();
+    }
+
+    @Override
+    public Observable<List<Meal>> getSundaydmeals() {
+        return mealDAO.getSundaymeals();
+    }
+
+    @Override
+    public Observable<List<Meal>> getMondaymeals() {
+        return mealDAO.getMondaymeals();
+    }
+
+    @Override
+    public Observable<List<Meal>> getTusdaymeals() {
+        return mealDAO.getTusdaymeals();
+    }
+
+    @Override
+    public Observable<List<Meal>> getWednsdaymeals() {
+        return mealDAO.getWednsdaymeals();
+    }
+
+    @Override
+    public Observable<List<Meal>> getThursdaymeals() {
+        return mealDAO.getThursdaymeals();
+    }
+
+    @Override
+    public Observable<List<Meal>> getFridaymeals() {
+        return mealDAO.getFridaymeals();
+    }
 }

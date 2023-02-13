@@ -41,7 +41,7 @@
             android:exported="false"
             android:theme="@style/Theme.Project.NoActionBar" />
         <activity
-            android:name=".calender.CalendarActivity"
+            android:name=".calender.view.CalendarActivity"
             android:exported="false"
             android:theme="@style/Theme.Project.NoActionBar" />
         <activity

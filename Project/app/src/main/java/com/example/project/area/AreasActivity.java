@@ -12,7 +12,7 @@ import android.view.MenuItem;
 import com.example.project.R;
 
 import com.example.project.area.selectedArea.view.SelectedAreaActivity;
-import com.example.project.calender.CalendarActivity;
+import com.example.project.calender.view.CalendarActivity;
 import com.example.project.favourite.view.FavActivity;
 import com.example.project.home.view.HomeActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

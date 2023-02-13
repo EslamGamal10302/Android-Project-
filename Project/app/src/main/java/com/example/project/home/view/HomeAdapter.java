@@ -86,33 +86,39 @@ public void setList(ArrayList<Meal> randomMeals){
                 switch (day) {
                     case "Saturday":
                        meal.setDay("1");
-
+                        listner.onAddToFavorite(meal);
                         Toast.makeText(context, "Meal added to "+day, Toast.LENGTH_SHORT).show();
                        break;
                     case "Sunday":
                         meal.setDay("2");
+                        listner.onAddToFavorite(meal);
                         Toast.makeText(context, "Meal added to "+meal.getDay(), Toast.LENGTH_SHORT).show();
                         break;
                     case "Monday":
                         meal.setDay("3");
+                        listner.onAddToFavorite(meal);
                         Toast.makeText(context, "Meal added to "+day, Toast.LENGTH_SHORT).show();
                         break;
                     case "Tuesday":
                         meal.setDay("4");
+                        listner.onAddToFavorite(meal);
                         Toast.makeText(context, "Meal added to "+day, Toast.LENGTH_SHORT).show();
                         break;
 
                     case "Wednesday":
                         meal.setDay("5");
+                        listner.onAddToFavorite(meal);
                         Toast.makeText(context, "Meal added to "+day, Toast.LENGTH_SHORT).show();
                         break;
 
                     case "Thursday":
                         meal.setDay("6");
+                        listner.onAddToFavorite(meal);
                         Toast.makeText(context, "Meal added to "+day, Toast.LENGTH_SHORT).show();
                         break;
                     case "Friday":
                         meal.setDay("7");
+                        listner.onAddToFavorite(meal);
                         Toast.makeText(context, "Meal added to "+day, Toast.LENGTH_SHORT).show();
                         break;
 
