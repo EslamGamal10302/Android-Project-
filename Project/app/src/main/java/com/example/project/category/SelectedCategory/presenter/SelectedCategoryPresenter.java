@@ -32,4 +32,9 @@ public class SelectedCategoryPresenter implements SelectedCategoryInterface , Ar
     public void getSelectedcategoryMeals(String category) {
        GR.resultMealsSelectedCategory(this,category);
     }
+
+    @Override
+    public void addToFavorite(Meal meal) {
+        GR.insert(meal);
+    }
 }

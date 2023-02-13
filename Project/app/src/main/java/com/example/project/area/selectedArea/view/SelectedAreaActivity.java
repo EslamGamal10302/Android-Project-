@@ -24,7 +24,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
-public class SelectedAreaActivity extends AppCompatActivity implements SelectedAreaViewInterface{
+public class SelectedAreaActivity extends AppCompatActivity implements SelectedAreaViewInterface , SelectedAreaOnClickListner{
     private String nationality;
 
 
@@ -43,7 +43,7 @@ public class SelectedAreaActivity extends AppCompatActivity implements SelectedA
         Log.i("eslam",nationality);
         rv = findViewById(R.id.recyclerView);
         manger = new LinearLayoutManager(this);
-        ad= new SelectedAreaAdapter( this );
+        ad= new SelectedAreaAdapter( this , this );
         presenter = new SelectedAreaPresenter(this, GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(this),this));
         rv.setLayoutManager(manger);
         rv.setAdapter(ad);
@@ -105,5 +105,10 @@ public class SelectedAreaActivity extends AppCompatActivity implements SelectedA
     public void showData(ArrayList<Meal> meals) {
        ad.setList(meals);
        ad.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onAddToFavorite(Meal meal) {
+        presenter.addToFavorite(meal);
     }
 }
