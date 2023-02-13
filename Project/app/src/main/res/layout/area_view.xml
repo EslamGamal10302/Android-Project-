@@ -33,9 +33,10 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="44dp"
             android:text="TextView"
-            android:textColor="@color/white"
-            android:textSize="20dp"
+            android:fontFamily="casual"
+            android:textSize="18sp"
             android:textStyle="bold"
+            android:textColor="@color/black"
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toTopOf="parent" />
 
