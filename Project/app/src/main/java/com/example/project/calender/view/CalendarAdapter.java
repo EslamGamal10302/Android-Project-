@@ -83,8 +83,8 @@ CalenderOnClickListner listner;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
           //  layout = itemView.findViewById(R.id.calendar_constrain);
-            name = itemView.findViewById(R.id.tv_random_meals_name);
-            thumbnails = itemView.findViewById(R.id.img_random_meal);
+            name = itemView.findViewById(R.id.tv_calender_meal_name);
+            thumbnails = itemView.findViewById(R.id.img_calender_meal);
             delete=itemView.findViewById(R.id.btn_removeFromCalender);
 
         }

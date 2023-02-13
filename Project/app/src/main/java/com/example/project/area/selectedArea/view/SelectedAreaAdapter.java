@@ -62,8 +62,8 @@ public class SelectedAreaAdapter extends RecyclerView.Adapter <SelectedAreaAdapt
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             layout = itemView.findViewById(R.id.cons_lay_Selected_area);
-            title = itemView.findViewById(R.id.text_selected_area);
-            thumbnails = itemView.findViewById(R.id.imageView_selected_area);
+            title = itemView.findViewById(R.id.tv_calender_meal_name);
+            thumbnails = itemView.findViewById(R.id.img_calender_meal);
 
         }
 

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".home.CalendarActivity">
+    tools:context=".home.CalendarActivity"
+    android:background="#0C000000">
 
 
     <androidx.core.widget.NestedScrollView

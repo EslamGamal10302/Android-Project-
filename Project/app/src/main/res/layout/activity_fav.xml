@@ -5,24 +5,8 @@
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".favourite.view.FavActivity">
-
-    <TextView
-        android:id="@+id/tv_favouritePage"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="casual"
-        android:maxHeight="48dp"
-        android:text="@string/tv_favouritePage"
-        android:textAlignment="center"
-        android:textColor="#FFBF00"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.416"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    tools:context=".favourite.view.FavActivity"
+    android:background="#0C000000">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -39,13 +23,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fav_recyclerView"
         android:layout_width="409dp"
-        android:layout_height="608dp"
+        android:layout_height="668dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="32dp"
         android:layout_marginEnd="1dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_favouritePage" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

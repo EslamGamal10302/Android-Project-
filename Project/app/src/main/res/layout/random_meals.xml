@@ -56,15 +56,15 @@
             android:fontFamily="casual"
             android:paddingStart="12dp"
             android:text="TextView"
-
             android:textSize="18sp"
+            android:textColor="@color/black"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/btn_addToFavorite"
+            app:layout_constraintEnd_toStartOf="@+id/btn_removeFromCalender"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rnadom_cardView" />
 
         <ToggleButton
-            android:id="@+id/btn_addToFavorite"
+            android:id="@+id/btn_removeFromCalender"
             android:layout_width="39dp"
             android:layout_height="31dp"
 
@@ -101,7 +101,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_addToFavorite"
+            app:layout_constraintTop_toBottomOf="@+id/btn_removeFromCalender"
             tools:ignore="Deprecated" />
 
 

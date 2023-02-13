@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.project.R;
 import com.example.project.area.selectedArea.model.Meal;
-import com.example.project.model.MealMeals;
 
 import java.util.ArrayList;
 
@@ -74,12 +72,12 @@ public class FavAdabter  extends  RecyclerView.Adapter<FavAdabter.FavViewHolder>
         private TextView mealName ;
         private ImageView mealImage;
         private ImageButton removeFromFavourite ;
-        private Spinner daysSpinner ;
+
         public FavViewHolder(@NonNull View itemView) {
             super(itemView);
-            mealName = itemView.findViewById(R.id.tv_favourite_meal_name);
-            mealImage = itemView.findViewById(R.id.img_favourite_meal);
-           removeFromFavourite = itemView.findViewById(R.id.btn_remove_from_fav);
+            mealName = itemView.findViewById(R.id.tv_calender_meal_name);
+            mealImage = itemView.findViewById(R.id.img_calender_meal);
+           removeFromFavourite = itemView.findViewById(R.id.btn_removeFromCalender);
 
 
         }

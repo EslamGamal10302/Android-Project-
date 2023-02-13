@@ -2,18 +2,14 @@ package com.example.project.home.view;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -25,8 +21,6 @@ import com.bumptech.glide.Glide;
 import com.example.project.R;
 import com.example.project.area.selectedArea.model.Meal;
 
-
-import com.example.project.model.MealMeals;
 
 import java.util.ArrayList;
 
@@ -169,7 +163,7 @@ public void setList(ArrayList<Meal> randomMeals){
             super(itemView);
           mealName = itemView.findViewById(R.id.tv_random_meals_name);
           mealImage = itemView.findViewById(R.id.img_random_meal);
-          addToFavourite = itemView.findViewById(R.id.btn_addToFavorite);
+          addToFavourite = itemView.findViewById(R.id.btn_removeFromCalender);
           autoCompleteTextView =itemView.findViewById(R.id.days_drop_dawn);
 
         }
