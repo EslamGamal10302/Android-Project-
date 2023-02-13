@@ -5,7 +5,7 @@
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".favourite.FavActivity">
+    tools:context=".favourite.view.FavActivity">
 
     <TextView
         android:id="@+id/tv_favouritePage"

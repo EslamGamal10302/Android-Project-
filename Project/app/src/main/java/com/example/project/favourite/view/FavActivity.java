@@ -1,4 +1,4 @@
-package com.example.project.favourite;
+package com.example.project.favourite.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,23 +9,62 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.project.DataBase.DataBaseRepository;
+import com.example.project.GeneralRepositoryModel.GeneralRepository;
+import com.example.project.Network.MealClient;
 import com.example.project.R;
+import com.example.project.area.selectedArea.model.Meal;
 import com.example.project.calender.CalendarActivity;
+import com.example.project.favourite.presenter.FavouritePresenterInterface;
+import com.example.project.favourite.presenter.favouritePresenter;
 import com.example.project.home.SearchActivity;
 import com.example.project.home.view.HomeActivity;
 
 import com.example.project.model.MealMeals;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class FavActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+
+public class FavActivity extends AppCompatActivity implements  FavViewInterface , FavOnClickListner {
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
+
+
     FavAdabter favAdapter;
+
+    FavouritePresenterInterface favPresenter;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fav);
+        recyclerView =findViewById(R.id.fav_recyclerView);
+        layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(RecyclerView.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
+        favAdapter = new FavAdabter(this,this);
+        recyclerView.setAdapter(favAdapter);
+        favPresenter = new favouritePresenter(this , GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(this),this));
+       favPresenter.getFav();
+
+
+
+
+
+
+
+
+
+
+
+
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.favScreen);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -54,15 +93,23 @@ public class FavActivity extends AppCompatActivity {
 
 
 
-        MealMeals[] meals ={new MealMeals("Pasta", R.drawable.allmeals) , new MealMeals("Eshta",R.drawable.cat)};
 
-        recyclerView =findViewById(R.id.fav_recyclerView);
-        layoutManager = new LinearLayoutManager(this);
+    }
 
-        layoutManager.setOrientation(RecyclerView.VERTICAL);
-        recyclerView.setLayoutManager(layoutManager);
+    @Override
+    public void onClick(Meal meal) {
+       removeProduct(meal);
+    }
 
-        favAdapter = new FavAdabter(this,meals);
-        recyclerView.setAdapter(favAdapter);
+    @Override
+    public void showFav(Observable<List<Meal>> meals) {
+        meals.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(o->favAdapter.setList((ArrayList<Meal>) o));
+    }
+
+    @Override
+    public void removeProduct(Meal meal) {
+      favPresenter.remove(meal);
     }
 }

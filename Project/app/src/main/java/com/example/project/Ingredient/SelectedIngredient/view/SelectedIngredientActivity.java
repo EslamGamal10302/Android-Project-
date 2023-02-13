@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.example.project.DataBase.DataBaseRepository;
 import com.example.project.GeneralRepositoryModel.GeneralRepository;
 import com.example.project.Ingredient.SelectedIngredient.presenter.SelectedIngredientInterface;
 import com.example.project.Ingredient.SelectedIngredient.presenter.SelectedIngredientPresenter;
@@ -17,7 +18,7 @@ import com.example.project.Network.MealClient;
 import com.example.project.R;
 import com.example.project.area.selectedArea.model.Meal;
 import com.example.project.calender.CalendarActivity;
-import com.example.project.favourite.FavActivity;
+import com.example.project.favourite.view.FavActivity;
 import com.example.project.home.view.HomeActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -42,7 +43,7 @@ public class SelectedIngredientActivity extends AppCompatActivity implements Sel
         rv = findViewById(R.id.recyclerView);
         manger = new LinearLayoutManager(this);
         ad= new SelectedIngredientAdapter(this);
-        presenter = new SelectedIngredientPresenter(this, GeneralRepository.getInstance(MealClient.getInstance(),this));
+        presenter = new SelectedIngredientPresenter(this, GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(this),this));
         rv.setLayoutManager(manger);
         rv.setAdapter(ad);
         presenter.getSelectedIngredientMeals(ingredient);

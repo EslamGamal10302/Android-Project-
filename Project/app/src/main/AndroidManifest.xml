@@ -45,7 +45,7 @@
             android:exported="false"
             android:theme="@style/Theme.Project.NoActionBar" />
         <activity
-            android:name=".favourite.FavActivity"
+            android:name=".favourite.view.FavActivity"
             android:exported="false"
             android:theme="@style/Theme.Project.NoActionBar" />
         <activity

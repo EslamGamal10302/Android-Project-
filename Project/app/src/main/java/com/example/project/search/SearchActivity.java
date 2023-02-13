@@ -13,7 +13,7 @@ import com.example.project.Ingredient.view.IngredientActivity;
 import com.example.project.R;
 import com.example.project.allMeals.view.AllMealsActivity;
 import com.example.project.calender.CalendarActivity;
-import com.example.project.favourite.FavActivity;
+import com.example.project.favourite.view.FavActivity;
 import com.example.project.home.view.HomeActivity;
 import com.example.project.area.AreasActivity;
 import com.example.project.category.view.CategoryActivity;

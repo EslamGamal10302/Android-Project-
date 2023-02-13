@@ -5,20 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
+import com.example.project.DataBase.DataBaseRepository;
 import com.example.project.GeneralRepositoryModel.GeneralRepository;
 import com.example.project.Network.MealClient;
 import com.example.project.R;
 import com.example.project.area.selectedArea.model.Meal;
 
 import com.example.project.calender.CalendarActivity;
-import com.example.project.favourite.FavActivity;
+import com.example.project.favourite.view.FavActivity;
 import com.example.project.home.SearchActivity;
 
 import com.example.project.home.pressenter.HomePressenter;
@@ -29,7 +27,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
-public class HomeActivity extends AppCompatActivity implements  HomeViewInterface {
+public class HomeActivity extends AppCompatActivity implements  HomeViewInterface , HomeOnClickListner{
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
     HomeAdapter homeAdapter;
@@ -43,12 +41,12 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.homeScreen);
 
-        pressenter = new HomePressenter(GeneralRepository.getInstance(MealClient.getInstance(), this), this);
+        pressenter = new HomePressenter(GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(this),this), this);
         recyclerView = findViewById(R.id.home_recyclerView);
         layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);
-        homeAdapter = new HomeAdapter(this);
+        homeAdapter = new HomeAdapter(this, this);
         recyclerView.setAdapter(homeAdapter);
         pressenter.getDailyRandomMeals();
 
@@ -83,6 +81,11 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
     public void showRandomMeals(ArrayList<Meal> randomMeals) {
         homeAdapter.setList(randomMeals);
         homeAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onAddToFavorite(Meal meal) {
+          pressenter.addToFavorite(meal);
     }
 }
 

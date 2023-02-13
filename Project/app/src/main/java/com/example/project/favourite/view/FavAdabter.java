@@ -1,4 +1,4 @@
-package com.example.project.favourite;
+package com.example.project.favourite.view;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,19 +12,31 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.project.R;
+import com.example.project.area.selectedArea.model.Meal;
 import com.example.project.model.MealMeals;
+
+import java.util.ArrayList;
 
 public class FavAdabter  extends  RecyclerView.Adapter<FavAdabter.FavViewHolder>  {
 
     Context context;
-    MealMeals[] meals;
+    ArrayList<Meal> myMeals;
+
+    FavOnClickListner listner ;
 
 
-    public FavAdabter (Context context , MealMeals[] meals){
+    public FavAdabter (Context context ,FavOnClickListner listner){
         this.context = context;
-        this.meals = meals;
+        this.listner=listner;
+        myMeals = new ArrayList<>();
 
+    }
+
+    public  void setList(ArrayList<Meal> meals){
+        myMeals = meals;
+        notifyDataSetChanged();
     }
 
 
@@ -40,20 +52,22 @@ public class FavAdabter  extends  RecyclerView.Adapter<FavAdabter.FavViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull FavViewHolder holder, int position) {
-        String [] days ={"satrday","sunday","monday","tusday"};
-        MealMeals meal = meals[position];
-        holder.mealName.setText(meal.getStrMeal());
-        holder.mealImage.setImageResource(meal.getImage_thumbnail());
-       /* ArrayAdapter <CharSequence> adapter = ArrayAdapter.createFromResource(context,R.array.days, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
-        holder.daysSpinner.setAdapter(adapter);*/
+        Meal myMeal = myMeals.get(position);
+        holder.mealName.setText(myMeal.getStrMeal());
+        Glide.with(context).load(myMeal.getStrMealThumb()).into(holder.mealImage);
+       holder.removeFromFavourite.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               listner.onClick(myMeal);
+           }
+       });
 
 
     }
 
     @Override
     public int getItemCount() {
-        return meals.length;
+        return myMeals.size();
     }
 
     class FavViewHolder extends RecyclerView.ViewHolder {
