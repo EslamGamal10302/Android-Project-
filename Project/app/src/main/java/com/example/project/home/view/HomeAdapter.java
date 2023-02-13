@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
@@ -36,6 +37,7 @@ public class HomeAdapter extends  RecyclerView.Adapter<HomeAdapter.HomeViewHolde
     ArrayList<Meal> rnadomMels;
 
 
+
 public HomeAdapter (Context context){
     this.context = context;
     rnadomMels = new ArrayList<>();
@@ -60,37 +62,72 @@ public void setList(ArrayList<Meal> randomMeals){
 
     @Override
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
-       String [] days ={"satrday","sunday","monday","tusday"};
+    String [] days ={"Saturday","Sunday","Monday","Tuesday","Wednesday","Thursday","Friday"};
 
        Meal meal = rnadomMels.get(position);
        holder.mealName.setText(meal.getStrMeal());
         Glide.with(context).load(meal.getStrMealThumb()).into(holder.mealImage);
-       ArrayAdapter <CharSequence> adapter = ArrayAdapter.createFromResource(context,R.array.days, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
-        holder.daysSpinner.setAdapter(adapter);
-        holder.daysSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        ArrayAdapter<String> adapter=new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1,days);
+        holder.autoCompleteTextView.setAdapter(adapter);
+        holder.autoCompleteTextView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String day = parent.getItemAtPosition(position).toString();
-                Toast.makeText(parent.getContext(), day, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+            public void onClick(View v) {
+                holder.autoCompleteTextView.showDropDown();
             }
         });
+        holder.autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String day = parent.getItemAtPosition(position).toString();
+                switch (day) {
+                    case "Saturday":
+                       meal.setDay("1");
+
+                        Toast.makeText(context, "Meal added to "+day, Toast.LENGTH_SHORT).show();
+                       break;
+                    case "Sunday":
+                        meal.setDay("2");
+                        Toast.makeText(context, "Meal added to "+meal.getDay(), Toast.LENGTH_SHORT).show();
+                        break;
+                    case "Monday":
+                        meal.setDay("3");
+                        Toast.makeText(context, "Meal added to "+day, Toast.LENGTH_SHORT).show();
+                        break;
+                    case "Tuesday":
+                        meal.setDay("4");
+                        Toast.makeText(context, "Meal added to "+day, Toast.LENGTH_SHORT).show();
+                        break;
+
+                    case "Wednesday":
+                        meal.setDay("5");
+                        Toast.makeText(context, "Meal added to "+day, Toast.LENGTH_SHORT).show();
+                        break;
+
+                    case "Thursday":
+                        meal.setDay("6");
+                        Toast.makeText(context, "Meal added to "+day, Toast.LENGTH_SHORT).show();
+                        break;
+                    case "Friday":
+                        meal.setDay("7");
+                        Toast.makeText(context, "Meal added to "+day, Toast.LENGTH_SHORT).show();
+                        break;
+
+
+                }
+              //  Toast.makeText(context, "Meal added to "+parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
+
+            }
+
+        });
         holder.addToFavourite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            boolean isClicked = false;
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    holder.addToFavourite.setChecked(true);
+                if (!isClicked){
+                    isClicked= true ;
                     holder.addToFavourite.setBackgroundResource(R.drawable.baseline_favorite_24);
                     Toast.makeText(context, "on Click", Toast.LENGTH_SHORT).show();
 
-                }else{
-                   holder.addToFavourite.setBackgroundResource(R.drawable.baseline_favorite_border_24);
-                    Toast.makeText(context, "Removed", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -107,13 +144,16 @@ public void setList(ArrayList<Meal> randomMeals){
       private TextView mealName ;
         private ImageView mealImage;
         private ToggleButton addToFavourite ;
-        private Spinner daysSpinner ;
+
+        AutoCompleteTextView autoCompleteTextView;
+
+
         public HomeViewHolder(@NonNull View itemView) {
             super(itemView);
           mealName = itemView.findViewById(R.id.tv_random_meals_name);
           mealImage = itemView.findViewById(R.id.img_random_meal);
           addToFavourite = itemView.findViewById(R.id.btn_addToFavorite);
-          daysSpinner=itemView.findViewById(R.id.days_spinner);
+          autoCompleteTextView =itemView.findViewById(R.id.days_drop_dawn);
 
         }
     }

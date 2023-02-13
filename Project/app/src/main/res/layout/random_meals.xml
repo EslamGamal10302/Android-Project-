@@ -54,22 +54,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rnadom_cardView" />
 
-        <Spinner
-            android:id="@+id/days_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/edit_background"
-            android:contentDescription="@string/spinner_content_description"
-            android:dropDownSelector="@drawable/baseline_keyboard_arrow_down_24"
-            android:minHeight="48dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_random_meals_name" />
-
         <ToggleButton
             android:id="@+id/btn_addToFavorite"
             android:layout_width="85dp"
@@ -85,6 +69,29 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/tv_random_meals_name"
             app:layout_constraintTop_toBottomOf="@+id/rnadom_cardView" />
+
+        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+            android:id="@+id/days_drop_dawn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="24dp"
+            android:completionHint="select a day"
+            android:completionThreshold="0"
+            android:editable="false"
+            android:hint="@string/DropDawn_hint"
+            android:textAlignment="center"
+            android:textColorHint="@color/black"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:fontFamily="casual"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_addToFavorite"
+            tools:ignore="Deprecated"
+            android:background="@drawable/edit_background"
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

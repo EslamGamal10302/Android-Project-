@@ -18,7 +18,7 @@ public class Meal {
     private String strCategory;
     private String idMeal;
 
-
+     private String day;
 
     private String strArea;
     private String strInstructions;
@@ -62,6 +62,15 @@ public class Meal {
     private String strMeasure15;
     private String strMeasure16;
     private String strMeasure17;
+
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
 
     public String getIdMeal() {
         return idMeal;
