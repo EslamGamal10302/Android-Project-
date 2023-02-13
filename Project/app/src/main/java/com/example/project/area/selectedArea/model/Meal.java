@@ -1,68 +1,29 @@
 package com.example.project.area.selectedArea.model;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-@Entity (tableName = "meals")
+@Entity (tableName = "meals" , primaryKeys = {"NAME" ,"DAY"})
 
 public class Meal {
 
-    @PrimaryKey
+
+
+    @ColumnInfo(name = "NAME")
     @NonNull
     private String strMeal;
+
+    @ColumnInfo(name = "IMAGE")
     private String strMealThumb;
 
-    private  String strIngredient;
-
-    private String strCategory;
-    private String idMeal;
-
-     private String day;
-
+    @ColumnInfo(name = "AREA")
     private String strArea;
-    private String strInstructions;
-
-
-    private String strYoutube;
-    private String strIngredient1;
-    private String strIngredient2;
-    private String strIngredient3;
-    private String strIngredient4;
-    private String strIngredient5;
-    private String strIngredient6;
-    private String strIngredient7;
-    private String strIngredient8;
-    private String strIngredient9;
-    private String strIngredient10;
-    private String strIngredient11;
-    private String strIngredient12;
-    private String strIngredient13;
-    private String strIngredient14;
-    private String strIngredient15;
-    private String strIngredient16;
-    private String strIngredient17;
-    private String strIngredient18;
-    private String strIngredient19;
-    private String strIngredient20;
-    private String strMeasure1;
-    private String strMeasure2;
-    private String strMeasure3;
-    private String strMeasure4;
-    private String strMeasure5;
-    private String strMeasure6;
-    private String strMeasure7;
-    private String strMeasure8;
-    private String strMeasure9;
-    private String strMeasure10;
-    private String strMeasure11;
-    private String strMeasure12;
-    private String strMeasure13;
-    private String strMeasure14;
-    private String strMeasure15;
-    private String strMeasure16;
-    private String strMeasure17;
-
+    @ColumnInfo(name = "DAY")
+    @NonNull
+    private  String day;
 
     public String getDay() {
         return day;
@@ -71,6 +32,95 @@ public class Meal {
     public void setDay(String day) {
         this.day = day;
     }
+
+    @Ignore
+    private  String strIngredient;
+    @Ignore
+    private String strCategory;
+    @Ignore
+    private String idMeal;
+
+
+
+    @Ignore
+    private String strInstructions;
+
+    @Ignore
+    private String strYoutube;
+    @Ignore
+    private String strIngredient1;
+    @Ignore
+    private String strIngredient2;
+    @Ignore
+    private String strIngredient3;
+    @Ignore
+    private String strIngredient4;
+    @Ignore
+    private String strIngredient5;
+    @Ignore
+    private String strIngredient6;
+    @Ignore
+    private String strIngredient7;
+    @Ignore
+    private String strIngredient8;
+    @Ignore
+    private String strIngredient9;
+    @Ignore
+    private String strIngredient10;
+    @Ignore
+    private String strIngredient11;
+    @Ignore
+    private String strIngredient12;
+    @Ignore
+    private String strIngredient13;
+    @Ignore
+    private String strIngredient14;
+    @Ignore
+    private String strIngredient15;
+    @Ignore
+    private String strIngredient16;
+    @Ignore
+    private String strIngredient17;
+    @Ignore
+    private String strIngredient18;
+    @Ignore
+    private String strIngredient19;
+    @Ignore
+    private String strIngredient20;
+    @Ignore
+    private String strMeasure1;
+    @Ignore
+    private String strMeasure2;
+    @Ignore
+    private String strMeasure3;
+    @Ignore
+    private String strMeasure4;
+    @Ignore
+    private String strMeasure5;
+    @Ignore
+    private String strMeasure6;
+    @Ignore
+    private String strMeasure7;
+    @Ignore
+    private String strMeasure8;
+    @Ignore
+    private String strMeasure9;
+    @Ignore
+    private String strMeasure10;
+    @Ignore
+    private String strMeasure11;
+    @Ignore
+    private String strMeasure12;
+    @Ignore
+    private String strMeasure13;
+    @Ignore
+    private String strMeasure14;
+    @Ignore
+    private String strMeasure15;
+    @Ignore
+    private String strMeasure16;
+    @Ignore
+    private String strMeasure17;
 
     public String getIdMeal() {
         return idMeal;
@@ -431,10 +481,14 @@ public class Meal {
     public void setStrSource(String strSource) {
         this.strSource = strSource;
     }
+    @Ignore
 
     private String strMeasure18;
+    @Ignore
     private String strMeasure19;
+    @Ignore
     private String strMeasure20;
+    @Ignore
     private String strSource;
 
 
@@ -487,6 +541,11 @@ public class Meal {
 
     public String getStrIngredient() {
         return strIngredient;
+    }
+
+    public Meal(@NonNull String strMeal, @NonNull String day) {
+        this.strMeal = strMeal;
+        this.day = day;
     }
 
     public void setStrIngredient(String strIngredient) {

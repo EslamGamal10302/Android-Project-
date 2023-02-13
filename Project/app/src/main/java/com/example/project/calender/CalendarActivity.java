@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.project.R;
-import com.example.project.favourite.FavActivity;
+import com.example.project.favourite.view.FavActivity;
 import com.example.project.home.SearchActivity;
 import com.example.project.home.view.HomeActivity;
 

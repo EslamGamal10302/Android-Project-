@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.project.DataBase.DataBaseRepository;
 import com.example.project.GeneralRepositoryModel.GeneralRepository;
 import com.example.project.Ingredient.SelectedIngredient.view.SelectedIngredientActivity;
 import com.example.project.Ingredient.presenter.IngredientInterface;
@@ -18,7 +19,7 @@ import com.example.project.R;
 
 import com.example.project.area.selectedArea.model.Meal;
 import com.example.project.calender.CalendarActivity;
-import com.example.project.favourite.FavActivity;
+import com.example.project.favourite.view.FavActivity;
 import com.example.project.home.view.HomeActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -42,7 +43,7 @@ public class IngredientActivity extends AppCompatActivity implements IngredientV
         myRecycleView.setLayoutManager(myManger);
         myAdapter = new IngredientAdapter(this , this );
         myRecycleView.setAdapter(myAdapter);
-        presnter = new IngredientPresenter(this, GeneralRepository.getInstance(MealClient.getInstance(),this));
+        presnter = new IngredientPresenter(this, GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(this),this));
         presnter.getAllIngredient();
 
 

@@ -2,29 +2,36 @@ package com.example.project.GeneralRepositoryModel;
 
 import android.content.Context;
 
+import com.example.project.DataBase.LocalSource;
 import com.example.project.Network.AreaNetworkDelegate;
 import com.example.project.Network.RemoteSource;
 import com.example.project.area.selectedArea.model.Meal;
 
 import java.util.List;
+import java.util.Locale;
 
 import io.reactivex.Observable;
 
 public class GeneralRepository implements GeneralRepositoryInterface{
-    Context context;
+
     RemoteSource RS;
+
+    LocalSource LS;
+
+    Context context;
 
 
     private static  GeneralRepository gr = null ;
 
-    public GeneralRepository(Context context, RemoteSource RS) {
-        this.context = context;
+    public GeneralRepository(RemoteSource RS, LocalSource LS, Context context) {
         this.RS = RS;
+        this.LS = LS;
+        this.context = context;
     }
 
-    public static GeneralRepository getInstance(RemoteSource RS , Context context){
+    public static GeneralRepository getInstance(RemoteSource RS , LocalSource LS ,  Context context){
         if(gr ==null){
-            gr = new GeneralRepository(context,RS);
+            gr = new GeneralRepository(RS , LS , context);
         }
         return gr;
     }
@@ -68,16 +75,18 @@ public class GeneralRepository implements GeneralRepositoryInterface{
 
     @Override
     public Observable<List<Meal>> getStoredmeals() {
-        return null;
+       return LS.getStoredmeals();
     }
 
     @Override
     public void delete(Meal meal) {
+        LS.delete(meal);
 
     }
 
     @Override
     public void insert(Meal meal) {
+        LS.insert(meal);
 
     }
 }

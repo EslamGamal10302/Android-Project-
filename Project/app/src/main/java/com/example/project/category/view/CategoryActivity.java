@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.project.DataBase.DataBaseRepository;
 import com.example.project.GeneralRepositoryModel.GeneralRepository;
 import com.example.project.Network.MealClient;
 import com.example.project.R;
@@ -18,7 +19,7 @@ import com.example.project.calender.CalendarActivity;
 import com.example.project.category.SelectedCategory.view.SelectedCategoryActivity;
 import com.example.project.category.presenter.CategoryInterface;
 import com.example.project.category.presenter.CategoryPresenter;
-import com.example.project.favourite.FavActivity;
+import com.example.project.favourite.view.FavActivity;
 import com.example.project.home.view.HomeActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -42,7 +43,7 @@ public class CategoryActivity extends AppCompatActivity implements CategoryViewI
         myRecycleView.setLayoutManager(myManger);
         myAdapter = new CategoryAdapter(this ,this);
         myRecycleView.setAdapter(myAdapter);
-        presenter = new CategoryPresenter(this, GeneralRepository.getInstance(MealClient.getInstance(),this));
+        presenter = new CategoryPresenter(this, GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(this),this));
         presenter.getAllCategory();
 
 

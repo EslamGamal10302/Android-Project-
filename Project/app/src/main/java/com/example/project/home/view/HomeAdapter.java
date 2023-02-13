@@ -36,10 +36,14 @@ public class HomeAdapter extends  RecyclerView.Adapter<HomeAdapter.HomeViewHolde
     Context context;
     ArrayList<Meal> rnadomMels;
 
+    HomeOnClickListner listner ;
 
 
-public HomeAdapter (Context context){
+
+
+public HomeAdapter (Context context , HomeOnClickListner listner){
     this.context = context;
+    this.listner= listner;
     rnadomMels = new ArrayList<>();
 
 }
@@ -120,15 +124,22 @@ public void setList(ArrayList<Meal> randomMeals){
 
         });
         holder.addToFavourite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            boolean isClicked = false;
+            Boolean clicked = false ;
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (!isClicked){
-                    isClicked= true ;
+
+                if (!clicked){
+                   // holder.addToFavourite.setChecked(false);
+                    clicked = true;
                     holder.addToFavourite.setBackgroundResource(R.drawable.baseline_favorite_24);
                     Toast.makeText(context, "on Click", Toast.LENGTH_SHORT).show();
+                   meal.setDay("0");
+                   listner.onAddToFavorite(meal);
 
-                }
+                } /*else{
+                   holder.addToFavourite.setBackgroundResource(R.drawable.baseline_favorite_border_24);
+                    Toast.makeText(context, "Removed", Toast.LENGTH_SHORT).show();
+                } */
             }
         });
     }

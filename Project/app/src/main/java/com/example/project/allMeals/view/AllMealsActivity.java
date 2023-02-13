@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import com.example.project.DataBase.DataBaseRepository;
 import com.example.project.GeneralRepositoryModel.GeneralRepository;
 import com.example.project.Network.MealClient;
 import com.example.project.R;
@@ -33,7 +34,7 @@ public class AllMealsActivity extends AppCompatActivity implements AllMealsViewI
         setContentView(R.layout.activity_all_meals);
         allRecyclerView = findViewById(R.id.allmeals_recyclerView);
         layoutManager=new LinearLayoutManager(this);
-        pressenter = new allMealsPressenter(GeneralRepository.getInstance(MealClient.getInstance(),this),this);
+        pressenter = new allMealsPressenter(GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(this),this),this);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         allRecyclerView.setLayoutManager(layoutManager);
         allMealAdapter = new AllMealAdapter(this);
