@@ -70,7 +70,7 @@ public void setList(ArrayList<Meal> randomMeals){
         holder.autoCompleteTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.autoCompleteTextView.showDropDown();
+               holder.autoCompleteTextView.showDropDown();
             }
         });
         holder.autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -157,7 +157,6 @@ public void setList(ArrayList<Meal> randomMeals){
         private ToggleButton addToFavourite ;
 
         AutoCompleteTextView autoCompleteTextView;
-
 
         public HomeViewHolder(@NonNull View itemView) {
             super(itemView);

@@ -22,6 +22,11 @@ public class SelectedIngredientPresenter implements SelectedIngredientInterface 
     }
 
     @Override
+    public void addToFavorite(Meal meal) {
+        GR.insert(meal);
+    }
+
+    @Override
     public void onSuccessResponse(ArrayList<Meal> response) {
          view.showData(response);
     }

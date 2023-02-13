@@ -20,7 +20,7 @@ import com.example.project.home.view.HomeAdapter;
 
 import java.util.ArrayList;
 
-public class AllMealsActivity extends AppCompatActivity implements AllMealsViewInterface {
+public class AllMealsActivity extends AppCompatActivity implements AllMealsViewInterface , AllMealOnClick {
     RecyclerView allRecyclerView;
     LinearLayoutManager layoutManager;
     AllMealAdapter allMealAdapter;
@@ -37,7 +37,7 @@ public class AllMealsActivity extends AppCompatActivity implements AllMealsViewI
         pressenter = new allMealsPressenter(GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(this),this),this);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         allRecyclerView.setLayoutManager(layoutManager);
-        allMealAdapter = new AllMealAdapter(this);
+        allMealAdapter = new AllMealAdapter(this , this);
         allRecyclerView.setAdapter(allMealAdapter);
         pressenter.getAllMeals();
 
@@ -49,5 +49,10 @@ public class AllMealsActivity extends AppCompatActivity implements AllMealsViewI
     public void showAllMeals(ArrayList<Meal> allMeals) {
         allMealAdapter.setList(allMeals);
         allMealAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onAddToFavorite(Meal meal) {
+        pressenter.addToFavorite(meal);
     }
 }

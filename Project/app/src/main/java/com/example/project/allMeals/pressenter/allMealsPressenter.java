@@ -26,6 +26,11 @@ public class allMealsPressenter implements allMealPressenterInterface , AreaNetw
     }
 
     @Override
+    public void addToFavorite(Meal meal) {
+        general.insert(meal);
+    }
+
+    @Override
     public void onSuccessResponse(ArrayList<Meal> response) {
         view.showAllMeals(response);
     }

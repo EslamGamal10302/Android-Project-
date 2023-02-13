@@ -7,4 +7,5 @@ import java.util.ArrayList;
 
 public interface AllMealsViewInterface {
     public void showAllMeals(ArrayList<Meal> allMeals);
+
 }
