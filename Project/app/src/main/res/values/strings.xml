@@ -58,6 +58,7 @@
     <string name="Friday">Friday</string>
     <string name="instarctions">Instractions</string>
     <string name="DropDawn_hint">Add To Plane</string>
+    <string name="hint_search">"Search For a Meal "</string>
 
     <string-array name="days">
         <item>"Select the day you want"</item>

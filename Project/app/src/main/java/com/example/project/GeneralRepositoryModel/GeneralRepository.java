@@ -72,6 +72,11 @@ public class GeneralRepository implements GeneralRepositoryInterface{
         RS.resultAllMeals(networkDelegate);
     }
 
+    @Override
+    public void resultMealBySearch(AreaNetworkDelegate networkDelegate, String searchLitter) {
+        RS.resultMealBySearch(networkDelegate,searchLitter);
+    }
+
 
     @Override
     public Observable<List<Meal>> getStoredmeals() {

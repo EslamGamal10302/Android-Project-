@@ -1,6 +1,8 @@
 package com.example.project.Network;
 
 
+import android.util.Log;
+
 import com.example.project.area.selectedArea.model.SelectedResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -114,7 +116,16 @@ public class MealClient implements RemoteSource{
         );
     }
 
-
+    @Override
+    public void resultMealBySearch(AreaNetworkDelegate networkDelegate , String searchLitter) {
+        MealService myApi=RetrofitCall();
+        Observable<SelectedResponse> observable = myApi.getMealsBySearch(searchLitter)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+        observable.subscribe(o->networkDelegate.onSuccessResponse(o.getAreaMeals()),
+                e->Log.i("milad" , "error"+e.getMessage())
+        );
+    }
 
 
 }

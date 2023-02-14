@@ -21,8 +21,8 @@ public class allMealsPressenter implements allMealPressenterInterface , AreaNetw
 
 
     @Override
-    public void getAllMeals() {
-         general.resultAllMeals(this);
+    public void getAllMeals(String searcLitter) {
+         general.resultMealBySearch(this,searcLitter);
     }
 
     @Override

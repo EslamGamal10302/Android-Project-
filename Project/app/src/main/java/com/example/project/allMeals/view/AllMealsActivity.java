@@ -5,6 +5,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.widget.EditText;
 
 import com.example.project.DataBase.DataBaseRepository;
 import com.example.project.GeneralRepositoryModel.GeneralRepository;
@@ -27,11 +31,14 @@ public class AllMealsActivity extends AppCompatActivity implements AllMealsViewI
 
     allMealPressenterInterface pressenter ;
 
+    EditText search;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_meals);
+        search = findViewById(R.id.bt_searchForAllMeals);
         allRecyclerView = findViewById(R.id.allmeals_recyclerView);
         layoutManager=new LinearLayoutManager(this);
         pressenter = new allMealsPressenter(GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(this),this),this);
@@ -39,16 +46,45 @@ public class AllMealsActivity extends AppCompatActivity implements AllMealsViewI
         allRecyclerView.setLayoutManager(layoutManager);
         allMealAdapter = new AllMealAdapter(this , this);
         allRecyclerView.setAdapter(allMealAdapter);
-        pressenter.getAllMeals();
+       // pressenter.getAllMeals("s");
 
+
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.length()!=0){
+                    String searchLitter = s.toString();
+                    pressenter.getAllMeals(searchLitter);
+                } else if (s.length()==0) {
+                    allMealAdapter.setList(new ArrayList<>());
+                    allMealAdapter.notifyDataSetChanged();
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
 
     }
 
     @Override
     public void showAllMeals(ArrayList<Meal> allMeals) {
-        allMealAdapter.setList(allMeals);
-        allMealAdapter.notifyDataSetChanged();
+        if(allMeals.isEmpty()){
+            Log.i("error","no data");
+        }else {
+            allMealAdapter.setList(allMeals);
+            allMealAdapter.notifyDataSetChanged();
+        }
+
     }
 
     @Override

@@ -16,4 +16,7 @@ public interface RemoteSource {
 
     public void resultAllMeals(AreaNetworkDelegate networkDelegate);
 
+    public void resultMealBySearch(AreaNetworkDelegate networkDelegate , String searchLitter);
+
+
 }
