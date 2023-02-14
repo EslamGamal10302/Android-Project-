@@ -1,5 +1,7 @@
 package com.example.project.home.pressenter;
 
+import android.content.Intent;
+
 import com.example.project.GeneralRepositoryModel.GeneralRepositoryInterface;
 import com.example.project.Network.AreaNetworkDelegate;
 import com.example.project.area.selectedArea.model.Meal;
