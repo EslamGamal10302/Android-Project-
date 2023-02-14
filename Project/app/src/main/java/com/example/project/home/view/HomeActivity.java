@@ -16,6 +16,7 @@ import com.example.project.R;
 import com.example.project.area.selectedArea.model.Meal;
 
 import com.example.project.calender.view.CalendarActivity;
+import com.example.project.details.MealDetails;
 import com.example.project.favourite.view.FavActivity;
 import com.example.project.home.SearchActivity;
 
@@ -34,6 +35,8 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
 
     HomePressenterInterface pressenter;
 
+    public static Meal detail;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,7 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
         homeAdapter = new HomeAdapter(this, this);
         recyclerView.setAdapter(homeAdapter);
         pressenter.getDailyRandomMeals();
+
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -86,6 +90,14 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
     @Override
     public void onAddToFavorite(Meal meal) {
           pressenter.addToFavorite(meal);
+    }
+
+    @Override
+    public void showMealDetails(Meal meal) {
+        detail = meal;
+        Intent intent = new Intent(HomeActivity.this, MealDetails.class);
+        startActivity(intent);
+
     }
 }
 

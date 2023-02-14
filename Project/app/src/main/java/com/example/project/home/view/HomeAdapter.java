@@ -15,6 +15,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -142,6 +143,13 @@ public void setList(ArrayList<Meal> randomMeals){
                 } */
             }
         });
+
+        holder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listner.showMealDetails(meal);
+            }
+        });
     }
 
     @Override
@@ -158,12 +166,15 @@ public void setList(ArrayList<Meal> randomMeals){
 
         AutoCompleteTextView autoCompleteTextView;
 
+        ConstraintLayout layout ;
+
         public HomeViewHolder(@NonNull View itemView) {
             super(itemView);
           mealName = itemView.findViewById(R.id.tv_random_meals_name);
           mealImage = itemView.findViewById(R.id.img_random_meal);
           addToFavourite = itemView.findViewById(R.id.btn_removeFromCalender);
           autoCompleteTextView =itemView.findViewById(R.id.days_drop_dawn);
+          layout = itemView.findViewById(R.id.cons_random_meal);
 
         }
     }

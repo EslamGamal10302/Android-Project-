@@ -2,21 +2,33 @@ package com.example.project.details;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.project.R;
+import com.example.project.area.selectedArea.model.Meal;
+import com.example.project.home.view.HomeActivity;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
+
+import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 public class MealDetails extends AppCompatActivity {
     ImageView mealImage;
     TextView mealName;
     TextView mealContry;
-    TextView mealIngradiant;
+
+
+    TextView mealCategory;
+
     TextView ingradiant1;
     TextView ingradiant2;
     TextView ingradiant3;
@@ -27,6 +39,16 @@ public class MealDetails extends AppCompatActivity {
     TextView steps;
     YouTubePlayerView youTubePlayerView ;
 
+    Meal response ;
+    String VideoUrl;
+
+    RecyclerView RV;
+    LinearLayoutManager manger;
+    MealDetailAdapter adapter;
+
+    ArrayList<MealIngredients> resultToShow ;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,32 +57,108 @@ public class MealDetails extends AppCompatActivity {
         mealImage = findViewById(R.id.img_details_meal);
         mealName = findViewById(R.id.mealname);
         mealContry =findViewById(R.id.mealContry);
-        ingradiant1=findViewById(R.id.ingradiant1);
-        ingradiant2=findViewById(R.id.ingradiant2);
-        ingradiant3=findViewById(R.id.ingradiant3);
-        ingradiant4=findViewById(R.id.ingradiant4);
-        ingradiant5=findViewById(R.id.ingradiant5);
-        ingradiant6=findViewById(R.id.ingradiant6);
-        ingradiant7=findViewById(R.id.ingradiant7);
+        mealCategory=findViewById(R.id.meal_category);
         steps=findViewById(R.id.steps);
         youTubePlayerView =findViewById(R.id.ybv);
+        response = HomeActivity.detail;
+        Glide.with(this).load(response.getStrMealThumb()).into(mealImage);
+        mealName.setText(response.getStrMeal());
+        mealContry.setText(response.getStrArea());
+        mealCategory.setText(response.getStrCategory());
+     /*   ingradiant1.setText(response.getStrIngredient1());
+        ingradiant2.setText(response.getStrIngredient2());
+        ingradiant3.setText(response.getStrIngredient3());
+        ingradiant4.setText(response.getStrIngredient4());
+        ingradiant5.setText(response.getStrIngredient5());
+        ingradiant6.setText(response.getStrIngredient6());
+        ingradiant7.setText(response.getStrIngredient7()); */
+        steps.setText(response.getStrInstructions());
+        VideoUrl = response.getStrYoutube();
+        RV=findViewById(R.id.recyclerView2);
+        manger = new LinearLayoutManager(this);
+        manger.setOrientation(RecyclerView.HORIZONTAL);
+        RV.setLayoutManager(manger);
+        adapter = new MealDetailAdapter(this);
+        resultToShow = prepareIngredient(response);
+        RV.setAdapter(adapter);
+        adapter.setList(resultToShow);
+        adapter.notifyDataSetChanged();
 
 
-
-    /*    youTubePlayerView =findViewById(R.id.ybv);
         youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
             @Override
             public void onReady(@NonNull YouTubePlayer youTubePlayer) {
                 super.onReady(youTubePlayer);
-                youTubePlayer.loadVideo("mulqW-J3Yy4",0);
-                // youTubePlayer.play();
+                if(VideoUrl !=null){
+                    VideoUrl = VideoUrl.substring(VideoUrl.indexOf("=") + 1);
+                    StringTokenizer st = new StringTokenizer(VideoUrl, "&");
+                    VideoUrl = st.nextToken();
+                    youTubePlayer.loadVideo(VideoUrl, 0);
+                }
             }
-        });*/
+        });
+
+    }
 
 
 
+    public ArrayList<MealIngredients> prepareIngredient (Meal meal){
+        ArrayList<MealIngredients> ingredientsList = new ArrayList<>();
+        if (meal.getStrIngredient1()!=null&&  !meal.getStrIngredient1().isEmpty())
+            ingredientsList.add(new MealIngredients(meal.getStrIngredient1(),meal.getStrMeasure1()));
+        if (meal.getStrIngredient2()!=null &&  !meal.getStrIngredient2().isEmpty())
+            ingredientsList.add(new MealIngredients(meal.getStrIngredient2(), meal.getStrMeasure2()));
+        if (meal.getStrIngredient3()!=null &&  !meal.getStrIngredient3().isEmpty())
+            ingredientsList.add(new MealIngredients(meal.getStrIngredient3(), meal.getStrMeasure3()));
+        if (meal.getStrIngredient4()!=null &&  !meal.getStrIngredient4().isEmpty())
+            ingredientsList.add(new MealIngredients(meal.getStrIngredient4(), meal.getStrMeasure4()));
+        if (meal.getStrIngredient5()!=null &&  !meal.getStrIngredient5().isEmpty())
+            ingredientsList.add(new MealIngredients(meal.getStrIngredient5(), meal.getStrMeasure5()));
+        if (meal.getStrIngredient6()!=null &&  !meal.getStrIngredient6().isEmpty())
+            ingredientsList.add(new MealIngredients(meal.getStrIngredient6(), meal.getStrMeasure6()));
+        if (meal.getStrIngredient7()!=null &&  !meal.getStrIngredient7().isEmpty())
+            ingredientsList.add(new MealIngredients(meal.getStrIngredient7(), meal.getStrMeasure7()));
+        if (meal.getStrIngredient8()!=null &&  !meal.getStrIngredient8().isEmpty())
+            ingredientsList.add(new MealIngredients(meal.getStrIngredient8(), meal.getStrMeasure8()));
+        if (meal.getStrIngredient9()!=null &&  !meal.getStrIngredient9().isEmpty())
+            ingredientsList.add(new MealIngredients(meal.getStrIngredient9(), meal.getStrMeasure9()));
+        if (meal.getStrIngredient10()!=null &&  !meal.getStrIngredient10().isEmpty())
+            ingredientsList.add(new MealIngredients(meal.getStrIngredient10(), meal.getStrMeasure10()));
+        if (meal.getStrIngredient11()!=null &&  !meal.getStrIngredient11().isEmpty())
+            ingredientsList.add(new MealIngredients(meal.getStrIngredient11(), meal.getStrMeasure11()));
+        if (meal.getStrIngredient12()!=null &&  !meal.getStrIngredient12().isEmpty())
+            ingredientsList.add(new MealIngredients(meal.getStrIngredient12(), meal.getStrMeasure12()));
+        if (meal.getStrIngredient13()!=null &&  !meal.getStrIngredient13().isEmpty())
+            ingredientsList.add(new MealIngredients(meal.getStrIngredient13(), meal.getStrMeasure13()));
+        if (meal.getStrIngredient14()!=null &&  !meal.getStrIngredient14().isEmpty())
+            ingredientsList.add(new MealIngredients(meal.getStrIngredient14(), meal.getStrMeasure14()));
+        if (meal.getStrIngredient15()!=null &&  !meal.getStrIngredient15().isEmpty())
+            ingredientsList.add(new MealIngredients(meal.getStrIngredient15(), meal.getStrMeasure15()));
+        if (meal.getStrIngredient16()!=null &&  !meal.getStrIngredient16().isEmpty())
+            ingredientsList.add(new MealIngredients(meal.getStrIngredient16(), meal.getStrMeasure16()));
+        if (meal.getStrIngredient17()!=null &&  !meal.getStrIngredient17().isEmpty())
+            ingredientsList.add(new MealIngredients(meal.getStrIngredient17(), meal.getStrMeasure17()));
+        if (meal.getStrIngredient18()!=null &&  !meal.getStrIngredient18().isEmpty())
+            ingredientsList.add(new MealIngredients(meal.getStrIngredient18(), meal.getStrMeasure18()));
+        if (meal.getStrIngredient19()!=null &&  !meal.getStrIngredient19().isEmpty())
+            ingredientsList.add(new MealIngredients(meal.getStrIngredient19(), meal.getStrMeasure19()));
+        if (meal.getStrIngredient20()!=null && !meal.getStrIngredient20().isEmpty()){
+            ingredientsList.add(new MealIngredients(meal.getStrIngredient20(), meal.getStrMeasure20()));
+            Log.i("eslam","if here ");
+            Log.i("eslam",meal.getStrIngredient20());
+        }
+
+     /*  MealIngredients one  = new MealIngredients("Lime" , "meald");
+        MealIngredients two  = new MealIngredients("Lime" , "meald");
+        MealIngredients three  = new MealIngredients("Lime" , "meald");
+        MealIngredients four  = new MealIngredients("Lime" , "meald");
+        ingredientsList.add(one);
+        ingredientsList.add(two);
+        ingredientsList.add(three);
+        ingredientsList.add(four);*/
 
 
 
+        return  ingredientsList;
     }
 }
