@@ -7,8 +7,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 import com.example.project.DataBase.DataBaseRepository;
 import com.example.project.GeneralRepositoryModel.GeneralRepository;
@@ -32,11 +35,14 @@ public class SelectedIngredientActivity extends AppCompatActivity implements Sel
 
     SelectedIngredientInterface presenter;
     RecyclerView.LayoutManager manger;
+    EditText search ;
 
+ArrayList<Meal> myApiMeals;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selected_ingredient);
+        search = findViewById(R.id.tb_search_ingrediant_meals);
         Intent recived = getIntent();
         ingredient = recived.getStringExtra("ingredient");
         Log.i("eslam",ingredient);
@@ -49,25 +55,22 @@ public class SelectedIngredientActivity extends AppCompatActivity implements Sel
         presenter.getSelectedIngredientMeals(ingredient);
 
 
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
 
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filtterMeals(s);
+            }
 
+            @Override
+            public void afterTextChanged(Editable s) {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            }
+        });
 
 
 
@@ -100,6 +103,7 @@ public class SelectedIngredientActivity extends AppCompatActivity implements Sel
 
     @Override
     public void showData(ArrayList<Meal> meals) {
+        myApiMeals = meals;
         ad.setList(meals);
         ad.notifyDataSetChanged();
     }
@@ -107,5 +111,16 @@ public class SelectedIngredientActivity extends AppCompatActivity implements Sel
     @Override
     public void onAddToFavorite(Meal meal) {
         presenter.addToFavorite(meal);
+    }
+
+    public void filtterMeals(CharSequence s  ){
+        ArrayList<Meal> fillteredMeals = new ArrayList<>();
+        for(int j = 0 ; j< myApiMeals.size() ;j++){
+            if(myApiMeals.get(j).getStrMeal().toLowerCase().startsWith(s.toString())){
+                fillteredMeals.add(myApiMeals.get(j));
+            }
+            ad.setList(fillteredMeals);
+            ad.notifyDataSetChanged();
+        }
     }
 }

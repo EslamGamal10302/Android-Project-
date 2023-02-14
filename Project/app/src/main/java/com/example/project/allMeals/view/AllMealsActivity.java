@@ -38,7 +38,7 @@ public class AllMealsActivity extends AppCompatActivity implements AllMealsViewI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_meals);
-        search = findViewById(R.id.bt_searchForAllMeals);
+        search = findViewById(R.id.pt_searchForAllMeals);
         allRecyclerView = findViewById(R.id.allmeals_recyclerView);
         layoutManager=new LinearLayoutManager(this);
         pressenter = new allMealsPressenter(GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(this),this),this);

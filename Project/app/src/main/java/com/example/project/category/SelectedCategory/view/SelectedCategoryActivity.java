@@ -7,8 +7,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 import com.example.project.DataBase.DataBaseRepository;
 import com.example.project.GeneralRepositoryModel.GeneralRepository;
@@ -33,10 +36,13 @@ public class SelectedCategoryActivity extends AppCompatActivity implements Selec
     SelectedCategoryInterface presenter;
     RecyclerView.LayoutManager manger;
 
+    ArrayList<Meal> myApiMeals ;
+    EditText search;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selected_category);
+        search = findViewById(R.id.tb_search_category_meals);
         Intent recived = getIntent();
         category = recived.getStringExtra("category");
         Log.i("eslam",category);
@@ -48,32 +54,25 @@ public class SelectedCategoryActivity extends AppCompatActivity implements Selec
         rv.setAdapter(ad);
         presenter.getSelectedcategoryMeals(category);
 
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                           filtterMeals(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
 
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.searchScreen);
@@ -106,6 +105,7 @@ public class SelectedCategoryActivity extends AppCompatActivity implements Selec
 
     @Override
     public void showData(ArrayList<Meal> meals) {
+        myApiMeals= meals ;
         ad.setList(meals);
         ad.notifyDataSetChanged();
     }
@@ -113,5 +113,16 @@ public class SelectedCategoryActivity extends AppCompatActivity implements Selec
     @Override
     public void onAddToFavorite(Meal meal) {
         presenter.addToFavorite(meal);
+    }
+
+    public void filtterMeals(CharSequence s  ){
+        ArrayList<Meal> fillteredMeals = new ArrayList<>();
+        for(int j = 0 ; j< myApiMeals.size() ;j++){
+            if(myApiMeals.get(j).getStrMeal().toLowerCase().startsWith(s.toString())){
+                fillteredMeals.add(myApiMeals.get(j));
+            }
+            ad.setList(fillteredMeals);
+            ad.notifyDataSetChanged();
+        }
     }
 }
