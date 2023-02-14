@@ -16,7 +16,7 @@ import com.example.project.R;
 import com.example.project.area.selectedArea.model.Meal;
 
 import com.example.project.calender.view.CalendarActivity;
-import com.example.project.details.MealDetails;
+import com.example.project.details.view.MealDetails;
 import com.example.project.favourite.view.FavActivity;
 import com.example.project.home.SearchActivity;
 
@@ -95,7 +95,9 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
     @Override
     public void showMealDetails(Meal meal) {
         detail = meal;
+        String mealName = meal.getStrMeal();
         Intent intent = new Intent(HomeActivity.this, MealDetails.class);
+        intent.putExtra("name",mealName);
         startActivity(intent);
 
     }

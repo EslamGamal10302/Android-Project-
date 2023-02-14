@@ -23,7 +23,7 @@
             android:name=".category.SelectedCategory.view.SelectedCategoryActivity"
             android:exported="false" />
         <activity
-            android:name=".details.MealDetails"
+            android:name=".details.view.MealDetails"
             android:exported="false" />
         <activity
             android:name=".area.selectedArea.view.SelectedAreaActivity"

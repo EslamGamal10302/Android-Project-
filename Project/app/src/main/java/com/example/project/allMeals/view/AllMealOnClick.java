@@ -4,4 +4,6 @@ import com.example.project.area.selectedArea.model.Meal;
 
 public interface AllMealOnClick {
     void onAddToFavorite (Meal meal);
+
+    void ShowMealDetails(Meal meal);
 }
