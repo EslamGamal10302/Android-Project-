@@ -15,6 +15,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -60,6 +61,12 @@ public class AllMealAdapter extends  RecyclerView.Adapter<AllMealAdapter.AllMeal
         Meal meal = allmeals.get(position);
         holder.mealName.setText(meal.getStrMeal());
         Glide.with(context).load(meal.getStrMealThumb()).into(holder.mealImage);
+        holder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listner.ShowMealDetails(meal);
+            }
+        });
         ArrayAdapter<String> adapter=new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1,days);
         holder.autoCompleteTextView.setAdapter(adapter);
         holder.autoCompleteTextView.setOnClickListener(new View.OnClickListener() {
@@ -154,12 +161,15 @@ public class AllMealAdapter extends  RecyclerView.Adapter<AllMealAdapter.AllMeal
 
         AutoCompleteTextView autoCompleteTextView;
 
+        ConstraintLayout layout;
+
         public AllMealsViewHolder(@NonNull View itemView) {
             super(itemView);
             mealName = itemView.findViewById(R.id.allmeals_name);
             mealImage = itemView.findViewById(R.id.allmeal_imageView);
             addToFav = itemView.findViewById(R.id.btn_addToFavorite);
             autoCompleteTextView = itemView.findViewById(R.id.days_drop_dawn);
+            layout = itemView.findViewById(R.id.cons_lay_Selected_ingredient);
 
 
         }

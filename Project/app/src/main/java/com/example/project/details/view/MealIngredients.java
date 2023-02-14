@@ -1,4 +1,4 @@
-package com.example.project.details;
+package com.example.project.details.view;
 
 public class MealIngredients {
     private String strIngredient;

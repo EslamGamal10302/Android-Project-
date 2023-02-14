@@ -1,18 +1,31 @@
-package com.example.project.details;
+package com.example.project.details.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.bumptech.glide.Glide;
+import com.example.project.DataBase.DataBaseRepository;
+import com.example.project.GeneralRepositoryModel.GeneralRepository;
+import com.example.project.Network.MealClient;
 import com.example.project.R;
 import com.example.project.area.selectedArea.model.Meal;
+import com.example.project.details.presenter.MealDetailPresenter;
+import com.example.project.details.presenter.MealDetailPresenterInterface;
 import com.example.project.home.view.HomeActivity;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
@@ -21,7 +34,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTube
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-public class MealDetails extends AppCompatActivity {
+public class MealDetails extends AppCompatActivity implements MealDetailViewInterface {
     ImageView mealImage;
     TextView mealName;
     TextView mealContry;
@@ -48,6 +61,20 @@ public class MealDetails extends AppCompatActivity {
 
     ArrayList<MealIngredients> resultToShow ;
 
+    AutoCompleteTextView dropList;
+
+    ToggleButton addToFavourite ;
+
+    private  int stepNo = 0;
+
+    String [] days ={"Saturday","Sunday","Monday","Tuesday","Wednesday","Thursday","Friday"};
+
+
+    MealDetailPresenterInterface presenter;
+
+    private String MealName ;
+
+    private  Meal selectedSearchMeal;
 
 
     @Override
@@ -58,31 +85,131 @@ public class MealDetails extends AppCompatActivity {
         mealName = findViewById(R.id.mealname);
         mealContry =findViewById(R.id.mealContry);
         mealCategory=findViewById(R.id.meal_category);
+        addToFavourite=findViewById(R.id.btn_add_mealDetail_toFav);
+        dropList=findViewById(R.id.days_drop_dawn);
         steps=findViewById(R.id.steps);
         youTubePlayerView =findViewById(R.id.ybv);
-        response = HomeActivity.detail;
-        Glide.with(this).load(response.getStrMealThumb()).into(mealImage);
-        mealName.setText(response.getStrMeal());
-        mealContry.setText(response.getStrArea());
-        mealCategory.setText(response.getStrCategory());
-     /*   ingradiant1.setText(response.getStrIngredient1());
-        ingradiant2.setText(response.getStrIngredient2());
-        ingradiant3.setText(response.getStrIngredient3());
-        ingradiant4.setText(response.getStrIngredient4());
-        ingradiant5.setText(response.getStrIngredient5());
-        ingradiant6.setText(response.getStrIngredient6());
-        ingradiant7.setText(response.getStrIngredient7()); */
-        steps.setText(response.getStrInstructions());
-        VideoUrl = response.getStrYoutube();
         RV=findViewById(R.id.recyclerView2);
         manger = new LinearLayoutManager(this);
         manger.setOrientation(RecyclerView.HORIZONTAL);
         RV.setLayoutManager(manger);
         adapter = new MealDetailAdapter(this);
-        resultToShow = prepareIngredient(response);
         RV.setAdapter(adapter);
+        presenter = new MealDetailPresenter(GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(this),this),this);
+        Intent intent = getIntent();
+        MealName = intent.getStringExtra("name");
+        presenter.getSelectedMealDetails(MealName);
+
+
+
+
+
+
+
+
+
+
+        addToFavourite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            Boolean clicked = false ;
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (!clicked){
+                    // holder.addToFavourite.setChecked(false);
+                    clicked = true;
+                    addToFavourite.setBackgroundResource(R.drawable.baseline_favorite_24);
+                    Toast.makeText(MealDetails.this, "meal added to favourite", Toast.LENGTH_SHORT).show();
+                    selectedSearchMeal.setDay("0");
+                  //  listner.onAddToFavorite(response);
+                    presenter.addToFavorite(selectedSearchMeal);
+
+                }
+            }
+        });
+
+        ArrayAdapter<String> adapter=new ArrayAdapter<String>(MealDetails.this, android.R.layout.simple_list_item_1,days);
+        dropList.setAdapter(adapter);
+        dropList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dropList.showDropDown();
+            }
+        });
+        dropList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String day = parent.getItemAtPosition(position).toString();
+                switch (day) {
+                    case "Saturday":
+                        selectedSearchMeal.setDay("1");
+                        presenter.addToFavorite(selectedSearchMeal);
+                        Toast.makeText(MealDetails.this, "Meal added to "+day, Toast.LENGTH_SHORT).show();
+                        break;
+                    case "Sunday":
+                        selectedSearchMeal.setDay("2");
+                        presenter.addToFavorite(selectedSearchMeal);
+                        Toast.makeText(MealDetails.this, "Meal added to "+day, Toast.LENGTH_SHORT).show();
+                        break;
+                    case "Monday":
+                        selectedSearchMeal.setDay("3");
+                        presenter.addToFavorite(selectedSearchMeal);
+                        Toast.makeText(MealDetails.this, "Meal added to "+day, Toast.LENGTH_SHORT).show();
+                        break;
+                    case "Tuesday":
+                        selectedSearchMeal.setDay("4");
+                        presenter.addToFavorite(selectedSearchMeal);
+                        Toast.makeText(MealDetails.this, "Meal added to "+day, Toast.LENGTH_SHORT).show();
+                        break;
+
+                    case "Wednesday":
+                        selectedSearchMeal.setDay("5");
+                        presenter.addToFavorite(selectedSearchMeal);
+                        Toast.makeText(MealDetails.this, "Meal added to "+day, Toast.LENGTH_SHORT).show();
+                        break;
+
+                    case "Thursday":
+                        selectedSearchMeal.setDay("6");
+                        presenter.addToFavorite(selectedSearchMeal);
+                        Toast.makeText(MealDetails.this, "Meal added to "+day, Toast.LENGTH_SHORT).show();
+                        break;
+                    case "Friday":
+                        selectedSearchMeal.setDay("7");
+                        presenter.addToFavorite(selectedSearchMeal);
+                        Toast.makeText(MealDetails.this, "Meal added to "+day, Toast.LENGTH_SHORT).show();
+                        break;
+
+
+                }
+            }
+        });
+
+
+
+
+
+    }
+
+    public  void setScreenData(Meal meal){
+
+      // response = HomeActivity.detail;
+        Glide.with(this).load(meal.getStrMealThumb()).into(mealImage);
+        mealName.setText(meal.getStrMeal());
+        mealContry.setText(meal.getStrArea());
+        mealCategory.setText(meal.getStrCategory());
+        StringTokenizer st = new StringTokenizer(meal.getStrInstructions(), ".");
+        while (st.hasMoreTokens()){
+            steps.append("Step "+String.valueOf(stepNo+1)+"\n"+st.nextToken()+"\n");
+            stepNo++;
+
+        }
+       // steps.setText(response.getStrInstructions());
+        VideoUrl = meal.getStrYoutube();
+      //  VideoUrl = "https://www.youtube.com/watch?v=omnQWLBe6tg";
+
+        resultToShow = prepareIngredient(meal);
         adapter.setList(resultToShow);
         adapter.notifyDataSetChanged();
+
 
 
         youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
@@ -160,5 +287,17 @@ public class MealDetails extends AppCompatActivity {
 
 
         return  ingredientsList;
+    }
+
+    @Override
+    public void showSelectedMealDetails(ArrayList<Meal> allMeals) {
+
+              for(Meal search : allMeals){
+                  if(search.getStrMeal().equalsIgnoreCase(MealName)){
+                      selectedSearchMeal =search;
+                  }
+              }
+              setScreenData(selectedSearchMeal);
+
     }
 }

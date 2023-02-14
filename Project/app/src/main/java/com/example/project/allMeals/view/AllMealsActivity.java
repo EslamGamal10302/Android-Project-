@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -18,6 +19,7 @@ import com.example.project.allMeals.pressenter.allMealPressenterInterface;
 import com.example.project.allMeals.pressenter.allMealsPressenter;
 import com.example.project.area.selectedArea.model.Meal;
 
+import com.example.project.details.view.MealDetails;
 import com.example.project.home.pressenter.HomePressenter;
 import com.example.project.home.pressenter.HomePressenterInterface;
 import com.example.project.home.view.HomeAdapter;
@@ -90,5 +92,13 @@ public class AllMealsActivity extends AppCompatActivity implements AllMealsViewI
     @Override
     public void onAddToFavorite(Meal meal) {
         pressenter.addToFavorite(meal);
+    }
+
+    @Override
+    public void ShowMealDetails(Meal meal) {
+        String mealName = meal.getStrMeal();
+        Intent intent = new Intent(AllMealsActivity.this, MealDetails.class);
+        intent.putExtra("name",mealName);
+        startActivity(intent);
     }
 }
