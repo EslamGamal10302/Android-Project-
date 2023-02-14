@@ -130,6 +130,13 @@ public class SelectedIngredientAdapter extends RecyclerView.Adapter<SelectedIngr
                 } */
             }
         });
+
+        holder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listner.ShowMealDetails(meal);
+            }
+        });
     }
 
     @Override

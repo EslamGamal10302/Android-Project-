@@ -146,6 +146,8 @@ public class AllMealAdapter extends  RecyclerView.Adapter<AllMealAdapter.AllMeal
         });
 
 
+
+
     }
 
     @Override

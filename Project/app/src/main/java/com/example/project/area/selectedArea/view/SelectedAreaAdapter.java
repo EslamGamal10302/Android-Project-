@@ -126,6 +126,13 @@ public class SelectedAreaAdapter extends RecyclerView.Adapter<SelectedAreaAdapte
             }
         });
 
+        holder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listner.ShowMealDetails(meal);
+            }
+        });
+
     }
 
     @Override

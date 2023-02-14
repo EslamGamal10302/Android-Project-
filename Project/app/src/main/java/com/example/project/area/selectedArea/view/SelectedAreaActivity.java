@@ -22,6 +22,7 @@ import com.example.project.area.selectedArea.model.Meal;
 import com.example.project.area.selectedArea.presenter.SelectedAreaInrerface;
 import com.example.project.area.selectedArea.presenter.SelectedAreaPresenter;
 import com.example.project.calender.view.CalendarActivity;
+import com.example.project.details.view.MealDetails;
 import com.example.project.favourite.view.FavActivity;
 import com.example.project.home.view.HomeActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -116,6 +117,14 @@ public class SelectedAreaActivity extends AppCompatActivity implements SelectedA
     @Override
     public void onAddToFavorite(Meal meal) {
         presenter.addToFavorite(meal);
+    }
+
+    @Override
+    public void ShowMealDetails(Meal meal) {
+        String mealName = meal.getStrMeal();
+        Intent intent = new Intent(SelectedAreaActivity.this, MealDetails.class);
+        intent.putExtra("name",mealName);
+        startActivity(intent);
     }
 
 
