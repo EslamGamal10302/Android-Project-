@@ -1,4 +1,4 @@
-package com.example.project.Ingredient.SelectedIngredient.presenter;
+package com.example.project.Ingredient.SelectedIngredient.view.presenter;
 
 import com.example.project.GeneralRepositoryModel.GeneralRepositoryInterface;
 import com.example.project.Ingredient.SelectedIngredient.view.SelectedIngredientViewInterface;

@@ -15,8 +15,8 @@ import android.widget.EditText;
 
 import com.example.project.DataBase.DataBaseRepository;
 import com.example.project.GeneralRepositoryModel.GeneralRepository;
-import com.example.project.Ingredient.SelectedIngredient.presenter.SelectedIngredientInterface;
-import com.example.project.Ingredient.SelectedIngredient.presenter.SelectedIngredientPresenter;
+import com.example.project.Ingredient.SelectedIngredient.view.presenter.SelectedIngredientInterface;
+import com.example.project.Ingredient.SelectedIngredient.view.presenter.SelectedIngredientPresenter;
 import com.example.project.Network.MealClient;
 import com.example.project.R;
 import com.example.project.area.selectedArea.model.Meal;

@@ -53,10 +53,6 @@ public class IngredientActivity extends AppCompatActivity implements IngredientV
 
 
 
-
-
-
-
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.searchScreen);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
