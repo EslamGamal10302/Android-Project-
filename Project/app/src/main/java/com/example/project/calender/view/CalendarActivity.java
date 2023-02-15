@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.project.DataBase.DataBaseRepository;
 import com.example.project.GeneralRepositoryModel.GeneralRepository;
@@ -30,12 +31,9 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class CalendarActivity extends AppCompatActivity implements CalenderViewInterface , CalenderOnClickListner{
+public class CalendarActivity extends AppCompatActivity implements CalenderViewInterface, CalenderOnClickListner {
 
-    CalenderPressenterInterface pressenter ;
-
-
-
+    CalenderPressenterInterface pressenter;
 
 
     RecyclerView saturdayRecycle;
@@ -72,7 +70,6 @@ public class CalendarActivity extends AppCompatActivity implements CalenderViewI
     LinearLayoutManager thursdaydayManger;
 
 
-
     RecyclerView fridayRecycle;
     CalendarAdapter fridayAdapter;
 
@@ -83,71 +80,62 @@ public class CalendarActivity extends AppCompatActivity implements CalenderViewI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
 
-        pressenter = new CalenderPressenter(this ,  GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(this),this));
-
+        pressenter = new CalenderPressenter(this, GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(this), this));
 
 
         saturdayRecycle = findViewById(R.id.saturday);
         myManger = new LinearLayoutManager(this);
         myManger.setOrientation(RecyclerView.HORIZONTAL);
         saturdayRecycle.setLayoutManager(myManger);
-        saturdayAdapter = new CalendarAdapter(this,this ,findViewById(R.id.txt_saturday) );
+        saturdayAdapter = new CalendarAdapter(this, this, findViewById(R.id.txt_saturday) ,saturdayRecycle);
         saturdayRecycle.setAdapter(saturdayAdapter);
-
 
 
         sundayManger = new LinearLayoutManager(this);
         sundayManger.setOrientation(RecyclerView.HORIZONTAL);
-        sundayRecycle=findViewById(R.id.sunday);
+        sundayRecycle = findViewById(R.id.sunday);
         sundayRecycle.setLayoutManager(sundayManger);
-        sundayAdapter= new CalendarAdapter(this,this,findViewById(R.id.txt_sunday));
+        sundayAdapter = new CalendarAdapter(this, this, findViewById(R.id.txt_sunday),sundayRecycle);
         sundayRecycle.setAdapter(sundayAdapter);
-
 
 
         mondayManger = new LinearLayoutManager(this);
         mondayManger.setOrientation(RecyclerView.HORIZONTAL);
-        mondayRecycle=findViewById(R.id.monday);
+        mondayRecycle = findViewById(R.id.monday);
         mondayRecycle.setLayoutManager(mondayManger);
-        monddayAdapter= new CalendarAdapter(this,this,findViewById(R.id.txt_monday));
+        monddayAdapter = new CalendarAdapter(this, this, findViewById(R.id.txt_monday),mondayRecycle);
         mondayRecycle.setAdapter(monddayAdapter);
 
 
-
-         tuesdaydayManger = new LinearLayoutManager(this);
+        tuesdaydayManger = new LinearLayoutManager(this);
         tuesdaydayManger.setOrientation(RecyclerView.HORIZONTAL);
-        tuesdaydayRecycle=findViewById(R.id.tuesday);
+        tuesdaydayRecycle = findViewById(R.id.tuesday);
         tuesdaydayRecycle.setLayoutManager(tuesdaydayManger);
-        tuesdaydayAdapter= new CalendarAdapter(this,this,findViewById(R.id.txt_tuesday));
+        tuesdaydayAdapter = new CalendarAdapter(this, this, findViewById(R.id.txt_tuesday),tuesdaydayRecycle);
         tuesdaydayRecycle.setAdapter(tuesdaydayAdapter);
 
 
-
-         wednesdayManger= new LinearLayoutManager(this);
+        wednesdayManger = new LinearLayoutManager(this);
         wednesdayManger.setOrientation(RecyclerView.HORIZONTAL);
-        wednesdayRecycle=findViewById(R.id.wednesday);
+        wednesdayRecycle = findViewById(R.id.wednesday);
         wednesdayRecycle.setLayoutManager(wednesdayManger);
-         wednesdayAdapter= new CalendarAdapter(this,this,findViewById(R.id.txt_wednesday));
+        wednesdayAdapter = new CalendarAdapter(this, this, findViewById(R.id.txt_wednesday),wednesdayRecycle);
         wednesdayRecycle.setAdapter(wednesdayAdapter);
-
-
 
 
         thursdaydayManger = new LinearLayoutManager(this);
         thursdaydayManger.setOrientation(RecyclerView.HORIZONTAL);
-        thursdaydayRecycle=findViewById(R.id.thuresday);
+        thursdaydayRecycle = findViewById(R.id.thuresday);
         thursdaydayRecycle.setLayoutManager(thursdaydayManger);
-        thursdaydayAdapter= new CalendarAdapter(this,this,findViewById(R.id.txt_thuresday));
+        thursdaydayAdapter = new CalendarAdapter(this, this, findViewById(R.id.txt_thuresday),thursdaydayRecycle);
         thursdaydayRecycle.setAdapter(thursdaydayAdapter);
-
-
 
 
         fridayManger = new LinearLayoutManager(this);
         fridayManger.setOrientation(RecyclerView.HORIZONTAL);
-        fridayRecycle=findViewById(R.id.friday);
+        fridayRecycle = findViewById(R.id.friday);
         fridayRecycle.setLayoutManager(fridayManger);
-        fridayAdapter= new CalendarAdapter(this,this,findViewById(R.id.txt_friday));
+        fridayAdapter = new CalendarAdapter(this, this, findViewById(R.id.txt_friday),fridayRecycle);
         fridayRecycle.setAdapter(fridayAdapter);
 
 
@@ -160,24 +148,23 @@ public class CalendarActivity extends AppCompatActivity implements CalenderViewI
         pressenter.getFridayMeals();
 
 
-        BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.calScreen);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch(item.getItemId())
-                {
+                switch (item.getItemId()) {
                     case R.id.searchScreen:
                         startActivity(new Intent(getApplicationContext(), SearchActivity.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
                         return true;
                     case R.id.homeScreen:
                         startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
                         return true;
                     case R.id.favScreen:
                         startActivity(new Intent(getApplicationContext(), FavActivity.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
                         return true;
                     case R.id.calScreen:
                         return true;
@@ -196,53 +183,90 @@ public class CalendarActivity extends AppCompatActivity implements CalenderViewI
     public void showSaturdayMeals(Observable<List<Meal>> meals) {
         meals.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(o->saturdayAdapter.setList((ArrayList<Meal>) o));
+                .subscribe(o -> {saturdayAdapter.setList((ArrayList<Meal>) o);
+                    if(o.size()>0)
+                    {
+                        saturdayRecycle.setVisibility(View.VISIBLE);
+                    }
+                });
     }
 
     @Override
     public void showSundayMeals(Observable<List<Meal>> meals) {
         meals.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(o->sundayAdapter.setList((ArrayList<Meal>) o));
+                .subscribe(o -> {sundayAdapter.setList((ArrayList<Meal>) o);
+                    if(o.size()>0)
+                    {
+                        sundayRecycle.setVisibility(View.VISIBLE);
+                    }
+                });
     }
 
     @Override
     public void showMondayMeals(Observable<List<Meal>> meals) {
         meals.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(o->monddayAdapter.setList((ArrayList<Meal>) o));
+                .subscribe(o ->{ monddayAdapter.setList((ArrayList<Meal>) o);
+                if(o.size()>0)
+                {
+                    mondayRecycle.setVisibility(View.VISIBLE);
+                }
+                });
     }
 
     @Override
     public void showTusdayMeals(Observable<List<Meal>> meals) {
         meals.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(o->tuesdaydayAdapter.setList((ArrayList<Meal>) o));
+                .subscribe(o -> {tuesdaydayAdapter.setList((ArrayList<Meal>) o);
+                    if(o.size()>0)
+                    {
+                        tuesdaydayRecycle.setVisibility(View.VISIBLE);
+                    }
+                });
     }
 
     @Override
     public void showwednsdayMeals(Observable<List<Meal>> meals) {
         meals.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(o->wednesdayAdapter.setList((ArrayList<Meal>) o));
+                .subscribe(o ->{ wednesdayAdapter.setList((ArrayList<Meal>) o);
+                    if(o.size()>0)
+                    {
+                        wednesdayRecycle.setVisibility(View.VISIBLE);
+                    }
+                ;});
     }
 
     @Override
     public void showThursdayMeals(Observable<List<Meal>> meals) {
         meals.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(o->thursdaydayAdapter.setList((ArrayList<Meal>) o));
+                .subscribe(o -> {thursdaydayAdapter.setList((ArrayList<Meal>) o);
+                    if(o.size()>0)
+                    {
+                        thursdaydayRecycle.setVisibility(View.VISIBLE);
+                    }
+
+                });
     }
 
     @Override
     public void showFridayMeals(Observable<List<Meal>> meals) {
-           meals.subscribeOn(Schedulers.io())
-                   .observeOn(AndroidSchedulers.mainThread())
-                   .subscribe(o->fridayAdapter.setList((ArrayList<Meal>) o));
+        meals.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(o -> {fridayAdapter.setList((ArrayList<Meal>) o);
+                    if(o.size()>0)
+                    {
+                        fridayRecycle.setVisibility(View.VISIBLE);
+                    }
+
+                });
     }
 
     @Override
     public void removeMeal(Meal meal) {
-         pressenter.remove(meal);
+        pressenter.remove(meal);
     }
 }

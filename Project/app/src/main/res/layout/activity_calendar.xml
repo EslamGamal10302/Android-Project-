@@ -45,7 +45,8 @@
                 android:id="@+id/saturday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="4" />
+                android:layout_weight="4"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/txt_sunday"
@@ -63,7 +64,8 @@
                 android:id="@+id/sunday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="4" />
+                android:layout_weight="4"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/txt_monday"
@@ -81,7 +83,8 @@
                 android:id="@+id/monday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="4" />
+                android:layout_weight="4"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/txt_tuesday"
@@ -99,7 +102,8 @@
                 android:id="@+id/tuesday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="4" />
+                android:layout_weight="4"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/txt_wednesday"
@@ -117,7 +121,8 @@
                 android:id="@+id/wednesday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="4" />
+                android:layout_weight="4"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/txt_thuresday"
@@ -135,7 +140,8 @@
                 android:id="@+id/thuresday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="4" />
+                android:layout_weight="4"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/txt_friday"
@@ -154,7 +160,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_weight="4" />
+                android:layout_weight="4"
+                android:visibility="gone"/>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

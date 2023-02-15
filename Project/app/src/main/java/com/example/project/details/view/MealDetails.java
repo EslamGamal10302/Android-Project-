@@ -203,8 +203,8 @@ public class MealDetails extends AppCompatActivity implements MealDetailViewInte
 
         }
        // steps.setText(response.getStrInstructions());
-        VideoUrl = meal.getStrYoutube();
-      //  VideoUrl = "https://www.youtube.com/watch?v=omnQWLBe6tg";
+       VideoUrl = meal.getStrYoutube();
+      // VideoUrl = "https://www.youtube.com/watch?v=omnQWLBe6tg";
 
         resultToShow = prepareIngredient(meal);
         adapter.setList(resultToShow);

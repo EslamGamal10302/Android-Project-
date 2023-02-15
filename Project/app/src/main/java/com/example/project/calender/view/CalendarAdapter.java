@@ -25,10 +25,13 @@ public class CalendarAdapter extends RecyclerView.Adapter <CalendarAdapter.MyVie
 CalenderOnClickListner listner;
     TextView day;
 
-    public CalendarAdapter(Context context, CalenderOnClickListner listner, TextView day) {
+    RecyclerView rv;
+
+    public CalendarAdapter(Context context, CalenderOnClickListner listner, TextView day ,RecyclerView rv) {
         this.context = context;
         this.listner = listner;
         this.day = day;
+        this.rv = rv;
         meals = new ArrayList<>();
     }
 
@@ -53,12 +56,23 @@ CalenderOnClickListner listner;
         Glide.with(context).load(meal.getStrMealThumb()).into(holder.thumbnails);
         if(meals.size()>0){
             day.setVisibility(View.VISIBLE);
-        }
+            rv.setVisibility(View.VISIBLE);
+        } /*else if (meals.size()==0){
+            day.setVisibility(View.GONE);
+
+
+        }*/
 
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 listner.OnClick(meal);
+
+                if ((meals.size()-1)==0){
+                    day.setVisibility(View.GONE);
+                    rv.setVisibility(View.GONE);
+
+                }
               /*  if (meals.size()==0){
                     day.setVisibility(View.GONE);
                     notifyDataSetChanged();
