@@ -1,6 +1,7 @@
 package com.example.project.login;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -15,6 +16,7 @@ import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -24,12 +26,19 @@ import com.example.project.Network.NetworkConnection;
 import com.example.project.R;
 import com.example.project.home.view.HomeActivity;
 import com.example.project.signup.SignUp;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 public class LoginScreen extends AppCompatActivity {
     TextView signup;
@@ -43,14 +52,11 @@ public class LoginScreen extends AppCompatActivity {
 
     ProgressDialog dialog;
 
-
     TextView recovery;
-
-
-
-
-
     Button guest ;
+
+    ImageView google ;
+    GoogleSignInClient googleSignInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +69,9 @@ public class LoginScreen extends AppCompatActivity {
         guest = findViewById(R.id.btn_guest);
         recovery = findViewById(R.id.tv_recovery);
         firebaseAuth = FirebaseAuth.getInstance();
+        google = findViewById(R.id.img_google);
+
+
 
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,6 +122,35 @@ public class LoginScreen extends AppCompatActivity {
             showRecoveryPasswordDialog();
         }
     });
+
+
+        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+        googleSignInClient = GoogleSignIn.getClient(LoginScreen.this,googleSignInOptions);
+
+        google.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = googleSignInClient.getSignInIntent();
+                startActivityForResult(intent, 100);
+            }
+        });
+
+
+        // msh fahm leh bs mina 2aly hatdrab lw m7tthash ... isa mtdrabsh 7aga
+    /*    FirebaseUser user = firebaseAuth.getCurrentUser();
+        if(user != null){
+            startActivity(new Intent(LoginScreen.this,HomeActivity.class));
+            finish();
+        }*/
+
+
+
+
+
 
 
     }
@@ -220,6 +258,38 @@ public class LoginScreen extends AppCompatActivity {
         AlertDialog alertDialog = builder.create();
 
         alertDialog.show();
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode==100){
+            Task<GoogleSignInAccount> signInAccountTask = GoogleSignIn.getSignedInAccountFromIntent(data);
+            if(signInAccountTask.isSuccessful()){
+                Toast.makeText(this, "Google Sign In Successful", Toast.LENGTH_SHORT).show();
+            }
+            try {
+                GoogleSignInAccount googleSignInAccount = signInAccountTask.getResult(ApiException.class);
+                if(googleSignInAccount != null){
+                    AuthCredential authCredential = GoogleAuthProvider.getCredential(googleSignInAccount.getIdToken(), null);
+                    firebaseAuth.signInWithCredential(authCredential).addOnCompleteListener(LoginScreen.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()){
+                                Toast.makeText(LoginScreen.this, "Authentication successful", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(LoginScreen.this,HomeActivity.class));
+                                finish();
+                            }else{
+                                Toast.makeText(LoginScreen.this, "Authentication Failed" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+
+            } catch (ApiException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
 

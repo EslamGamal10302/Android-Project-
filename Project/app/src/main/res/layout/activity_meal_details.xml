@@ -149,7 +149,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="casual"
-            android:text="Instractions"
+            android:text="Instructions"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="20sp"
