@@ -1,6 +1,9 @@
 package com.example.project.calender.view;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,17 +69,31 @@ CalenderOnClickListner listner;
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listner.OnClick(meal);
 
-                if ((meals.size()-1)==0){
-                    day.setVisibility(View.GONE);
-                    rv.setVisibility(View.GONE);
 
-                }
-              /*  if (meals.size()==0){
-                    day.setVisibility(View.GONE);
-                    notifyDataSetChanged();
-                }*/
+                String yes = "YES,I'M SURE";
+                String no =  "NO,GO BACK";
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setMessage("You will lose it from your Calndar meals list for this day");
+                builder.setTitle("Wait ! Are You Sure You Want To Delete This Meal ?");
+                builder.setCancelable(false);
+                builder.setPositiveButton(Html.fromHtml("<font color='#FFBF00'>"+yes+"</font>"), (DialogInterface.OnClickListener) (dialog, which) -> {
+                    listner.OnClick(meal);
+                    if ((meals.size()-1)==0){
+                        day.setVisibility(View.GONE);
+                        rv.setVisibility(View.GONE);
+                    }
+
+
+                });
+                builder.setNegativeButton(Html.fromHtml("<font color='#FFBF00'>"+no+"</font>"), (DialogInterface.OnClickListener) (dialog, which) -> {
+
+                    dialog.cancel();
+                });
+
+                AlertDialog alertDialog = builder.create();
+
+                alertDialog.show();
             }
         });
     }

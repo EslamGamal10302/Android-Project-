@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -43,10 +44,15 @@ public class SelectedAreaActivity extends AppCompatActivity implements SelectedA
 
     ArrayList<Meal> myApiMeals ;
 
+    ProgressDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selected_area);
+        dialog = new ProgressDialog(this);
+        dialog.setMessage("Loading....");
+        dialog.show();
         Intent recived = getIntent();
         search = findViewById(R.id.tb_search_area_meals);
         nationality=recived.getStringExtra("area");
@@ -112,6 +118,7 @@ public class SelectedAreaActivity extends AppCompatActivity implements SelectedA
         this.myApiMeals = meals;
        ad.setList(meals);
        ad.notifyDataSetChanged();
+       dialog.dismiss();
     }
 
     @Override

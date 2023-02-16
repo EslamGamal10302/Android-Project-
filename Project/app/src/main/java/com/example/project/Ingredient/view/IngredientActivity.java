@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -32,11 +33,16 @@ public class IngredientActivity extends AppCompatActivity implements IngredientV
 
     IngredientInterface presnter;
 
+    ProgressDialog dialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ingredient);
+        dialog = new ProgressDialog(this);
+        dialog.setMessage("Loading....");
+        dialog.show();
         myRecycleView = (RecyclerView) findViewById(R.id.recyclerView);
         myManger = new LinearLayoutManager(this);
         myManger.setOrientation(RecyclerView.VERTICAL);
@@ -84,6 +90,7 @@ public class IngredientActivity extends AppCompatActivity implements IngredientV
     public void showData(ArrayList<Meal> meals) {
        myAdapter.setList(meals);
        myAdapter.notifyDataSetChanged();
+       dialog.dismiss();
     }
 
     @Override

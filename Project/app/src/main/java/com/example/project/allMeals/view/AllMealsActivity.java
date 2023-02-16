@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -36,6 +37,8 @@ public class AllMealsActivity extends AppCompatActivity implements AllMealsViewI
     EditText search;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +65,7 @@ public class AllMealsActivity extends AppCompatActivity implements AllMealsViewI
                 if(s.length()!=0){
                     String searchLitter = s.toString();
                     pressenter.getAllMeals(searchLitter);
+
                 } else if (s.length()==0) {
                     allMealAdapter.setList(new ArrayList<>());
                     allMealAdapter.notifyDataSetChanged();
@@ -85,6 +89,7 @@ public class AllMealsActivity extends AppCompatActivity implements AllMealsViewI
         }else {
             allMealAdapter.setList(allMeals);
             allMealAdapter.notifyDataSetChanged();
+
         }
 
     }

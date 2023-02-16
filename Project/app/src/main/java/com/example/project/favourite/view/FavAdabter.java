@@ -1,6 +1,11 @@
 package com.example.project.favourite.view;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.text.Html;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.project.R;
 import com.example.project.area.selectedArea.model.Meal;
+import com.example.project.home.view.HomeActivity;
+import com.example.project.login.LoginScreen;
 
 import java.util.ArrayList;
 
@@ -56,7 +63,26 @@ public class FavAdabter  extends  RecyclerView.Adapter<FavAdabter.FavViewHolder>
        holder.removeFromFavourite.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               listner.onClick(myMeal);
+               String yes = "YES,I'M SURE";
+               String no =  "NO,GO BACK";
+               AlertDialog.Builder builder = new AlertDialog.Builder(context);
+               builder.setMessage("You will lose it from your favourite  meals list");
+               builder.setTitle("Wait ! Are You Sure You Want To Delete This Meal ?");
+               builder.setCancelable(false);
+               builder.setPositiveButton(Html.fromHtml("<font color='#FFBF00'>"+yes+"</font>"), (DialogInterface.OnClickListener) (dialog, which) -> {
+
+                   listner.onClick(myMeal);
+
+               });
+               builder.setNegativeButton(Html.fromHtml("<font color='#FFBF00'>"+no+"</font>"), (DialogInterface.OnClickListener) (dialog, which) -> {
+
+                   dialog.cancel();
+               });
+
+               AlertDialog alertDialog = builder.create();
+
+               alertDialog.show();
+
            }
        });
 
@@ -82,5 +108,7 @@ public class FavAdabter  extends  RecyclerView.Adapter<FavAdabter.FavViewHolder>
 
         }
     }
+
+
 
 }

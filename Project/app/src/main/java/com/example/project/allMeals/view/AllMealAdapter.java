@@ -23,6 +23,8 @@ import com.example.project.R;
 import com.example.project.area.selectedArea.model.Meal;
 
 import com.example.project.home.view.HomeAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
@@ -33,10 +35,18 @@ public class AllMealAdapter extends  RecyclerView.Adapter<AllMealAdapter.AllMeal
 
    AllMealOnClick  listner ;
 
+    FirebaseAuth firebaseAuth;
+
+    FirebaseUser user ;
+
+
     public AllMealAdapter(Context context , AllMealOnClick listener) {
         this.context = context;
         allmeals = new ArrayList<>();
         this. listner=listener;
+        firebaseAuth = FirebaseAuth.getInstance();
+        user = firebaseAuth.getCurrentUser();
+
     }
 
     public void setList(ArrayList<Meal> allmeals){
@@ -72,7 +82,11 @@ public class AllMealAdapter extends  RecyclerView.Adapter<AllMealAdapter.AllMeal
         holder.autoCompleteTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(user != null){
                 holder.autoCompleteTextView.showDropDown();
+                } else  {
+                    Toast.makeText(context, "You need to login to be able to save meals to your week calendar plan", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         holder.autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -129,16 +143,20 @@ public class AllMealAdapter extends  RecyclerView.Adapter<AllMealAdapter.AllMeal
             Boolean clicked = false ;
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
+                if(user != null){
                 if (!clicked){
                     // holder.addToFavourite.setChecked(false);
                     clicked = true;
                     holder.addToFav.setBackgroundResource(R.drawable.baseline_favorite_24);
-                    Toast.makeText(context, "Meal Added To Favourite", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "meal added to your favourite list", Toast.LENGTH_SHORT).show();
                     meal.setDay("0");
                     listner.onAddToFavorite(meal);
 
-                } /*else{
+                }
+                } else {
+                    Toast.makeText(context, "You need to login to be able to save meals to your favourit list ", Toast.LENGTH_SHORT).show();
+                }
+                /*else{
                    holder.addToFavourite.setBackgroundResource(R.drawable.baseline_favorite_border_24);
                     Toast.makeText(context, "Removed", Toast.LENGTH_SHORT).show();
                 } */

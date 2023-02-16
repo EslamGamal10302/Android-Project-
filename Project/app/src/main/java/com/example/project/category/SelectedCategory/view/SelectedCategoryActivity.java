@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -40,10 +41,15 @@ public class SelectedCategoryActivity extends AppCompatActivity implements Selec
 
     ArrayList<Meal> myApiMeals ;
     EditText search;
+
+    ProgressDialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selected_category);
+        dialog = new ProgressDialog(this);
+        dialog.setMessage("Loading....");
+        dialog.show();
         search = findViewById(R.id.tb_search_category_meals);
         Intent recived = getIntent();
         category = recived.getStringExtra("category");
@@ -110,6 +116,7 @@ public class SelectedCategoryActivity extends AppCompatActivity implements Selec
         myApiMeals= meals ;
         ad.setList(meals);
         ad.notifyDataSetChanged();
+        dialog.dismiss();
     }
 
     @Override

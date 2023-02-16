@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -32,11 +33,16 @@ public class CategoryActivity extends AppCompatActivity implements CategoryViewI
 
     CategoryInterface presenter;
 
+    ProgressDialog dialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
+        dialog = new ProgressDialog(this);
+        dialog.setMessage("Loading....");
+        dialog.show();
         myRecycleView = (RecyclerView) findViewById(R.id.recyclerView);
         myManger = new LinearLayoutManager(this);
         myManger.setOrientation(RecyclerView.VERTICAL);
@@ -92,6 +98,7 @@ public class CategoryActivity extends AppCompatActivity implements CategoryViewI
     public void showData(ArrayList<Meal> meals) {
         myAdapter.setList(meals);
         myAdapter.notifyDataSetChanged();
+        dialog.dismiss();
     }
 
     @Override

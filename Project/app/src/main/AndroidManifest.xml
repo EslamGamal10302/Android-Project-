@@ -16,6 +16,7 @@
         <activity
             android:name=".allMeals.view.AllMealsActivity"
             android:exported="false"
+            android:theme="@style/Theme.Project.NoActionBar"
             />
         <activity
             android:name=".Ingredient.SelectedIngredient.view.SelectedIngredientActivity"

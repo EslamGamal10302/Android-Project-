@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -37,12 +38,16 @@ public class SelectedIngredientActivity extends AppCompatActivity implements Sel
     SelectedIngredientInterface presenter;
     RecyclerView.LayoutManager manger;
     EditText search ;
+    ProgressDialog dialog;
 
 ArrayList<Meal> myApiMeals;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selected_ingredient);
+        dialog = new ProgressDialog(this);
+        dialog.setMessage("Loading....");
+        dialog.show();
         search = findViewById(R.id.tb_search_ingrediant_meals);
         Intent recived = getIntent();
         ingredient = recived.getStringExtra("ingredient");
@@ -107,6 +112,7 @@ ArrayList<Meal> myApiMeals;
         myApiMeals = meals;
         ad.setList(meals);
         ad.notifyDataSetChanged();
+        dialog.dismiss();
     }
 
     @Override

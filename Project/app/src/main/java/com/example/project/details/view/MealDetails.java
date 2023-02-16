@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,6 +28,8 @@ import com.example.project.area.selectedArea.model.Meal;
 import com.example.project.details.presenter.MealDetailPresenter;
 import com.example.project.details.presenter.MealDetailPresenterInterface;
 import com.example.project.home.view.HomeActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
@@ -76,11 +79,22 @@ public class MealDetails extends AppCompatActivity implements MealDetailViewInte
 
     private  Meal selectedSearchMeal;
 
+    FirebaseAuth firebaseAuth;
+
+    FirebaseUser user ;
+
+    ProgressDialog dialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meal_details);
+        dialog = new ProgressDialog(this);
+        dialog.setMessage("Loading....");
+        dialog.show();
+        firebaseAuth = FirebaseAuth.getInstance();
+        user = firebaseAuth.getCurrentUser();
         mealImage = findViewById(R.id.img_details_meal);
         mealName = findViewById(R.id.mealname);
         mealContry =findViewById(R.id.mealContry);
@@ -113,17 +127,21 @@ public class MealDetails extends AppCompatActivity implements MealDetailViewInte
             Boolean clicked = false ;
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+              if(user!= null){
+                  if (!clicked){
+                      // holder.addToFavourite.setChecked(false);
+                      clicked = true;
+                      addToFavourite.setBackgroundResource(R.drawable.baseline_favorite_24);
+                      Toast.makeText(MealDetails.this, "meal added to your favourite list", Toast.LENGTH_SHORT).show();
+                      selectedSearchMeal.setDay("0");
+                      //  listner.onAddToFavorite(response);
+                      presenter.addToFavorite(selectedSearchMeal);
 
-                if (!clicked){
-                    // holder.addToFavourite.setChecked(false);
-                    clicked = true;
-                    addToFavourite.setBackgroundResource(R.drawable.baseline_favorite_24);
-                    Toast.makeText(MealDetails.this, "meal added to favourite", Toast.LENGTH_SHORT).show();
-                    selectedSearchMeal.setDay("0");
-                  //  listner.onAddToFavorite(response);
-                    presenter.addToFavorite(selectedSearchMeal);
+                  }
+              } else {
+                  Toast.makeText(MealDetails.this, "You need to login to be able to save meals to your favourit list", Toast.LENGTH_SHORT).show();
+              }
 
-                }
             }
         });
 
@@ -132,7 +150,12 @@ public class MealDetails extends AppCompatActivity implements MealDetailViewInte
         dropList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dropList.showDropDown();
+                if(user!=null){
+                    dropList.showDropDown();
+                } else {
+                    Toast.makeText(MealDetails.this, "You need to login to be able to save meals to your week calendar plan", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         dropList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -193,6 +216,9 @@ public class MealDetails extends AppCompatActivity implements MealDetailViewInte
 
       // response = HomeActivity.detail;
         Glide.with(this).load(meal.getStrMealThumb()).into(mealImage);
+        resultToShow = prepareIngredient(meal);
+        adapter.setList(resultToShow);
+        adapter.notifyDataSetChanged();
         mealName.setText(meal.getStrMeal());
         mealContry.setText(meal.getStrArea());
         mealCategory.setText(meal.getStrCategory());
@@ -206,9 +232,9 @@ public class MealDetails extends AppCompatActivity implements MealDetailViewInte
        VideoUrl = meal.getStrYoutube();
       // VideoUrl = "https://www.youtube.com/watch?v=omnQWLBe6tg";
 
-        resultToShow = prepareIngredient(meal);
-        adapter.setList(resultToShow);
-        adapter.notifyDataSetChanged();
+
+
+
 
 
 
@@ -221,9 +247,12 @@ public class MealDetails extends AppCompatActivity implements MealDetailViewInte
                     StringTokenizer st = new StringTokenizer(VideoUrl, "&");
                     VideoUrl = st.nextToken();
                     youTubePlayer.loadVideo(VideoUrl, 0);
+                    youTubePlayer.pause();
                 }
             }
         });
+
+        dialog.dismiss();
 
     }
 
@@ -298,6 +327,7 @@ public class MealDetails extends AppCompatActivity implements MealDetailViewInte
                   }
               }
               setScreenData(selectedSearchMeal);
+
 
     }
 }

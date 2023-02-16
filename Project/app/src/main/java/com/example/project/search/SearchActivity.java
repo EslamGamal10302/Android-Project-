@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.project.Ingredient.view.IngredientActivity;
 import com.example.project.R;
@@ -18,6 +19,8 @@ import com.example.project.home.view.HomeActivity;
 import com.example.project.area.AreasActivity;
 import com.example.project.category.view.CategoryActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class SearchActivity extends AppCompatActivity {
     Button area;
@@ -26,6 +29,9 @@ public class SearchActivity extends AppCompatActivity {
     Button category;
 
     Button allmeals ;
+
+    FirebaseAuth firebaseAuth ;
+    FirebaseUser user;
 
 
     @Override
@@ -36,6 +42,8 @@ public class SearchActivity extends AppCompatActivity {
         ingredient=findViewById(R.id.btn_ingradiant);
         category= findViewById(R.id.btn_gategory);
         allmeals = findViewById(R.id.btn_allmeals);
+        firebaseAuth = FirebaseAuth.getInstance();
+        user = firebaseAuth.getCurrentUser();
         category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,12 +86,25 @@ public class SearchActivity extends AppCompatActivity {
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.favScreen:
-                        startActivity(new Intent(getApplicationContext(),FavActivity.class));
-                        overridePendingTransition(0,0);
+                          if(user!= null){
+                              startActivity(new Intent(getApplicationContext(),FavActivity.class));
+                              overridePendingTransition(0,0);
+                          } else {
+                              Toast.makeText(SearchActivity.this, "you must login to enjoy with this feature", Toast.LENGTH_SHORT).show();
+                              bottomNavigationView.setSelectedItemId(R.id.searchScreen);
+                          }
+
+
                         return true;
                     case R.id.calScreen:
-                        startActivity(new Intent(getApplicationContext(),CalendarActivity.class));
-                        overridePendingTransition(0,0);
+                        if(user!= null){
+                            startActivity(new Intent(getApplicationContext(),CalendarActivity.class));
+                            overridePendingTransition(0,0);
+                        } else {
+                            Toast.makeText(SearchActivity.this, "you must login to enjoy with this feature", Toast.LENGTH_SHORT).show();
+                            bottomNavigationView.setSelectedItemId(R.id.searchScreen);
+                        }
+
                         return true;
                 }
                 return false;

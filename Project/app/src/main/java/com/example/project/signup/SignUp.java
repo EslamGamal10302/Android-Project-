@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.project.Network.NetworkConnection;
 import com.example.project.R;
 import com.example.project.login.LoginScreen;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -49,23 +50,31 @@ public class SignUp extends AppCompatActivity {
         btn_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String userEmail = email.getText().toString().trim();
-                String userPass = password.getText().toString().trim();
-                String userConfPasss = confPassword.getText().toString().trim();
 
-                if(!Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()){
-                    email.setError("Invalid Email");
-                    email.setFocusable(true);
-                } else if (userPass.length()<8) {
-                    password.setError("Invalid Password");
-                    password.setFocusable(true);
-                }else if (!userPass.equals(userConfPasss)){
-                    confPassword.setError("Password Not Match");
-                    confPassword.setFocusable(true);
-                }else {
-                    // calling method
-                    RegsisterUser(userEmail,userPass);
+                if(NetworkConnection.getConnectivity(SignUp.this)) {
+
+                    String userEmail = email.getText().toString().trim();
+                    String userPass = password.getText().toString().trim();
+                    String userConfPasss = confPassword.getText().toString().trim();
+
+                    if (!Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()) {
+                        email.setError("Invalid Email");
+                        email.setFocusable(true);
+                    } else if (userPass.length() < 8) {
+                        password.setError("Invalid Password");
+                        password.setFocusable(true);
+                    } else if (!userPass.equals(userConfPasss)) {
+                        confPassword.setError("Password Not Match");
+                        confPassword.setFocusable(true);
+                    } else {
+                        // calling method
+                        RegsisterUser(userEmail, userPass);
+                    }
+                }  else {
+                    Toast.makeText(SignUp.this, "There is no internet connection " + "\n" +"Please reconnect and try again", Toast.LENGTH_SHORT).show();
                 }
+
+
 
             }
         });

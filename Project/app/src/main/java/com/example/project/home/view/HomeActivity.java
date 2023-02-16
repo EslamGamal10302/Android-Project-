@@ -5,13 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.project.DataBase.DataBaseRepository;
 import com.example.project.GeneralRepositoryModel.GeneralRepository;
@@ -32,6 +35,7 @@ import com.example.project.home.pressenter.HomePressenterInterface;
 import com.example.project.login.LoginScreen;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
@@ -53,6 +57,10 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
     TextView internet_2;
     Button internet_retry;
 
+    //ProgressBar loading;
+
+    ProgressDialog dialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +68,18 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
         setContentView(R.layout.activity_home);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.homeScreen);
+        dialog = new ProgressDialog(this);
+        dialog.setMessage("Loading....");
+      //  loading=new ProgressBar(this);
+     //   loading.setVisibility(View.VISIBLE);
         exit=findViewById(R.id.log_out);
         firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+     /*   if(user !=null){
+            Toast.makeText(this, "Logged in successfully", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Login as a guest was successfully", Toast.LENGTH_SHORT).show();
+        }  */
         internet_image=findViewById(R.id.internet_1);
         internet_1=findViewById(R.id.internet_2);
         internet_2=findViewById(R.id.internet_3);
@@ -87,12 +105,28 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
                     case R.id.homeScreen:
                         return true;
                     case R.id.favScreen:
-                        startActivity(new Intent(getApplicationContext(), FavActivity.class));
-                        overridePendingTransition(0, 0);
+                        if(user != null){
+                            startActivity(new Intent(getApplicationContext(), FavActivity.class));
+                            overridePendingTransition(0, 0);
+                        } else {
+                            Toast.makeText(HomeActivity.this, "you must login to enjoy with this feature", Toast.LENGTH_SHORT).show();
+                            bottomNavigationView.setSelectedItemId(R.id.homeScreen);
+                        }
+
+
                         return true;
                     case R.id.calScreen:
-                        startActivity(new Intent(getApplicationContext(), CalendarActivity.class));
-                        overridePendingTransition(0, 0);
+                        if(user != null){
+                            startActivity(new Intent(getApplicationContext(), CalendarActivity.class));
+                            overridePendingTransition(0, 0);
+                        } else {
+                            Toast.makeText(HomeActivity.this, "you must login to enjoy with this feature", Toast.LENGTH_SHORT).show();
+                            bottomNavigationView.setSelectedItemId(R.id.homeScreen);
+                        }
+                       
+                        
+                        
+                        
                         return true;
                 }
                 return false;
@@ -105,6 +139,7 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
                 firebaseAuth.signOut();
                 startActivity(new Intent(HomeActivity.this, LoginScreen.class));
                 finish();
+                Toast.makeText(HomeActivity.this, "Logged out successful", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -121,12 +156,15 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
 
     private  void checkNetwork(){
         if(NetworkConnection.getConnectivity(this)){
+            dialog.show();
             pressenter = new HomePressenter(GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(this),this), this);
             pressenter.getDailyRandomMeals();
+           // loading.setVisibility(View.GONE);
             internet_image.setVisibility(View.GONE);
             internet_1.setVisibility(View.GONE);
             internet_2.setVisibility(View.GONE);
             internet_retry.setVisibility(View.GONE);
+
 
         }else{
             internet_image.setVisibility(View.VISIBLE);
@@ -140,6 +178,7 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
 
     @Override
     public void showRandomMeals(ArrayList<Meal> randomMeals) {
+        dialog.dismiss();
         homeAdapter.setList(randomMeals);
         homeAdapter.notifyDataSetChanged();
     }

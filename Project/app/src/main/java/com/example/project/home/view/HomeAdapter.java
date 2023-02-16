@@ -19,8 +19,11 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.project.Network.NetworkConnection;
 import com.example.project.R;
 import com.example.project.area.selectedArea.model.Meal;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 import java.util.ArrayList;
@@ -34,12 +37,21 @@ public class HomeAdapter extends  RecyclerView.Adapter<HomeAdapter.HomeViewHolde
     HomeOnClickListner listner ;
 
 
+    FirebaseAuth firebaseAuth;
+
+    FirebaseUser user ;
+
+
 
 
 public HomeAdapter (Context context , HomeOnClickListner listner){
     this.context = context;
     this.listner= listner;
     rnadomMels = new ArrayList<>();
+
+    firebaseAuth = FirebaseAuth.getInstance();
+     user = firebaseAuth.getCurrentUser();
+
 
 }
 
@@ -71,7 +83,12 @@ public void setList(ArrayList<Meal> randomMeals){
         holder.autoCompleteTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               holder.autoCompleteTextView.showDropDown();
+                if(user != null){
+                    holder.autoCompleteTextView.showDropDown();
+                } else  {
+                    Toast.makeText(context, "You need to login to be able to save meals to your week calendar plan", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         holder.autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -128,26 +145,33 @@ public void setList(ArrayList<Meal> randomMeals){
             Boolean clicked = false ;
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                 if(user != null){
+                     if (!clicked){
+                         // holder.addToFavourite.setChecked(false);
+                         clicked = true;
+                         holder.addToFavourite.setBackgroundResource(R.drawable.baseline_favorite_24);
+                         Toast.makeText(context, "meal added to your favourite list", Toast.LENGTH_SHORT).show();
+                         meal.setDay("0");
+                         listner.onAddToFavorite(meal);
 
-                if (!clicked){
-                   // holder.addToFavourite.setChecked(false);
-                    clicked = true;
-                    holder.addToFavourite.setBackgroundResource(R.drawable.baseline_favorite_24);
-                    Toast.makeText(context, "on Click", Toast.LENGTH_SHORT).show();
-                   meal.setDay("0");
-                   listner.onAddToFavorite(meal);
+                     }
+                 } else {
+                     Toast.makeText(context, "You need to login to be able to save meals to your favourit list ", Toast.LENGTH_SHORT).show();
+                 }
 
-                } /*else{
-                   holder.addToFavourite.setBackgroundResource(R.drawable.baseline_favorite_border_24);
-                    Toast.makeText(context, "Removed", Toast.LENGTH_SHORT).show();
-                } */
+
             }
         });
 
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listner.showMealDetails(meal);
+                if(NetworkConnection.getConnectivity(context)) {
+                    listner.showMealDetails(meal);
+                }
+                else  {
+                    Toast.makeText(context, "There is no internet connection " + "\n" +"Please reconnect and try again", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
