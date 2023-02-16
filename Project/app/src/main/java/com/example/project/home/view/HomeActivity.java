@@ -9,11 +9,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.project.DataBase.DataBaseRepository;
 import com.example.project.GeneralRepositoryModel.GeneralRepository;
 import com.example.project.Network.MealClient;
+import com.example.project.Network.NetworkConnection;
 import com.example.project.R;
 import com.example.project.area.selectedArea.model.Meal;
 
@@ -45,6 +48,12 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
 
     FirebaseAuth firebaseAuth;
 
+    ImageView internet_image ;
+    TextView internet_1;
+    TextView internet_2;
+    Button internet_retry;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,16 +62,18 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
         bottomNavigationView.setSelectedItemId(R.id.homeScreen);
         exit=findViewById(R.id.log_out);
         firebaseAuth = FirebaseAuth.getInstance();
-
-
-        pressenter = new HomePressenter(GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(this),this), this);
+        internet_image=findViewById(R.id.internet_1);
+        internet_1=findViewById(R.id.internet_2);
+        internet_2=findViewById(R.id.internet_3);
+        internet_retry=findViewById(R.id.internet_button);
         recyclerView = findViewById(R.id.home_recyclerView);
         layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);
         homeAdapter = new HomeAdapter(this, this);
         recyclerView.setAdapter(homeAdapter);
-        pressenter.getDailyRandomMeals();
+        checkNetwork();
+
 
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -98,7 +109,32 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
             }
         });
 
+        internet_retry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkNetwork();
+            }
+        });
 
+
+    }
+
+    private  void checkNetwork(){
+        if(NetworkConnection.getConnectivity(this)){
+            pressenter = new HomePressenter(GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(this),this), this);
+            pressenter.getDailyRandomMeals();
+            internet_image.setVisibility(View.GONE);
+            internet_1.setVisibility(View.GONE);
+            internet_2.setVisibility(View.GONE);
+            internet_retry.setVisibility(View.GONE);
+
+        }else{
+            internet_image.setVisibility(View.VISIBLE);
+            internet_1.setVisibility(View.VISIBLE);
+            internet_2.setVisibility(View.VISIBLE);
+            internet_retry.setVisibility(View.VISIBLE);
+
+        }
     }
 
 
