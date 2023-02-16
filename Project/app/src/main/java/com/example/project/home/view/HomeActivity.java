@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.example.project.DataBase.DataBaseRepository;
 import com.example.project.GeneralRepositoryModel.GeneralRepository;
@@ -24,7 +26,9 @@ import com.example.project.home.pressenter.HomePressenter;
 import com.example.project.home.pressenter.HomePressenterInterface;
 
 
+import com.example.project.login.LoginScreen;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -37,12 +41,19 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
 
     public static Meal detail;
 
+    ImageView exit;
+
+    FirebaseAuth firebaseAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.homeScreen);
+        exit=findViewById(R.id.log_out);
+        firebaseAuth = FirebaseAuth.getInstance();
+
 
         pressenter = new HomePressenter(GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(this),this), this);
         recyclerView = findViewById(R.id.home_recyclerView);
@@ -74,6 +85,16 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
                         return true;
                 }
                 return false;
+            }
+        });
+
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                firebaseAuth.signOut();
+                startActivity(new Intent(HomeActivity.this, LoginScreen.class));
+                finish();
+
             }
         });
 

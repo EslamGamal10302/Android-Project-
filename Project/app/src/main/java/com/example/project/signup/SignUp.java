@@ -83,6 +83,7 @@ public class SignUp extends AppCompatActivity {
                     Toast.makeText(SignUp.this, "Register Successful ", Toast.LENGTH_SHORT).show();
                     Log.i("milad",""+user.getEmail());
                     startActivity(new Intent(getApplicationContext(), LoginScreen.class));
+                    finish();
                 }else{
                     pd.dismiss();
                     Toast.makeText(SignUp.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
