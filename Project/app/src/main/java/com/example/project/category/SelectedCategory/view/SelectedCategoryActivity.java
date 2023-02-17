@@ -12,11 +12,16 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.project.DataBase.DataBaseRepository;
 import com.example.project.GeneralRepositoryModel.GeneralRepository;
 import com.example.project.Network.MealClient;
+import com.example.project.Network.NetworkConnection;
 import com.example.project.R;
 import com.example.project.area.selectedArea.model.Meal;
 import com.example.project.area.selectedArea.view.SelectedAreaActivity;
@@ -43,24 +48,36 @@ public class SelectedCategoryActivity extends AppCompatActivity implements Selec
     EditText search;
 
     ProgressDialog dialog;
+
+    ImageView internet_image;
+    TextView internet1;
+    TextView internet2;
+    Button internet_retry;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selected_category);
         dialog = new ProgressDialog(this,R.style.MyAlertDialogStyle);
         dialog.setMessage("Loading....");
-        dialog.show();
+
         search = findViewById(R.id.tb_search_category_meals);
+        internet_image = findViewById(R.id.internet_1);
+        internet1 = findViewById(R.id.internet_2);
+        internet2 = findViewById(R.id.internet_3);
+        internet_retry = findViewById(R.id.internet_button);
         Intent recived = getIntent();
         category = recived.getStringExtra("category");
         Log.i("eslam",category);
         rv = findViewById(R.id.recyclerView);
         manger = new LinearLayoutManager(this);
         ad= new SelectedCategoryAdapter( this ,this );
-        presenter = new SelectedCategoryPresenter(this, GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(this),this));
+       // presenter = new SelectedCategoryPresenter(this, GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(this),this));
         rv.setLayoutManager(manger);
         rv.setAdapter(ad);
-        presenter.getSelectedcategoryMeals(category);
+      //  presenter.getSelectedcategoryMeals(category);
+        chcekNetwork();
+
 
         search.addTextChangedListener(new TextWatcher() {
             @Override
@@ -111,6 +128,8 @@ public class SelectedCategoryActivity extends AppCompatActivity implements Selec
     }
 
 
+
+
     @Override
     public void showData(ArrayList<Meal> meals) {
         myApiMeals= meals ;
@@ -142,4 +161,25 @@ public class SelectedCategoryActivity extends AppCompatActivity implements Selec
             ad.notifyDataSetChanged();
         }
     }
+
+    private void chcekNetwork() {
+        if(NetworkConnection.getConnectivity(this)){
+            dialog.show();
+            presenter = new SelectedCategoryPresenter(this, GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(this),this));
+            presenter.getSelectedcategoryMeals(category);
+            internet_image.setVisibility(View.GONE);
+            internet1.setVisibility(View.GONE);
+            internet2.setVisibility(View.GONE);
+            internet_retry.setVisibility(View.GONE);
+        }else{
+            internet_image.setVisibility(View.VISIBLE);
+            internet1.setVisibility(View.VISIBLE);
+            internet2.setVisibility(View.VISIBLE);
+            internet_retry.setVisibility(View.VISIBLE);
+        }
+
+    }
+
+
+
 }
