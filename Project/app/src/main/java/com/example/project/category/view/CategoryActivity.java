@@ -40,7 +40,7 @@ public class CategoryActivity extends AppCompatActivity implements CategoryViewI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
-        dialog = new ProgressDialog(this);
+        dialog = new ProgressDialog(this,R.style.MyAlertDialogStyle);
         dialog.setMessage("Loading....");
         dialog.show();
         myRecycleView = (RecyclerView) findViewById(R.id.recyclerView);

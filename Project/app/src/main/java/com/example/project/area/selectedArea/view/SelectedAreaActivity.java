@@ -50,7 +50,7 @@ public class SelectedAreaActivity extends AppCompatActivity implements SelectedA
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selected_area);
-        dialog = new ProgressDialog(this);
+        dialog = new ProgressDialog(this,R.style.MyAlertDialogStyle);
         dialog.setMessage("Loading....");
         dialog.show();
         Intent recived = getIntent();

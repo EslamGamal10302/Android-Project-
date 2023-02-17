@@ -90,7 +90,7 @@ public class MealDetails extends AppCompatActivity implements MealDetailViewInte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meal_details);
-        dialog = new ProgressDialog(this);
+        dialog = new ProgressDialog(this,R.style.MyAlertDialogStyle);
         dialog.setMessage("Loading....");
         dialog.show();
         firebaseAuth = FirebaseAuth.getInstance();

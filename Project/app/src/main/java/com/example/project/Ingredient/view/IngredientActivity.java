@@ -40,7 +40,7 @@ public class IngredientActivity extends AppCompatActivity implements IngredientV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ingredient);
-        dialog = new ProgressDialog(this);
+        dialog = new ProgressDialog(this,R.style.MyAlertDialogStyle);
         dialog.setMessage("Loading....");
         dialog.show();
         myRecycleView = (RecyclerView) findViewById(R.id.recyclerView);

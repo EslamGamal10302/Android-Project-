@@ -106,7 +106,7 @@ public class LoginScreen extends AppCompatActivity {
         });
 
 
-    dialog = new ProgressDialog(this);
+    dialog = new ProgressDialog(this,R.style.MyAlertDialogStyle);
 
 
     guest.setOnClickListener(new View.OnClickListener() {

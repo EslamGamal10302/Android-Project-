@@ -5,9 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
+import android.view.ContextThemeWrapper;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -68,7 +72,7 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
         setContentView(R.layout.activity_home);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.homeScreen);
-        dialog = new ProgressDialog(this);
+        dialog = new ProgressDialog(this,R.style.MyAlertDialogStyle);
         dialog.setMessage("Loading....");
       //  loading=new ProgressBar(this);
      //   loading.setVisibility(View.VISIBLE);
@@ -136,11 +140,8 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                firebaseAuth.signOut();
-                startActivity(new Intent(HomeActivity.this, LoginScreen.class));
-                finish();
-                Toast.makeText(HomeActivity.this, "Logged out successful", Toast.LENGTH_SHORT).show();
 
+                      exitAlertDialog();
             }
         });
 
@@ -153,6 +154,42 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
 
 
     }
+
+    private void exitAlertDialog(){
+
+        String yes = "YES,I'M SURE";
+        String no =  "NO,GO BACK";
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you want to logout ?");
+        builder.setTitle("Logging out");
+        builder.setCancelable(false);
+        builder.setPositiveButton(Html.fromHtml("<font color='#FFBF00'>"+yes+"</font>"), (DialogInterface.OnClickListener) (dialog, which) -> {
+            firebaseAuth.signOut();
+            startActivity(new Intent(HomeActivity.this, LoginScreen.class));
+            finish();
+            Toast.makeText(HomeActivity.this, "Logged out successful", Toast.LENGTH_SHORT).show();
+
+
+        });
+        builder.setNegativeButton(Html.fromHtml("<font color='#FFBF00'>"+no+"</font>"), (DialogInterface.OnClickListener) (dialog, which) -> {
+
+            dialog.cancel();
+        });
+
+        AlertDialog alertDialog = builder.create();
+
+        alertDialog.show();
+    }
+
+
+
+
+
+
+
+
+
+
 
     private  void checkNetwork(){
         if(NetworkConnection.getConnectivity(this)){

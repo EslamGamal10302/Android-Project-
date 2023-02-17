@@ -45,7 +45,7 @@ ArrayList<Meal> myApiMeals;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selected_ingredient);
-        dialog = new ProgressDialog(this);
+        dialog = new ProgressDialog(this,R.style.MyAlertDialogStyle);
         dialog.setMessage("Loading....");
         dialog.show();
         search = findViewById(R.id.tb_search_ingrediant_meals);

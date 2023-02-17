@@ -43,7 +43,7 @@ public class SignUp extends AppCompatActivity {
         email =findViewById(R.id.tb_email);
         password = findViewById(R.id.tb_password);
         confPassword = findViewById(R.id.tb_confirm_password);
-        pd = new ProgressDialog(this);
+        pd = new ProgressDialog(this,R.style.MyAlertDialogStyle);
         auth = FirebaseAuth.getInstance();
         pd.setMessage("Registering User ...");
 
