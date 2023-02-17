@@ -18,6 +18,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.project.Network.NetworkConnection;
 import com.example.project.R;
 import com.example.project.area.selectedArea.model.Meal;
 import com.google.firebase.auth.FirebaseAuth;
@@ -147,7 +148,11 @@ public class SelectedCategoryAdapter extends RecyclerView.Adapter<SelectedCatego
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listner.ShowMealDetails(meal);
+                if(NetworkConnection.getConnectivity(context)) {
+                    listner.ShowMealDetails(meal);
+                }else {
+                    Toast.makeText(context, "There is no internet connection " + "\n" +"Please reconnect and try again", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

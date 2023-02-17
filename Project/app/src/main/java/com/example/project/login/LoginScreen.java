@@ -149,10 +149,6 @@ public class LoginScreen extends AppCompatActivity {
 
 
 
-
-
-
-
     }
 
     private void showRecoveryPasswordDialog() {

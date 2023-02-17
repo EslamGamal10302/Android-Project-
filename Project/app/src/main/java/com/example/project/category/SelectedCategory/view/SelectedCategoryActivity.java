@@ -76,7 +76,15 @@ public class SelectedCategoryActivity extends AppCompatActivity implements Selec
         rv.setLayoutManager(manger);
         rv.setAdapter(ad);
       //  presenter.getSelectedcategoryMeals(category);
-        chcekNetwork();
+        checkNetwork();
+
+        internet_retry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkNetwork();
+            }
+        });
+
 
 
         search.addTextChangedListener(new TextWatcher() {
@@ -162,7 +170,7 @@ public class SelectedCategoryActivity extends AppCompatActivity implements Selec
         }
     }
 
-    private void chcekNetwork() {
+    private void  checkNetwork() {
         if(NetworkConnection.getConnectivity(this)){
             dialog.show();
             presenter = new SelectedCategoryPresenter(this, GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(this),this));

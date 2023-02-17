@@ -80,7 +80,14 @@ public class SelectedAreaActivity extends AppCompatActivity implements SelectedA
         rv.setLayoutManager(manger);
         rv.setAdapter(ad);
      //   presenter.getSelectedAreaMeals(nationality);
-        cehckNetwork ();
+        checkNetwork ();
+
+        internet_retray.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkNetwork();
+            }
+        });
 
 
         search.addTextChangedListener(new TextWatcher() {
@@ -164,7 +171,7 @@ public class SelectedAreaActivity extends AppCompatActivity implements SelectedA
         }
 
 
-    private void cehckNetwork (){
+    private void checkNetwork (){
         if(NetworkConnection.getConnectivity(this)){
             dialog.show();
             presenter = new SelectedAreaPresenter(this, GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(this),this));

@@ -10,11 +10,16 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.project.DataBase.DataBaseRepository;
 import com.example.project.GeneralRepositoryModel.GeneralRepository;
 import com.example.project.Network.MealClient;
+import com.example.project.Network.NetworkConnection;
 import com.example.project.R;
 import com.example.project.allMeals.pressenter.allMealPressenterInterface;
 import com.example.project.allMeals.pressenter.allMealsPressenter;
@@ -36,6 +41,11 @@ public class AllMealsActivity extends AppCompatActivity implements AllMealsViewI
 
     EditText search;
 
+    ImageView internet_img ;
+    TextView internet_1 ;
+    TextView internet_2;
+    Button internet_retray ;
+
 
 
 
@@ -45,6 +55,10 @@ public class AllMealsActivity extends AppCompatActivity implements AllMealsViewI
         setContentView(R.layout.activity_all_meals);
         search = findViewById(R.id.pt_searchForAllMeals);
         allRecyclerView = findViewById(R.id.allmeals_recyclerView);
+        internet_img = findViewById(R.id.internet_1);
+        internet_1 = findViewById(R.id.internet_2);
+        internet_2 = findViewById(R.id.internet_3);
+        internet_retray = findViewById(R.id.internet_button);
         layoutManager=new LinearLayoutManager(this);
         pressenter = new allMealsPressenter(GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(this),this),this);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
@@ -52,7 +66,15 @@ public class AllMealsActivity extends AppCompatActivity implements AllMealsViewI
         allMealAdapter = new AllMealAdapter(this , this);
         allRecyclerView.setAdapter(allMealAdapter);
        // pressenter.getAllMeals("s");
+        checkNetwork();
 
+
+        internet_retray.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkNetwork();
+            }
+        });
 
         search.addTextChangedListener(new TextWatcher() {
             @Override
@@ -82,6 +104,8 @@ public class AllMealsActivity extends AppCompatActivity implements AllMealsViewI
 
     }
 
+
+
     @Override
     public void showAllMeals(ArrayList<Meal> allMeals) {
         if(allMeals.isEmpty()){
@@ -105,5 +129,20 @@ public class AllMealsActivity extends AppCompatActivity implements AllMealsViewI
         Intent intent = new Intent(AllMealsActivity.this, MealDetails.class);
         intent.putExtra("name",mealName);
         startActivity(intent);
+    }
+
+    private void checkNetwork() {
+      if(NetworkConnection.getConnectivity(this)){
+          internet_img.setVisibility(View.GONE);
+          internet_1.setVisibility(View.GONE);
+          internet_2.setVisibility(View.GONE);
+          internet_retray.setVisibility(View.GONE);
+      }else{
+          internet_img.setVisibility(View.VISIBLE);
+          internet_1.setVisibility(View.VISIBLE);
+          internet_2.setVisibility(View.VISIBLE);
+          internet_retray.setVisibility(View.VISIBLE);
+      }
+
     }
 }

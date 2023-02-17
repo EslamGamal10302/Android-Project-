@@ -68,6 +68,13 @@ public class IngredientActivity extends AppCompatActivity implements IngredientV
        // presnter.getAllIngredient();
         checkNetwork();
 
+        internet_retray.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkNetwork();
+            }
+        });
+
 
 
 

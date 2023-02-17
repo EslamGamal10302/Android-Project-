@@ -77,7 +77,15 @@ ArrayList<Meal> myApiMeals;
         rv.setLayoutManager(manger);
         rv.setAdapter(ad);
       //  presenter.getSelectedIngredientMeals(ingredient);
-        chckNetwork();
+        checkNetwork();
+
+
+        internet_retray.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkNetwork();
+            }
+        });
 
 
         search.addTextChangedListener(new TextWatcher() {
@@ -159,7 +167,7 @@ ArrayList<Meal> myApiMeals;
         }
     }
 
-    private void chckNetwork() {
+    private void checkNetwork() {
         if(NetworkConnection.getConnectivity(this)) {
             dialog.show();
             presenter = new SelectedIngredientPresenter(this, GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(this), this));
