@@ -12,13 +12,18 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.project.DataBase.DataBaseRepository;
 import com.example.project.GeneralRepositoryModel.GeneralRepository;
 import com.example.project.Ingredient.SelectedIngredient.view.presenter.SelectedIngredientInterface;
 import com.example.project.Ingredient.SelectedIngredient.view.presenter.SelectedIngredientPresenter;
 import com.example.project.Network.MealClient;
+import com.example.project.Network.NetworkConnection;
 import com.example.project.R;
 import com.example.project.area.selectedArea.model.Meal;
 import com.example.project.calender.view.CalendarActivity;
@@ -39,15 +44,28 @@ public class SelectedIngredientActivity extends AppCompatActivity implements Sel
     RecyclerView.LayoutManager manger;
     EditText search ;
     ProgressDialog dialog;
-
 ArrayList<Meal> myApiMeals;
+
+    ImageView internet_image ;
+    TextView internet1 ;
+    TextView internet2;
+    Button internet_retray;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selected_ingredient);
         dialog = new ProgressDialog(this);
         dialog.setMessage("Loading....");
-        dialog.show();
+
+        internet_image = findViewById(R.id.internet_1);
+        internet1 = findViewById(R.id.internet_2);
+        internet2 = findViewById(R.id.internet_3);
+        internet_retray = findViewById(R.id.internet_button);
+
+
+
+
         search = findViewById(R.id.tb_search_ingrediant_meals);
         Intent recived = getIntent();
         ingredient = recived.getStringExtra("ingredient");
@@ -55,10 +73,11 @@ ArrayList<Meal> myApiMeals;
         rv = findViewById(R.id.recyclerView);
         manger = new LinearLayoutManager(this);
         ad= new SelectedIngredientAdapter(this , this);
-        presenter = new SelectedIngredientPresenter(this, GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(this),this));
+       // presenter = new SelectedIngredientPresenter(this, GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(this),this));
         rv.setLayoutManager(manger);
         rv.setAdapter(ad);
-        presenter.getSelectedIngredientMeals(ingredient);
+      //  presenter.getSelectedIngredientMeals(ingredient);
+        chckNetwork();
 
 
         search.addTextChangedListener(new TextWatcher() {
@@ -107,6 +126,7 @@ ArrayList<Meal> myApiMeals;
         });
     }
 
+
     @Override
     public void showData(ArrayList<Meal> meals) {
         myApiMeals = meals;
@@ -138,4 +158,26 @@ ArrayList<Meal> myApiMeals;
             ad.notifyDataSetChanged();
         }
     }
+
+    private void chckNetwork() {
+        if(NetworkConnection.getConnectivity(this)) {
+            dialog.show();
+            presenter = new SelectedIngredientPresenter(this, GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(this), this));
+            presenter.getSelectedIngredientMeals(ingredient);
+            internet_image.setVisibility(View.GONE);
+            internet1.setVisibility(View.GONE);
+            internet2.setVisibility(View.GONE);
+            internet_retray.setVisibility(View.GONE);
+        }else{
+            internet_image.setVisibility(View.VISIBLE);
+            internet1.setVisibility(View.VISIBLE);
+            internet2.setVisibility(View.VISIBLE);
+            internet_retray.setVisibility(View.VISIBLE);
+        }
+
+    }
+
+
+
+
 }

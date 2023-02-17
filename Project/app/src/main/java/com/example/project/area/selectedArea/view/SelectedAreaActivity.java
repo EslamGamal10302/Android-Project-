@@ -12,12 +12,17 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.project.DataBase.DataBaseRepository;
 import com.example.project.GeneralRepositoryModel.GeneralRepository;
 import com.example.project.Network.MealClient;
+import com.example.project.Network.NetworkConnection;
 import com.example.project.R;
 import com.example.project.area.selectedArea.model.Meal;
 import com.example.project.area.selectedArea.presenter.SelectedAreaInrerface;
@@ -46,24 +51,36 @@ public class SelectedAreaActivity extends AppCompatActivity implements SelectedA
 
     ProgressDialog dialog;
 
+    ImageView internet_img ;
+    TextView internet_1 ;
+    TextView internet_2;
+    Button internet_retray ;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selected_area);
         dialog = new ProgressDialog(this);
         dialog.setMessage("Loading....");
-        dialog.show();
+
         Intent recived = getIntent();
         search = findViewById(R.id.tb_search_area_meals);
         nationality=recived.getStringExtra("area");
+        internet_img = findViewById(R.id.internet_1);
+        internet_1 = findViewById(R.id.internet_2);
+        internet_2 = findViewById(R.id.internet_3);
+        internet_retray = findViewById(R.id.internet_button);
         Log.i("eslam",nationality);
         rv = findViewById(R.id.recyclerView);
         manger = new LinearLayoutManager(this);
         ad= new SelectedAreaAdapter( this , this );
-        presenter = new SelectedAreaPresenter(this, GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(this),this));
+       // presenter = new SelectedAreaPresenter(this, GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(this),this));
         rv.setLayoutManager(manger);
         rv.setAdapter(ad);
-        presenter.getSelectedAreaMeals(nationality);
+     //   presenter.getSelectedAreaMeals(nationality);
+        cehckNetwork ();
 
 
         search.addTextChangedListener(new TextWatcher() {
@@ -145,6 +162,24 @@ public class SelectedAreaActivity extends AppCompatActivity implements SelectedA
             ad.notifyDataSetChanged();
         }
         }
+
+
+    private void cehckNetwork (){
+        if(NetworkConnection.getConnectivity(this)){
+            dialog.show();
+            presenter = new SelectedAreaPresenter(this, GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(this),this));
+            presenter.getSelectedAreaMeals(nationality);
+            internet_img.setVisibility(View.GONE);
+            internet_1.setVisibility(View.GONE);
+            internet_2.setVisibility(View.GONE);
+            internet_retray.setVisibility(View.GONE);
+        }else{
+            internet_img.setVisibility(View.VISIBLE);
+            internet_1.setVisibility(View.VISIBLE);
+            internet_2.setVisibility(View.VISIBLE);
+            internet_retray.setVisibility(View.VISIBLE);
+        }
+    }
 
 
 }
