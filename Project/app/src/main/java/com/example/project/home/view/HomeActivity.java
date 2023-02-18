@@ -208,6 +208,7 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
         builder.setTitle("Logging out");
         builder.setCancelable(false);
         builder.setPositiveButton(Html.fromHtml("<font color='#FFBF00'>"+yes+"</font>"), (DialogInterface.OnClickListener) (dialog, which) -> {
+            pressenter.deleteAllMeals();
             firebaseAuth.signOut();
             startActivity(new Intent(HomeActivity.this, LoginScreen.class));
             finish();

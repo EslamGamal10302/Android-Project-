@@ -34,6 +34,11 @@ public class HomePressenter implements HomePressenterInterface , AreaNetworkDele
     }
 
     @Override
+    public void deleteAllMeals() {
+        genral.deleteAllMeals();
+    }
+
+    @Override
     public void onSuccessResponse(ArrayList<Meal> response) {
         view.showRandomMeals(response);
     }

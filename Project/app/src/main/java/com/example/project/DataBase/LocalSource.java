@@ -10,6 +10,7 @@ public interface LocalSource {
     public Observable<List<Meal>> getStoredmeals();
     public void delete(Meal meal);
     public void insert(Meal meal);
+    public void deleteAllMeals();
     public Observable<List<Meal>> getSutrdaydmeals();
     public Observable<List<Meal>> getSundaydmeals();
     public Observable<List<Meal>> getMondaymeals();

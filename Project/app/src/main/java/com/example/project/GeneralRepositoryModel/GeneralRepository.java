@@ -96,6 +96,11 @@ public class GeneralRepository implements GeneralRepositoryInterface{
     }
 
     @Override
+    public void deleteAllMeals() {
+        LS.deleteAllMeals();
+    }
+
+    @Override
     public Observable<List<Meal>> getSutrdaydmeals() {
         return  LS.getSutrdaydmeals();
     }

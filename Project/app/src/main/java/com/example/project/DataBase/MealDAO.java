@@ -17,6 +17,9 @@ import io.reactivex.Observable;
 public interface MealDAO {
     @Query("SELECT * FROM meals WHERE DAY LIKE '0'")
     Observable<List<Meal>> getAllmeals();
+    @Query("DELETE FROM meals")
+    Completable deleteAllMeals();
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     Completable insertMeal (Meal meal);
     @Delete

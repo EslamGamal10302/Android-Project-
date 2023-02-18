@@ -76,8 +76,8 @@ public class FirebaseDataBase {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren() ){
                     Meal meal = dataSnapshot.getValue(Meal.class);
-                 //  GeneralRepository repo =  GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(context),context);
-                  // repo.insert(meal);
+                   GeneralRepository repo =  GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(context),context);
+                   repo.insert(meal);
                 Log.i("finaaaaaaaal",meal.getStrMeal()+""+meal.getIdMeal());
                 }
             }

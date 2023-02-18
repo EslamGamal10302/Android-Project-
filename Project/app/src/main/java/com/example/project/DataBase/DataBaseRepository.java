@@ -79,6 +79,26 @@ public class DataBaseRepository implements LocalSource {
     }
 
     @Override
+    public void deleteAllMeals() {
+        mealDAO.deleteAllMeals().subscribeOn(Schedulers.computation()).subscribe(new CompletableObserver() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+        });
+    }
+
+    @Override
     public Observable<List<Meal>> getSutrdaydmeals() {
         return mealDAO.getSaturdaymeals();
     }

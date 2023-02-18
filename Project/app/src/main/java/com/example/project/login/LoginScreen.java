@@ -22,6 +22,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.project.Network.FirebaseDataBase;
 import com.example.project.Network.NetworkConnection;
 import com.example.project.R;
 import com.example.project.home.view.HomeActivity;
@@ -216,6 +217,14 @@ public class LoginScreen extends AppCompatActivity {
                                    startActivity(new Intent(LoginScreen.this,HomeActivity.class));
                                    finish();
                             Toast.makeText(LoginScreen.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
+                            FirebaseDataBase.getFavouriteFromFirebase(LoginScreen.this,user);
+                            FirebaseDataBase.getPlanFromFireBase(LoginScreen.this,user,"1");
+                            FirebaseDataBase.getPlanFromFireBase(LoginScreen.this,user,"2");
+                            FirebaseDataBase.getPlanFromFireBase(LoginScreen.this,user,"3");
+                            FirebaseDataBase.getPlanFromFireBase(LoginScreen.this,user,"4");
+                            FirebaseDataBase.getPlanFromFireBase(LoginScreen.this,user,"5");
+                            FirebaseDataBase.getPlanFromFireBase(LoginScreen.this,user,"6");
+                            FirebaseDataBase.getPlanFromFireBase(LoginScreen.this,user,"7");
                         }else {
                                   dialog.dismiss();
                             Toast.makeText(LoginScreen.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
