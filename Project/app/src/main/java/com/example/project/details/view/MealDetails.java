@@ -115,14 +115,6 @@ public class MealDetails extends AppCompatActivity implements MealDetailViewInte
         presenter.getSelectedMealDetails(MealName);
 
 
-
-
-
-
-
-
-
-
         addToFavourite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             Boolean clicked = false ;
             @Override

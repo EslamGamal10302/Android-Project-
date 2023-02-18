@@ -26,8 +26,6 @@ public class MealDetailAdapter extends  RecyclerView.Adapter<MealDetailAdapter.M
 
     private  String url_part2=".png";
 
-
-
     public MealDetailAdapter(Context context) {
         this.context = context;
         ingredients = new ArrayList<>();
@@ -50,8 +48,8 @@ public class MealDetailAdapter extends  RecyclerView.Adapter<MealDetailAdapter.M
     public void onBindViewHolder(@NonNull MealViewHolder holder, int position) {
           MealIngredients ing  = ingredients.get(position);
           holder.ingredientName.setText(ing.getStrIngredient());
-        Glide.with(context).load(url_part1+ing.getStrIngredient()+url_part2).into(holder.ingredientImage);
-        holder.measure.setText(ing.getStrMeasure());
+          Glide.with(context).load(url_part1+ing.getStrIngredient()+url_part2).into(holder.ingredientImage);
+          holder.measure.setText(ing.getStrMeasure());
     }
 
     @Override
