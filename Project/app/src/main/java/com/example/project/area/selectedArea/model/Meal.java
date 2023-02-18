@@ -21,9 +21,17 @@ public class Meal {
 
     @ColumnInfo(name = "AREA")
     private String strArea;
+
+    public Meal(@NonNull String strMeal) {
+        this.strMeal = strMeal;
+    }
+
     @ColumnInfo(name = "DAY")
     @NonNull
     private  String day;
+
+    public Meal() {
+    }
 
     public String getDay() {
         return day;
@@ -543,10 +551,7 @@ public class Meal {
         return strIngredient;
     }
 
-    public Meal(@NonNull String strMeal, @NonNull String day) {
-        this.strMeal = strMeal;
-        this.day = day;
-    }
+
 
     public void setStrIngredient(String strIngredient) {
         this.strIngredient = strIngredient;

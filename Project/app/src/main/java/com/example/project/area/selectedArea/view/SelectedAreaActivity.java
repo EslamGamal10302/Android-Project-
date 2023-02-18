@@ -25,6 +25,7 @@ import com.example.project.Network.MealClient;
 import com.example.project.Network.NetworkConnection;
 import com.example.project.R;
 import com.example.project.area.selectedArea.model.Meal;
+import com.example.project.area.selectedArea.model.SelectedResponse;
 import com.example.project.area.selectedArea.presenter.SelectedAreaInrerface;
 import com.example.project.area.selectedArea.presenter.SelectedAreaPresenter;
 import com.example.project.calender.view.CalendarActivity;
@@ -142,6 +143,13 @@ public class SelectedAreaActivity extends AppCompatActivity implements SelectedA
         this.myApiMeals = meals;
        ad.setList(meals);
        ad.notifyDataSetChanged();
+
+        Log.i("converted",SelectedResponse.convertListToHashMap(meals).get(0).get("strMeal"));
+        Log.i("converted",SelectedResponse.convertListToHashMap(meals).get(1).get("strMeal"));
+        Log.i("converted",SelectedResponse.convertListToHashMap(meals).get(2).get("strMeal"));
+        Log.i("converted",SelectedResponse.convertListToHashMap(meals).get(3).get("strMeal"));
+        Log.i("converted",SelectedResponse.convertListToHashMap(meals).get(4).get("strMeal"));
+
        dialog.dismiss();
     }
 
