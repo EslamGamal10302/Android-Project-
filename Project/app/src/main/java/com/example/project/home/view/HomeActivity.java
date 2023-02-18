@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,11 +23,13 @@ import android.widget.Toast;
 
 import com.example.project.DataBase.DataBaseRepository;
 import com.example.project.GeneralRepositoryModel.GeneralRepository;
+import com.example.project.Network.FirebaseDataBase;
 import com.example.project.Network.MealClient;
 import com.example.project.Network.NetworkConnection;
 import com.example.project.R;
 import com.example.project.area.selectedArea.model.Meal;
 
+import com.example.project.area.selectedArea.model.SelectedResponse;
 import com.example.project.calender.view.CalendarActivity;
 import com.example.project.details.view.MealDetails;
 import com.example.project.favourite.view.FavActivity;
@@ -37,11 +40,25 @@ import com.example.project.home.pressenter.HomePressenterInterface;
 
 
 import com.example.project.login.LoginScreen;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class HomeActivity extends AppCompatActivity implements  HomeViewInterface , HomeOnClickListner{
     RecyclerView recyclerView;
@@ -65,11 +82,20 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
 
     ProgressDialog dialog;
 
+    TextView test;
+
+
+    ImageView resultTest;
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        test = findViewById(R.id.textView6);
+        resultTest=findViewById(R.id.imageView2);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.homeScreen);
         dialog = new ProgressDialog(this,R.style.MyAlertDialogStyle);
@@ -153,6 +179,24 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
         });
 
 
+    test.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Meal eslam = new Meal("eslam");
+            eslam.setDay("0");
+            FirebaseDataBase.getFavouriteFromFirebase(HomeActivity.this,user);
+
+        }
+    });
+
+
+            resultTest.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+
     }
 
     private void exitAlertDialog(){
@@ -234,6 +278,9 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
         startActivity(intent);
 
     }
+
+
+
 }
 
 
