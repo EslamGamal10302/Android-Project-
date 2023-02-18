@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -84,6 +85,8 @@ public class MealDetails extends AppCompatActivity implements MealDetailViewInte
     FirebaseUser user ;
 
     ProgressDialog dialog;
+
+
 
 
     @Override
@@ -207,7 +210,19 @@ public class MealDetails extends AppCompatActivity implements MealDetailViewInte
         });
 
 
-
+    mealImage.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+           // selectedSearchMeal
+            Intent intent = new Intent(Intent.ACTION_INSERT);
+            intent.setData(CalendarContract.Events.CONTENT_URI);
+            intent.putExtra(CalendarContract.Events.TITLE,selectedSearchMeal.getStrMeal());
+            intent.putExtra(CalendarContract.Events.EVENT_LOCATION,selectedSearchMeal.getStrArea());
+            intent.putExtra(CalendarContract.Events.DESCRIPTION,selectedSearchMeal.getStrInstructions());
+            intent.putExtra(CalendarContract.Events.ALL_DAY,true);
+            startActivity(intent);
+        }
+    });
 
 
     }
