@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.project.Network.FirebaseDataBase;
 import com.example.project.R;
 import com.example.project.area.selectedArea.model.Meal;
 import com.example.project.calender.Calendar;
@@ -79,6 +80,7 @@ CalenderOnClickListner listner;
                 builder.setCancelable(false);
                 builder.setPositiveButton(Html.fromHtml("<font color='#FFBF00'>"+yes+"</font>"), (DialogInterface.OnClickListener) (dialog, which) -> {
                     listner.OnClick(meal);
+                    FirebaseDataBase.removePlanFromFireBase(context,meal);
                     if ((meals.size()-1)==0){
                         day.setVisibility(View.GONE);
                         rv.setVisibility(View.GONE);

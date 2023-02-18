@@ -76,9 +76,9 @@ public class FirebaseDataBase {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren() ){
                     Meal meal = dataSnapshot.getValue(Meal.class);
-                //    GeneralRepository repo=  GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(context),context);
-                 //   repo.insert(meal);
-                 Log.i("finaaaaaaaal",meal.getStrMeal()+""+meal.getIdMeal());
+                 //  GeneralRepository repo =  GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(context),context);
+                  // repo.insert(meal);
+                Log.i("finaaaaaaaal",meal.getStrMeal()+""+meal.getIdMeal());
                 }
             }
             @Override
@@ -86,6 +86,76 @@ public class FirebaseDataBase {
                 Log.i("test",error.getMessage());
             }
         });
+    }
+
+
+    public static void getPlanFromFireBase(Context context, FirebaseUser user , String day ) {
+        DatabaseReference rootPlan = FirebaseDatabase.getInstance().getReference().child("Food Planner's Users").child(user.getUid()).child("Plan").child(day);
+        rootPlan.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren() ) {
+                    Meal meal = dataSnapshot.getValue(Meal.class);
+                    GeneralRepository repo =  GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(context),context);
+                   repo.insert(meal);
+                    Log.i("finaaaaaaaal",meal.getStrMeal()+""+meal.getIdMeal());
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.i("test",error.getMessage());
+            }
+        });
+
+    }
+
+
+    public static void removeFavouriteFromFirebase(Context context, Meal myMeal) {
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        if (firebaseAuth.getCurrentUser()==null){
+            Toast.makeText(context, "you\re not logged in", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Food Planner's Users");
+            ref.child(firebaseAuth.getUid()).child("Favorites").child(myMeal.getStrMeal()).removeValue()
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(context, "removed from your favList", Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(context, "failed to remove from your favList", Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+
+        }
+    }
+
+    public static void removePlanFromFireBase(Context context, Meal myMeal) {
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        if (firebaseAuth.getCurrentUser()==null){
+            Toast.makeText(context, "you\re not logged in", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Food Planner's Users");
+            ref.child(firebaseAuth.getUid()).child("Plan").child(myMeal.getDay()).child(myMeal.getStrMeal()).removeValue()
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+
+                        }
+                    });
+
+        }
     }
 
 

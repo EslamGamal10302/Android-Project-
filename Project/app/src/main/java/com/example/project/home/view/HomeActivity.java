@@ -40,6 +40,7 @@ import com.example.project.home.pressenter.HomePressenterInterface;
 
 
 import com.example.project.login.LoginScreen;
+import com.example.project.welcome.MainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -182,9 +183,8 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
     test.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Meal eslam = new Meal("eslam");
-            eslam.setDay("0");
             FirebaseDataBase.getFavouriteFromFirebase(HomeActivity.this,user);
+            FirebaseDataBase.getPlanFromFireBase(HomeActivity.this,user,"1");
 
         }
     });

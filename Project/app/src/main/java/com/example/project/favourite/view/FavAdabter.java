@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.project.Network.FirebaseDataBase;
 import com.example.project.R;
 import com.example.project.area.selectedArea.model.Meal;
 import com.example.project.home.view.HomeActivity;
@@ -72,6 +73,7 @@ public class FavAdabter  extends  RecyclerView.Adapter<FavAdabter.FavViewHolder>
                builder.setPositiveButton(Html.fromHtml("<font color='#FFBF00'>"+yes+"</font>"), (DialogInterface.OnClickListener) (dialog, which) -> {
 
                    listner.onClick(myMeal);
+                   FirebaseDataBase.removeFavouriteFromFirebase(context,myMeal);
 
                });
                builder.setNegativeButton(Html.fromHtml("<font color='#FFBF00'>"+no+"</font>"), (DialogInterface.OnClickListener) (dialog, which) -> {
