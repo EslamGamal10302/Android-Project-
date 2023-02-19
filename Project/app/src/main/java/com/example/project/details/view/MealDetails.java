@@ -252,8 +252,15 @@ public class MealDetails extends AppCompatActivity implements MealDetailViewInte
 
         }
        // steps.setText(response.getStrInstructions());
-       VideoUrl = meal.getStrYoutube();
-      // VideoUrl = "https://www.youtube.com/watch?v=omnQWLBe6tg";
+
+      //idMeal : "52953"
+      if(meal.getIdMeal().equalsIgnoreCase("52953")) {
+          VideoUrl = "https://www.youtube.com/watch?v=omnQWLBe6tg";
+      } else {
+          VideoUrl = meal.getStrYoutube();
+      }
+
+
 
 
 
@@ -265,7 +272,7 @@ public class MealDetails extends AppCompatActivity implements MealDetailViewInte
             @Override
             public void onReady(@NonNull YouTubePlayer youTubePlayer) {
                 super.onReady(youTubePlayer);
-                if(VideoUrl !=null && !VideoUrl.isEmpty() && VideoUrl.equalsIgnoreCase("")){
+                if(VideoUrl !=null && !VideoUrl.isEmpty() && !VideoUrl.equalsIgnoreCase("")){
                     VideoUrl = VideoUrl.substring(VideoUrl.indexOf("=") + 1);
                     StringTokenizer st = new StringTokenizer(VideoUrl, "&");
                     VideoUrl = st.nextToken();
