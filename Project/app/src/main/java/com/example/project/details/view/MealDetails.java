@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -39,6 +40,8 @@ import java.util.StringTokenizer;
 
 public class MealDetails extends AppCompatActivity implements MealDetailViewInterface {
     ImageView mealImage;
+
+    ImageView calendar;
     TextView mealName;
     TextView mealContry;
 
@@ -86,6 +89,8 @@ public class MealDetails extends AppCompatActivity implements MealDetailViewInte
     ProgressDialog dialog;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,6 +101,7 @@ public class MealDetails extends AppCompatActivity implements MealDetailViewInte
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
         mealImage = findViewById(R.id.img_details_meal);
+        calendar = findViewById(R.id.calendar);
         mealName = findViewById(R.id.mealname);
         mealContry =findViewById(R.id.mealContry);
         mealCategory=findViewById(R.id.meal_category);
@@ -208,6 +214,23 @@ public class MealDetails extends AppCompatActivity implements MealDetailViewInte
 
 
 
+    calendar.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if(user!=null){
+                Intent intent = new Intent(Intent.ACTION_INSERT);
+                intent.setData(CalendarContract.Events.CONTENT_URI);
+                intent.putExtra(CalendarContract.Events.TITLE,selectedSearchMeal.getStrMeal());
+                intent.putExtra(CalendarContract.Events.EVENT_LOCATION,selectedSearchMeal.getStrArea());
+                intent.putExtra(CalendarContract.Events.DESCRIPTION,selectedSearchMeal.getStrInstructions());
+                intent.putExtra(CalendarContract.Events.ALL_DAY,true);
+                startActivity(intent);
+            } else {
+                Toast.makeText(MealDetails.this, "You need to login to be able to save meals to your Google calendar plan", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+    });
 
 
     }
