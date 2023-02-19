@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -80,6 +81,7 @@ CalenderOnClickListner listner;
                 builder.setCancelable(false);
                 builder.setPositiveButton(Html.fromHtml("<font color='#FFBF00'>"+yes+"</font>"), (DialogInterface.OnClickListener) (dialog, which) -> {
                     listner.OnClick(meal);
+                    Toast.makeText(context, "Removed from your plan list", Toast.LENGTH_SHORT).show();
                     FirebaseDataBase.removePlanFromFireBase(context,meal);
                     if ((meals.size()-1)==0){
                         day.setVisibility(View.GONE);

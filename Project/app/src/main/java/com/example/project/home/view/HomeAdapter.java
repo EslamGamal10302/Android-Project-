@@ -107,7 +107,7 @@ public void setList(ArrayList<Meal> randomMeals){
                         meal.setDay("2");
                         listner.onAddToFavorite(meal);
                         FirebaseDataBase.addPlanToFirebase(context,meal);
-                        Toast.makeText(context, "Meal added to "+meal.getDay(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Meal added to "+day, Toast.LENGTH_SHORT).show();
                         break;
                     case "Monday":
                         meal.setDay("3");
@@ -158,7 +158,7 @@ public void setList(ArrayList<Meal> randomMeals){
                          // holder.addToFavourite.setChecked(false);
                          clicked = true;
                          holder.addToFavourite.setBackgroundResource(R.drawable.baseline_favorite_24);
-                         Toast.makeText(context, "meal added to your favourite list", Toast.LENGTH_SHORT).show();
+                         Toast.makeText(context, "Meal added to your favourite list", Toast.LENGTH_SHORT).show();
                          meal.setDay("0");
                          listner.onAddToFavorite(meal);
                          FirebaseDataBase.addFavouriteToFirebase(context,meal);

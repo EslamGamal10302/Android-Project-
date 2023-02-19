@@ -156,6 +156,7 @@ public class SelectedAreaActivity extends AppCompatActivity implements SelectedA
     @Override
     public void onAddToFavorite(Meal meal) {
         presenter.addToFavorite(meal);
+
     }
 
     @Override

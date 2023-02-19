@@ -143,7 +143,7 @@ public class SelectedIngredientAdapter extends RecyclerView.Adapter<SelectedIngr
                     // holder.addToFavourite.setChecked(false);
                     clicked = true;
                     holder.addToFav.setBackgroundResource(R.drawable.baseline_favorite_24);
-                    Toast.makeText(context, "meal added to your favourite list", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Meal added to your favourite list", Toast.LENGTH_SHORT).show();
                     meal.setDay("0");
                     listner.onAddToFavorite(meal);
                     FirebaseDataBase.addFavouriteToFirebase(context,meal);

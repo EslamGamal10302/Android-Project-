@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -74,6 +75,7 @@ public class FavAdabter  extends  RecyclerView.Adapter<FavAdabter.FavViewHolder>
 
                    listner.onClick(myMeal);
                    FirebaseDataBase.removeFavouriteFromFirebase(context,myMeal);
+                   Toast.makeText(context, "Removed from your favorite list", Toast.LENGTH_SHORT).show();
 
                });
                builder.setNegativeButton(Html.fromHtml("<font color='#FFBF00'>"+no+"</font>"), (DialogInterface.OnClickListener) (dialog, which) -> {

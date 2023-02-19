@@ -32,12 +32,12 @@ public class FirebaseDataBase {
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
-                            Toast.makeText(context, "added to firebase", Toast.LENGTH_SHORT).show();
+                          //  Toast.makeText(context, "added to firebase", Toast.LENGTH_SHORT).show();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-
+                            Toast.makeText(context, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
         }
@@ -55,12 +55,12 @@ public class FirebaseDataBase {
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
-                            Toast.makeText(context, "added to firebase", Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(context, "added to firebase", Toast.LENGTH_SHORT).show();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-
+                            Toast.makeText(context, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -121,7 +121,7 @@ public class FirebaseDataBase {
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
-                            Toast.makeText(context, "removed from your favList", Toast.LENGTH_SHORT).show();
+                         //   Toast.makeText(context, "removed from your favList", Toast.LENGTH_SHORT).show();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -145,13 +145,14 @@ public class FirebaseDataBase {
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
+                         //   Toast.makeText(context, "removed firebase", Toast.LENGTH_SHORT).show();
 
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
 
-
+                            Toast.makeText(context, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
 
