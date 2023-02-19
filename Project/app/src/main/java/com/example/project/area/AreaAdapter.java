@@ -13,20 +13,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project.R;
 
-public class AreaAdapter extends RecyclerView.Adapter <AreaAdapter.MyViewHolder> {
-    Context context ;
-    Area[] areas;
+import java.util.ArrayList;
 
+public class AreaAdapter extends RecyclerView.Adapter <AreaAdapter.MyViewHolder> {
+    Context context;
+    ArrayList<Area> areas;
 
     AreaOnClickListner listner;
 
-    public AreaAdapter(Context context, Area[] areas ,AreaOnClickListner listner) {
+    public AreaAdapter(Context context, ArrayList<Area> areas ,AreaOnClickListner listner) {
         this.context = context;
         this.areas = areas;
         this.listner=listner;
     }
 
-    public void setAreas(Area [] areas){
+    public void setAreas(ArrayList<Area> areas){
         this.areas=areas;
     }
 
@@ -42,7 +43,7 @@ public class AreaAdapter extends RecyclerView.Adapter <AreaAdapter.MyViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull AreaAdapter.MyViewHolder holder, int position) {
-        Area area = areas[position];
+        Area area = areas.get(position);
         holder.nationality.setText(area.getNationality());
         holder.thumbnails.setImageResource(area.getImage_thumbnails());
         holder.layout.setOnClickListener(new View.OnClickListener() {
@@ -55,7 +56,7 @@ public class AreaAdapter extends RecyclerView.Adapter <AreaAdapter.MyViewHolder>
 
     @Override
     public int getItemCount() {
-        return areas.length;
+        return areas.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
