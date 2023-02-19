@@ -23,6 +23,7 @@ import android.widget.ToggleButton;
 import com.bumptech.glide.Glide;
 import com.example.project.DataBase.DataBaseRepository;
 import com.example.project.GeneralRepositoryModel.GeneralRepository;
+import com.example.project.Network.FirebaseDataBase;
 import com.example.project.Network.MealClient;
 import com.example.project.R;
 import com.example.project.area.selectedArea.model.Meal;
@@ -142,6 +143,7 @@ public class MealDetails extends AppCompatActivity implements MealDetailViewInte
                       selectedSearchMeal.setDay("0");
                       //  listner.onAddToFavorite(response);
                       presenter.addToFavorite(selectedSearchMeal);
+                      FirebaseDataBase.addFavouriteToFirebase(MealDetails.this,selectedSearchMeal);
 
                   }
               } else {
@@ -172,38 +174,45 @@ public class MealDetails extends AppCompatActivity implements MealDetailViewInte
                     case "Saturday":
                         selectedSearchMeal.setDay("1");
                         presenter.addToFavorite(selectedSearchMeal);
+                        FirebaseDataBase.addPlanToFirebase(MealDetails.this,selectedSearchMeal);
                         Toast.makeText(MealDetails.this, "Meal added to "+day, Toast.LENGTH_SHORT).show();
                         break;
                     case "Sunday":
                         selectedSearchMeal.setDay("2");
                         presenter.addToFavorite(selectedSearchMeal);
+                        FirebaseDataBase.addPlanToFirebase(MealDetails.this,selectedSearchMeal);
                         Toast.makeText(MealDetails.this, "Meal added to "+day, Toast.LENGTH_SHORT).show();
                         break;
                     case "Monday":
                         selectedSearchMeal.setDay("3");
                         presenter.addToFavorite(selectedSearchMeal);
+                        FirebaseDataBase.addPlanToFirebase(MealDetails.this,selectedSearchMeal);
                         Toast.makeText(MealDetails.this, "Meal added to "+day, Toast.LENGTH_SHORT).show();
                         break;
                     case "Tuesday":
                         selectedSearchMeal.setDay("4");
                         presenter.addToFavorite(selectedSearchMeal);
+                        FirebaseDataBase.addPlanToFirebase(MealDetails.this,selectedSearchMeal);
                         Toast.makeText(MealDetails.this, "Meal added to "+day, Toast.LENGTH_SHORT).show();
                         break;
 
                     case "Wednesday":
                         selectedSearchMeal.setDay("5");
                         presenter.addToFavorite(selectedSearchMeal);
+                        FirebaseDataBase.addPlanToFirebase(MealDetails.this,selectedSearchMeal);
                         Toast.makeText(MealDetails.this, "Meal added to "+day, Toast.LENGTH_SHORT).show();
                         break;
 
                     case "Thursday":
                         selectedSearchMeal.setDay("6");
                         presenter.addToFavorite(selectedSearchMeal);
+                        FirebaseDataBase.addPlanToFirebase(MealDetails.this,selectedSearchMeal);
                         Toast.makeText(MealDetails.this, "Meal added to "+day, Toast.LENGTH_SHORT).show();
                         break;
                     case "Friday":
                         selectedSearchMeal.setDay("7");
                         presenter.addToFavorite(selectedSearchMeal);
+                        FirebaseDataBase.addPlanToFirebase(MealDetails.this,selectedSearchMeal);
                         Toast.makeText(MealDetails.this, "Meal added to "+day, Toast.LENGTH_SHORT).show();
                         break;
 
