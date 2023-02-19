@@ -8,9 +8,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -45,6 +48,10 @@ public class CategoryActivity extends AppCompatActivity implements CategoryViewI
     TextView internet2;
     Button internet_retray;
 
+    EditText search ;
+
+    ArrayList<Meal> myApiMeals ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +61,7 @@ public class CategoryActivity extends AppCompatActivity implements CategoryViewI
         internet1 = findViewById(R.id.internet_2);
         internet2 = findViewById(R.id.internet_3);
         internet_retray = findViewById(R.id.internet_button);
-
+         search = findViewById(R.id.pt_searchForAllMeals);
         dialog = new ProgressDialog(this);
         dialog.setMessage("Loading....");
 
@@ -76,15 +83,22 @@ public class CategoryActivity extends AppCompatActivity implements CategoryViewI
             }
         });
 
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
 
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filtterMeals(s);
+            }
 
+            @Override
+            public void afterTextChanged(Editable s) {
 
-
-
-
-
-
+            }
+        });
 
 
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
@@ -118,6 +132,7 @@ public class CategoryActivity extends AppCompatActivity implements CategoryViewI
 
     @Override
     public void showData(ArrayList<Meal> meals) {
+        myApiMeals = meals;
         myAdapter.setList(meals);
         myAdapter.notifyDataSetChanged();
         dialog.dismiss();
@@ -146,6 +161,17 @@ public class CategoryActivity extends AppCompatActivity implements CategoryViewI
             internet2.setVisibility(View.VISIBLE);
             internet_retray.setVisibility(View.VISIBLE);
 
+        }
+    }
+
+    private void filtterMeals(CharSequence s) {
+        ArrayList<Meal> fillteredMeals = new ArrayList<>();
+        for(int j = 0 ; j< myApiMeals.size() ;j++){
+            if(myApiMeals.get(j).getStrCategory().toLowerCase().startsWith(s.toString())){
+                fillteredMeals.add(myApiMeals.get(j));
+            }
+            myAdapter.setList(fillteredMeals);
+            myAdapter.notifyDataSetChanged();
         }
     }
 }

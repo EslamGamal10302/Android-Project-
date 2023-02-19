@@ -8,9 +8,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -45,6 +48,10 @@ public class IngredientActivity extends AppCompatActivity implements IngredientV
     TextView internet2;
     Button internet_retray;
 
+    EditText search ;
+
+    ArrayList<Meal> myApiMeals ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +59,7 @@ public class IngredientActivity extends AppCompatActivity implements IngredientV
         setContentView(R.layout.activity_ingredient);
         dialog = new ProgressDialog(this,R.style.MyAlertDialogStyle);
         dialog.setMessage("Loading....");
-
+         search = findViewById(R.id.pt_searchForAllMeals);
         internet_image = findViewById(R.id.internet_1);
         internet1 = findViewById(R.id.internet_2);
         internet2 = findViewById(R.id.internet_3);
@@ -75,7 +82,22 @@ public class IngredientActivity extends AppCompatActivity implements IngredientV
             }
         });
 
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filtterMeals(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
 
 
@@ -109,10 +131,21 @@ public class IngredientActivity extends AppCompatActivity implements IngredientV
         });
     }
 
+    private void filtterMeals(CharSequence s) {
+        ArrayList<Meal> fillteredMeals = new ArrayList<>();
+        for(int j = 0 ; j< myApiMeals.size() ;j++){
+            if(myApiMeals.get(j).getStrIngredient().toLowerCase().startsWith(s.toString())){
+                fillteredMeals.add(myApiMeals.get(j));
+            }
+            myAdapter.setList(fillteredMeals);
+            myAdapter.notifyDataSetChanged();
+        }
+    }
 
 
     @Override
     public void showData(ArrayList<Meal> meals) {
+        myApiMeals = meals;
        myAdapter.setList(meals);
        myAdapter.notifyDataSetChanged();
        dialog.dismiss();
