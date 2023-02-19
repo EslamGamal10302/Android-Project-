@@ -26,6 +26,11 @@ public class AreaAdapter extends RecyclerView.Adapter <AreaAdapter.MyViewHolder>
         this.listner=listner;
     }
 
+    public void setAreas(Area [] areas){
+        this.areas=areas;
+    }
+
+
     @NonNull
     @Override
     public AreaAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

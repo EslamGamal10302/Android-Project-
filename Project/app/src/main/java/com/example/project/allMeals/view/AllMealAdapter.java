@@ -68,7 +68,6 @@ public class AllMealAdapter extends  RecyclerView.Adapter<AllMealAdapter.AllMeal
     @Override
     public void onBindViewHolder(@NonNull AllMealsViewHolder holder, int position) {
         String [] days ={"Saturday","Sunday","Monday","Tuesday","Wednesday","Thursday","Friday"};
-
         Meal meal = allmeals.get(position);
         holder.mealName.setText(meal.getStrMeal());
         Glide.with(context).load(meal.getStrMealThumb()).into(holder.mealImage);

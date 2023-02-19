@@ -2,6 +2,7 @@ package com.example.project.favourite.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -45,23 +46,14 @@ public class FavActivity extends AppCompatActivity implements  FavViewInterface 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fav);
         recyclerView =findViewById(R.id.fav_recyclerView);
-        layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(RecyclerView.VERTICAL);
+        layoutManager = new GridLayoutManager(this,2);
+      //  layoutManager = new LinearLayoutManager(this);
+       // layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         favAdapter = new FavAdabter(this,this);
         recyclerView.setAdapter(favAdapter);
         favPresenter = new favouritePresenter(this , GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(this),this));
        favPresenter.getFav();
-
-
-
-
-
-
-
-
-
-
 
 
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);

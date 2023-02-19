@@ -25,7 +25,7 @@ public class HomePressenter implements HomePressenterInterface , AreaNetworkDele
 
     @Override
     public void getDailyRandomMeals() {
-        genral.resultRandomMeals(this);
+        genral.resultAllMeals(this);
     }
 
     @Override

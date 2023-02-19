@@ -60,6 +60,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class HomeActivity extends AppCompatActivity implements  HomeViewInterface , HomeOnClickListner{
     RecyclerView recyclerView;
@@ -82,13 +83,12 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
     //ProgressBar loading;
 
     ProgressDialog dialog;
-
     TextView test;
-
 
     ImageView resultTest;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    ArrayList<Meal> myApiMeals = new ArrayList<>();
 
 
     @Override
@@ -101,16 +101,9 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
         bottomNavigationView.setSelectedItemId(R.id.homeScreen);
         dialog = new ProgressDialog(this,R.style.MyAlertDialogStyle);
         dialog.setMessage("Loading....");
-      //  loading=new ProgressBar(this);
-     //   loading.setVisibility(View.VISIBLE);
         exit=findViewById(R.id.log_out);
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
-     /*   if(user !=null){
-            Toast.makeText(this, "Logged in successfully", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "Login as a guest was successfully", Toast.LENGTH_SHORT).show();
-        }  */
         internet_image=findViewById(R.id.internet_1);
         internet_1=findViewById(R.id.internet_2);
         internet_2=findViewById(R.id.internet_3);
@@ -122,8 +115,6 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
         homeAdapter = new HomeAdapter(this, this);
         recyclerView.setAdapter(homeAdapter);
         checkNetwork();
-
-
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -179,24 +170,6 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
             }
         });
 
-
-    test.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            FirebaseDataBase.getFavouriteFromFirebase(HomeActivity.this,user);
-            FirebaseDataBase.getPlanFromFireBase(HomeActivity.this,user,"1");
-
-        }
-    });
-
-
-            resultTest.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
-
     }
 
     private void exitAlertDialog(){
@@ -227,27 +200,15 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
     }
 
 
-
-
-
-
-
-
-
-
-
     private  void checkNetwork(){
         if(NetworkConnection.getConnectivity(this)){
             dialog.show();
             pressenter = new HomePressenter(GeneralRepository.getInstance(MealClient.getInstance(), DataBaseRepository.getInstance(this),this), this);
             pressenter.getDailyRandomMeals();
-           // loading.setVisibility(View.GONE);
             internet_image.setVisibility(View.GONE);
             internet_1.setVisibility(View.GONE);
             internet_2.setVisibility(View.GONE);
             internet_retry.setVisibility(View.GONE);
-
-
         }else{
             internet_image.setVisibility(View.VISIBLE);
             internet_1.setVisibility(View.VISIBLE);
@@ -261,8 +222,13 @@ public class HomeActivity extends AppCompatActivity implements  HomeViewInterfac
     @Override
     public void showRandomMeals(ArrayList<Meal> randomMeals) {
         dialog.dismiss();
-        homeAdapter.setList(randomMeals);
-        homeAdapter.notifyDataSetChanged();
+        Random r = new Random();
+        for (int i = 0 ;i<6 ;i++) {
+            int s =r.nextInt(24);
+            myApiMeals.add(randomMeals.get(s));
+        }
+            homeAdapter.setList(myApiMeals);
+            homeAdapter.notifyDataSetChanged();
     }
 
     @Override

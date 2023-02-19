@@ -281,6 +281,14 @@ public class LoginScreen extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
+                                FirebaseDataBase.getFavouriteFromFirebase(LoginScreen.this,firebaseAuth.getCurrentUser());
+                                FirebaseDataBase.getPlanFromFireBase(LoginScreen.this,firebaseAuth.getCurrentUser(),"1");
+                                FirebaseDataBase.getPlanFromFireBase(LoginScreen.this,firebaseAuth.getCurrentUser(),"2");
+                                FirebaseDataBase.getPlanFromFireBase(LoginScreen.this,firebaseAuth.getCurrentUser(),"3");
+                                FirebaseDataBase.getPlanFromFireBase(LoginScreen.this,firebaseAuth.getCurrentUser(),"4");
+                                FirebaseDataBase.getPlanFromFireBase(LoginScreen.this,firebaseAuth.getCurrentUser(),"5");
+                                FirebaseDataBase.getPlanFromFireBase(LoginScreen.this,firebaseAuth.getCurrentUser(),"6");
+                                FirebaseDataBase.getPlanFromFireBase(LoginScreen.this,firebaseAuth.getCurrentUser(),"7");
                                 Toast.makeText(LoginScreen.this, "Authentication successful", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(LoginScreen.this,HomeActivity.class));
                                 finish();

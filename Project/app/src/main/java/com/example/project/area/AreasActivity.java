@@ -7,7 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 import com.example.project.R;
 
@@ -22,12 +25,14 @@ public class AreasActivity extends AppCompatActivity implements AreaOnClickListn
     LinearLayoutManager myManger;
     AreaAdapter myAdapter;
 
+    EditText search ;
     Area[] areas = {new Area(R.drawable.america,"American"),new Area(R.drawable.england,"British"),new Area(R.drawable.canada,"Canadian"),new Area(R.drawable.chinese,"Chinese"),new Area(R.drawable.croatia,"Croatian"),new Area(R.drawable.netherland,"Dutch"),new Area(R.drawable.egypt,"Egyptian"),new Area(R.drawable.france,"French"),new Area(R.drawable.greece,"Greek"),new Area(R.drawable.indian,"Indian"),new Area(R.drawable.ierland,"Irish"),new Area(R.drawable.italia,"Italian"),new Area(R.drawable.jamaika,"Jamaican"),new Area(R.drawable.japan,"Japanese"),new Area(R.drawable.kenia,"Kenyan"),new Area(R.drawable.malysia,"Malaysian"),new Area(R.drawable.mexico,"Mexican"),new Area(R.drawable.moroco,"Moroccan"),new Area(R.drawable.poland,"Polish"),new Area(R.drawable.porogal,"Portuguese"),new Area(R.drawable.russia,"Russian"),new Area(R.drawable.spain,"Spanish"),new Area(R.drawable.tailand,"Thali"),new Area(R.drawable.tunisa,"Tunisian"),new Area(R.drawable.turkey,"Turkish"),new Area(R.drawable.vitnam,"Vietnamese")};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_areas);
+        search = findViewById(R.id.pt_searchForAllMeals);
         myRecycleView = (RecyclerView) findViewById(R.id.recyclerView);
         myManger = new LinearLayoutManager(this);
         myManger.setOrientation(RecyclerView.VERTICAL);
@@ -59,6 +64,38 @@ public class AreasActivity extends AppCompatActivity implements AreaOnClickListn
                 return false;
             }
         });
+
+
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String filter = s.toString();
+                FiltterArea( filter);
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+    }
+
+    private void FiltterArea(String s) {
+        Area [] filtterdArea = new Area[26];
+        for(int i=0 ; i<areas.length ;i++){
+            if(areas[i].getNationality().startsWith(s)){
+                filtterdArea[i]=areas[i];
+            }
+        }
+        myAdapter.setAreas(filtterdArea);
+        myAdapter.notifyDataSetChanged();
     }
 
     @Override

@@ -242,7 +242,7 @@ public class MealDetails extends AppCompatActivity implements MealDetailViewInte
             @Override
             public void onReady(@NonNull YouTubePlayer youTubePlayer) {
                 super.onReady(youTubePlayer);
-                if(VideoUrl !=null){
+                if(VideoUrl !=null && !VideoUrl.isEmpty() && VideoUrl.equalsIgnoreCase("")){
                     VideoUrl = VideoUrl.substring(VideoUrl.indexOf("=") + 1);
                     StringTokenizer st = new StringTokenizer(VideoUrl, "&");
                     VideoUrl = st.nextToken();
