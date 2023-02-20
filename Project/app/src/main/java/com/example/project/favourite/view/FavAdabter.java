@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.project.Network.FirebaseDataBase;
+import com.example.project.Network.NetworkConnection;
 import com.example.project.R;
 import com.example.project.area.selectedArea.model.Meal;
 import com.example.project.home.view.HomeActivity;
@@ -94,7 +95,11 @@ public class FavAdabter  extends  RecyclerView.Adapter<FavAdabter.FavViewHolder>
        holder.layout.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               listner.showMealDetails(myMeal);
+               if(NetworkConnection.getConnectivity(context)) {
+                   listner.showMealDetails(myMeal);
+               } else {
+                   Toast.makeText(context, "There is no internet connection " + "\n" +"Please reconnect and try again", Toast.LENGTH_SHORT).show();
+               }
            }
        });
 
