@@ -16,6 +16,7 @@ import com.example.project.Network.MealClient;
 import com.example.project.R;
 import com.example.project.area.selectedArea.model.Meal;
 import com.example.project.calender.view.CalendarActivity;
+import com.example.project.details.view.MealDetails;
 import com.example.project.favourite.presenter.FavouritePresenterInterface;
 import com.example.project.favourite.presenter.favouritePresenter;
 import com.example.project.home.SearchActivity;
@@ -90,6 +91,14 @@ public class FavActivity extends AppCompatActivity implements  FavViewInterface 
     @Override
     public void onClick(Meal meal) {
        removeProduct(meal);
+    }
+
+    @Override
+    public void showMealDetails(Meal meal) {
+        String mealName = meal.getStrMeal();
+        Intent intent = new Intent(FavActivity.this, MealDetails.class);
+        intent.putExtra("name",mealName);
+        startActivity(intent);
     }
 
     @Override

@@ -18,6 +18,7 @@ import com.example.project.area.selectedArea.model.Meal;
 import com.example.project.calender.Calendar;
 import com.example.project.calender.pressenter.CalenderPressenter;
 import com.example.project.calender.pressenter.CalenderPressenterInterface;
+import com.example.project.details.view.MealDetails;
 import com.example.project.favourite.view.FavActivity;
 import com.example.project.home.SearchActivity;
 import com.example.project.home.view.HomeActivity;
@@ -177,6 +178,14 @@ public class CalendarActivity extends AppCompatActivity implements CalenderViewI
     @Override
     public void OnClick(Meal meal) {
         removeMeal(meal);
+    }
+
+    @Override
+    public void showMealDetails(Meal meal) {
+        String mealName = meal.getStrMeal();
+        Intent intent = new Intent(CalendarActivity.this, MealDetails.class);
+        intent.putExtra("name",mealName);
+        startActivity(intent);
     }
 
     @Override

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -100,6 +101,12 @@ CalenderOnClickListner listner;
                 alertDialog.show();
             }
         });
+        holder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listner.showMealDetails(meal);
+            }
+        });
     }
 
     @Override
@@ -115,12 +122,15 @@ CalenderOnClickListner listner;
 
         ImageButton delete;
 
+        ConstraintLayout layout ;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
           //  layout = itemView.findViewById(R.id.calendar_constrain);
             name = itemView.findViewById(R.id.tv_calender_meal_name);
             thumbnails = itemView.findViewById(R.id.img_calender_meal);
             delete=itemView.findViewById(R.id.btn_removeFromCalender);
+            layout =itemView.findViewById(R.id.cons_favMeals_layout);
 
         }
 

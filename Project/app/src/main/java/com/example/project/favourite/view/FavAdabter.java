@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -90,6 +91,13 @@ public class FavAdabter  extends  RecyclerView.Adapter<FavAdabter.FavViewHolder>
            }
        });
 
+       holder.layout.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               listner.showMealDetails(myMeal);
+           }
+       });
+
 
     }
 
@@ -103,11 +111,14 @@ public class FavAdabter  extends  RecyclerView.Adapter<FavAdabter.FavViewHolder>
         private ImageView mealImage;
         private ImageButton removeFromFavourite ;
 
+        ConstraintLayout layout ;
+
         public FavViewHolder(@NonNull View itemView) {
             super(itemView);
             mealName = itemView.findViewById(R.id.tv_calender_meal_name);
             mealImage = itemView.findViewById(R.id.img_calender_meal);
            removeFromFavourite = itemView.findViewById(R.id.btn_removeFromCalender);
+            layout =itemView.findViewById(R.id.cons_favMeals_layout);
 
 
         }

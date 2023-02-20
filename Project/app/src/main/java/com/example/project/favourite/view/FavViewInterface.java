@@ -9,4 +9,5 @@ import io.reactivex.Observable;
 public interface FavViewInterface {
     public void showFav(Observable<List<Meal>> meals);
     public void removeProduct(Meal meal);
+
 }
